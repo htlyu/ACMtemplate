@@ -718,6 +718,12 @@ void solve()
 
 \subsection{线段树}
 \subsubsection{线段树上二分}
+\textbf{用途：}在区间上找满足条件的最右/左端点，如前缀和$\leq k$的最大位置。
+
+\textbf{原理：}利用线段树分治性质，如果整个节点都满足条件就直接跳过，否则递归子节点。
+
+\textbf{关键：}递归时保证从左到右/从右到左的顺序，维护连续性。
+
 由于线段树的分治性质，可以做到线段树上二分
 
 实际上,根据线段树的递归性质,是可以严格从左遍历到右或者严格从右遍历到左
@@ -731,6 +737,8 @@ void solve()
 如果一个区间中的点都满足的话,那么把端点更新为线段树节点的右端点
 
 一旦出现一个点不满足了,立刻停止
+
+\textbf{代码说明：}sum是剩余容量，x是当前找到的最右端点。如果节点和$\leq$sum就更新x并减去该节点和，否则递归子节点。
 \begin{minted}{cpp}
 //要初始化一下x为第一个能满足的点的左边的那个点
 void query_sum(int u, int l, int r, int & sum, int & x)//查询l~r之间 l~x的和小于等于sum的最大的x
@@ -757,6 +765,12 @@ void query_sum(int u, int l, int r, int & sum, int & x)//查询l~r之间 l~x的�
 \end{minted}
 
 \subsubsection{标记永久化(堆式线段树)}
+\textbf{用途：}优化线段树的懒标记下传，减少pushdown操作。
+
+\textbf{原理：}不下传标记，而是在查询时累加沿途的所有标记。
+
+\textbf{优势：}代码更简洁，常数更小，适合简单的区间加法操作。
+
 将修改的影响直接作用在当前节点,并打上一个懒标记
 
 在查询的时候,递归查询的时候累加标记,就不需要像普通线段树一样下传标记
@@ -918,6 +932,13 @@ int query(int p, int l, int r, int ql, int qr, int s)
 \end{minted}
 
 \subsubsection{主席树}
+\textbf{用途：}静态区间第k小，可持久化数据结构，支持查询历史版本。
+
+\textbf{原理：}对每个前缀建立一棵权值线段树，利用前缀和思想：$query(l,r) = query(r) - query(l-1)$。
+
+\textbf{关键：}相邻版本只有$O(\log n)$个节点不同，通过复用节点节省空间。
+
+\textbf{空间：}$O(n\log n)$个节点，开$N*20$一般够用。
 \begin{minted}{cpp}
 struct Node
 {
@@ -1086,6 +1107,13 @@ void solve()
 \end{minted}
 
 \subsubsection{线段树合并}
+\textbf{用途：}将两棵动态开点线段树合并成一棵，常用于树上问题的信息合并。
+
+\textbf{核心思想：}递归合并对应位置的节点，叶子节点进行信息合并，空节点直接返回非空节点。
+
+\textbf{关键技巧：}合并后q树会被破坏，需要先处理子树询问再合并到父节点。
+
+\textbf{时间复杂度：}合并两棵树的时间复杂度为$O(\text{两树节点数之和})$。
 \begin{minted}{cpp}
 void pushup(int p)//用子节点信息更新父节点
 {
@@ -1217,6 +1245,11 @@ int main()
 \end{minted}
 
 \subsubsection{线段树分裂}
+\textbf{用途：}将一棵线段树按指定区间分裂成两棵树，常用于区间移动和分组问题。
+
+\textbf{核心思想：}递归地将指定区间从原树中"切出"，分裂后原树该区间被清空。
+
+\textbf{注意事项：}参数p必须用引用，因为分裂后原节点会被清空。通常分裂后要重新合并。
 \begin{minted}{cpp}
 //可以考虑分裂完之后再合并
 int split(int & p, int l, int r, int ql, int qr)//对于p 分裂出ql和qr的区间
@@ -1316,6 +1349,14 @@ int main()
 \end{minted}
 
 \subsubsection{线段树分治}
+\textbf{用途：}处理有删除操作的动态维护问题，特别是删除操作难以直接处理时。
+
+\textbf{原理：}将时间轴建成线段树，每个修改操作对应一个时间区间，在线段树上进行分治处理。
+
+\textbf{技巧：}删除操作转化为添加+撤销，配合可撤销数据结构（如可撤销并查集）。
+
+\textbf{应用：}动态图连通性、动态维护二分图性质等。
+
 线段树分治就是维护一些只存在一段时间的元素的贡献。有时候一些元素的删除并不好做，可以将其转化为只在某一段时间内存在。
 将这个存在时间利用线段树的结构分治,将删除操作转化为添加操作和撤销操作。
 
@@ -2291,6 +2332,11 @@ void solve()
 \end{minted}
 
 \subsubsection{历史线段树}
+\textbf{用途：}维护区间历史最值，支持区间加法、区间赋值操作。
+
+\textbf{核心思想：}在普通线段树基础上，额外维护历史最大值和对应的历史标记。
+
+\textbf{关键：}区间操作时，先用历史标记更新历史最值，再用当前标记更新当前值。
 
 Q X Y:询问从 $X$ 到 $Y$ 的最大值
 
@@ -2780,6 +2826,14 @@ int main()
 \end{minted}
 
 \subsubsection{FHQ\_Treap}
+\textbf{用途：}可持久化平衡树，支持分裂、合并操作，常用于区间操作。
+
+\textbf{核心操作：}split按值或排名分裂，merge合并两棵子树。
+
+\textbf{优势：}代码简洁，支持可持久化，分裂合并灵活。
+
+\textbf{使用模板：}插入x：split(root,x-1,T1,T2); root=merge(T1,merge(newnode(x),T2))
+
 维护集合一般使用按值分裂
 \begin{minted}{cpp}
 mt19937 rd(time(0));
@@ -3249,6 +3303,17 @@ void solve()
 
 
 \subsection{Link-Cut Tree(LCT)}
+\textbf{关键操作：}
+\begin{itemize}
+\item \texttt{split(x,y)}: 提取x到y路径，y成为路径根，路径信息在tr[y]中
+\item \texttt{link(x,y)}: 连边（自动判断是否已连通）
+\item \texttt{cut(x,y)}: 断边
+\item \texttt{connected(x,y)}: 判断连通性
+\item \texttt{path\_sum(x,y)}: 查询路径和
+\end{itemize}
+
+\textbf{处理边权：}每条边$(u,v)$变成点$w$，连$(u,w)$和$(w,v)$，边权存在$w$上。
+
 LCT处理点权比较方便,处理边权较为麻烦。而动态森林的变化一般依赖于边的变化,
 所以可以利用边转点的技巧,将边变为一个新点,原边变成两条边即可。
 \begin{minted}{cpp}
@@ -3313,6 +3378,12 @@ struct LCT
         if (findr(y)==x && tr[y].fa == x&&!tr[y].s[0])
             tr[x].s[1] = tr[y].fa = 0, pushup(x);
     }
+    
+    // 常用应用函数
+    bool connected(int x, int y) { return findr(x) == findr(y); } // 判断连通性
+    int path_sum(int x, int y) { split(x, y); return tr[y].sum; } // 路径和
+    void path_update(int x, int y, int val) { split(x, y); tr[y].v += val; pushup(y); } // 路径更新
+    int get_root(int x) { return findr(x); } // 获取x所在树的根
 }lct;
 
 \end{minted}
@@ -4557,6 +4628,14 @@ int main()
 \end{minted}
 
 \subsection{整体二分}
+\textbf{用途：}离线解决带修改的区间第k小、区间rank等问题。
+
+\textbf{核心思想：}将所有操作按时间序离线，在值域上二分，同时处理一批询问。
+
+\textbf{关键：}修改操作影响后续询问，询问根据当前值域范围决定贡献。
+
+\textbf{优势：}支持带修改，时间复杂度$O((n+m)\log^2 n)$，比线段树套线段树更优。
+
 整体二分本身就是支持带修改的,因为是按照时间序把操作离线下来的
 
 以解决区间第k小为例:
@@ -5451,6 +5530,13 @@ int main()
 \end{minted}
 
 \subsection{树上启发式合并}
+\textbf{用途：}处理子树统计问题，避免对每个节点重新统计整个子树。
+
+\textbf{核心思想：}保留重儿子的贡献，重新计算轻儿子的贡献，利用重链剖分的性质优化时间复杂度。
+
+\textbf{关键技巧：}先算轻儿子再清空，再算重儿子保留信息，最后补上轻儿子贡献。
+
+\textbf{时间复杂度：}$O(n\log n)$，每个节点最多被计算$\log n$次（重链层数）。
 
 经典例题 :求树上以$i$为根的子树中 颜色出现次数最多的编号和
 
@@ -5518,6 +5604,13 @@ void dfs(int u, int fa, int ty)//ty是类型 0代表轻儿子 1代表重儿子
 dfs(1, 0), dfs(1, 0, 1);
 \end{minted}
 \subsection{虚树}
+\textbf{用途：}多次询问树上少量关键点的问题，避免每次在整棵树上DP。
+
+\textbf{核心思想：}只保留关键点和它们的LCA构成的必要结构，大大减少DP的状态数。
+
+\textbf{构建步骤：}1)按DFS序排序关键点 2)加入相邻关键点的LCA 3)去重并按DFS序连边。
+
+\textbf{时间复杂度：}建树$O(k\log k)$，DP $O(k)$，其中$k$是关键点数。
 
 虚树一般都是在树上做dp,然后给你多次询问,每次询问都会给你不多的关键点,故每次询问都建出虚树,减小复杂度
 
@@ -7913,6 +8006,12 @@ void solve()
 \end{minted}
 
 \subsubsection{最大流}
+\textbf{用途：}求网络最大流，常用于二分图最大匹配、最小割等问题。
+
+\textbf{Dinic算法：}分层图+多路增广，时间复杂度$O(n^2m)$，二分图上$O(m\sqrt{n})$。
+
+\textbf{关键优化：}当前弧优化（cur数组）避免重复遍历无用边。
+
 Dinic 算法 (利用 Dinic 跑二分图最大匹配,可以优化到$m\sqrt{n}$)
 
 \begin{minted}{cpp}
@@ -8835,7 +8934,6 @@ void solve()
 \begin{minted}{cpp}
 struct HASH
 {
-    // 使用更大的质数提高安全性，也可以随机生成
     const int P1 = 1109, P2 = 3307, mod1 = 3036999473, mod2 = 3037000493;
     int h1[N], p1[N], h2[N], p2[N];
     void init(string & s)
@@ -9690,6 +9788,13 @@ $\Delta=len_{new}-lcp_{pre_{new},next_{new}}+lcp_{pre_{new},new}+lcp_{new,next_{
 将两个字符串拼在一起,跑后缀数组。利用$lcp_{i,j}=\min\limits_{k=rk_i+1}^{rk_j}height_k$不断求$lcp$。失配一次就往后跳,继续求$lcp$,直到失配$k$次。
 
 \subsection{后缀自动机}
+\textbf{用途：}处理字符串所有子串的问题，如子串去重、字典序第k小子串等。
+
+\textbf{核心性质：}从初始状态到任意状态的路径与原串的所有子串一一对应。
+
+\textbf{空间复杂度：}状态数不超过$2n-1$，边数不超过$3n-4$，数组要开两倍空间。
+
+\textbf{关键概念：}endpos等价类：结束位置集合相同的子串为一类，SAM每个状态对应一个等价类。
 
 SAM定义:字符串$s$的 SAM 是一个接受$s$的所有 后缀 的 最小 的有限状态自动机。具体地,SAM 有 状态集合$Q$,每个状态是有向无环图上的一个节点。从每个状态出发有若干条或零条 转移边,每条转移边都 对应一个字符(因此,一条路径表示一个 字符串),且从一个状态出发的转移互不相同。根据 DFA 的定义,SAM 还存在 终止状态集合 $F$,表示从初始状态$T$到任意终止状态的任意一条路径与$s$的每一个后缀一一对应。
 
@@ -10515,6 +10620,11 @@ void solve()
 \end{minted}
 
 \subsubsection{Palindrome series}
+\textbf{用途：}利用回文串的周期性质，将回文后缀划分为$O(\log n)$个等差数列，优化DP转移。
+
+\textbf{核心思想：}类似Border series，回文后缀也具有等差数列的结构特性。
+
+\textbf{应用：}加速回文划分DP，将$O(n^2)$的转移优化到$O(n\log n)$。
 
 回文后缀和Border也有着强联系,所以回文后缀也可以被划分为$O(\log)$个等差数列
 
@@ -10988,6 +11098,11 @@ for (int i = 1; i <= n; i++)
 \end{minted}
 
 \subsection{动态DP}
+\textbf{用途：}解决带修改的树上DP问题，如动态点权的最大权独立集。
+
+\textbf{核心思想：}用重链剖分+线段树，将树上DP转化为矩阵乘法，利用矩阵结合律快速合并。
+
+\textbf{关键：}定义广义矩阵乘法，$A \otimes B$中$(A \otimes B)_{i,j} = \max_k(A_{i,k} + B_{k,j})$。
 
 考虑没有上司的舞会,点权带修改,即点权是动态的树上最大权独立集问题
 
@@ -11768,6 +11883,13 @@ int cal()
 \end{minted}
 
 \subsection{线性基}
+\textbf{用途：}处理异或运算相关问题，如最大/最小异或值、第k小异或值等。
+
+\textbf{核心性质：}线性基能表示原集合所有数异或得到的所有可能值，且基中元素线性无关。
+
+\textbf{关键操作：}insert插入数字并维护线性无关性，query\_max/min查询最值。
+
+\textbf{优化：}对于大数据可用bitset优化，时间复杂度从$O(n \log^2 A)$降到$O(n \log A / w)$。
 
 \begin{minted}{cpp}
 const int N = 64;
@@ -11925,6 +12047,40 @@ void solve()
     }
     for (int i = 0; i < q; i++) cout << ans[i]<<"\n";
 }
+\end{minted}
+
+\textbf{Bitset优化线性基}
+
+当数据范围较大时，可以用bitset优化高斯消元，显著提升常数。
+
+\begin{minted}{cpp}
+const int N = 5005, M = 64;
+bitset<N> base[M], temp[M];
+int sz;
+void insert(bitset<N>& x)
+{
+    for (int i = M - 1; i >= 0; i--)
+    {
+        if (!x[i]) continue;
+        if (base[i].none())
+        {
+            base[i] = x;
+            sz++;
+            return;
+        }
+        x ^= base[i];
+    }
+}
+bitset<N> query_max()
+{
+    bitset<N> res;
+    for (int i = M - 1; i >= 0; i--)
+        res = max(res, res ^ base[i]);
+    return res;
+}
+// 使用示例：处理大整数的线性基
+// bitset<N> x; 先将大整数转换为bitset
+// insert(x); 插入到线性基中
 \end{minted}
 
 \section{杂项}
@@ -12198,8 +12354,6 @@ void merge(vector<PII> &segs)
 
 \subsection{快读快写}
 
-\subsubsection{超快IO模板}
-
 \begin{minted}{cpp}
 using u64 = unsigned long long;
 static const int BUF_SIZE = 1 << 20;
@@ -12253,8 +12407,6 @@ struct FastIOFlush
 } fastIOFlush;
 \end{minted}
 
-\subsubsection{经典快读快写}
-
 \begin{minted}{cpp}
 char gc()
 {
@@ -12291,78 +12443,7 @@ void write(int x)
 }
 \end{minted}
 
-更快的快读
-
-\begin{minted}{cpp}
-namespace io
-{
-    namespace detail
-    {
-        const size_t buflen = (1 << 21) + 1;
-        char buf[buflen], *st = nullptr, *ed = nullptr;
-        inline char gc() { return ((st == ed) ? (st = buf, ed = st
-            + fread(buf, 1, buflen, stdin), (st == ed) ? EOF : *st++) : *st++); }
-        inline bool blank(char c) { return c == ' ' || c == '-' ||
-            c == '\n' || c == '\t' || c == '\r'; }
-        template < typename T > inline bool Re(T & x)
-        {
-            char c; int f = 1;
-            while (blank(c = gc())) if (c == '-') f = -1;
-            if (c == EOF) return false;
-            for (x = c - '0'; (c = gc()) >= '0' && c <= '9'; x = x * 10 + c - '0');
-            x *= f; return true;
-        }
-        char obuf[buflen], *_ptr = obuf, *_oed = obuf + buflen - 1, _stk[55];
-        int _top;
-        void flush() { fwrite(obuf, 1, _ptr - obuf, stdout); _ptr = obuf; }
-        void pc(char c) { *(_ptr++) = c; if (_ptr == _oed) flush(); }
-        template < typename T > inline void Pr(T x)
-        {
-            if (x == 0) { pc('0'); return; }
-            if (x < 0) { pc('-'); x = -x; }
-            for (_top = 0; x > 0; _top++, x /= 10) _stk[_top]= (x % 10) + '0';
-            while (_top > 0) pc(_stk[--_top]);
-        }
-        struct _IOflusher_ { ~_IOflusher_() { flush(); } } __flusher__;
-    } // namespace detail
-    struct instream
-    {
-        instream & operator>>(char & __n) { __n = detail::gc(); return * this; }
-        //instream &operator>>(int &__n) { detail::Re(__n); return *this; }
-        instream & operator>>(long long & __n) { detail::Re(__n); return * this; }
-        instream & operator>>(std::string & __n)
-        {
-            __n.clear();
-            char c = detail::gc();
-            if (c == EOF) return * this;
-            while (c != EOF && detail::blank(c)) c = detail::gc();
-            if (c == EOF) return * this;
-            while (c != EOF && !detail::blank(c))
-            {
-                __n.push_back(c);
-                c = detail::gc();
-            }
-            if (c != EOF) detail::st--;
-            return * this;
-        }
-    } in;
-    struct outstream
-    {
-        outstream & operator<<(const char & __n) { detail::pc(__n); return * this; }
-        //outstream &operator<<(const int &__n) { detail::Pr(__n); return *this; }
-        outstream & operator<<(const long long & __n) { detail::Pr(__n); return * this; }
-        outstream & operator<<(const std::string & __n)
-        {
-            for (const char & __c: __n) detail::pc(__c);
-            return * this;
-        }
-    } out;
-} // namespace io
-using io::in;
-using io::out;
-\end{minted}
-
-交互高速IO
+\subsubsection{交互高速IO}
 
 \begin{minted}{cpp}
 namespace io
