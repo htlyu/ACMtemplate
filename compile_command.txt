@@ -1,0 +1,5 @@
+编译命令：
+xelatex -shell-escape Algorithm-template.tex
+xelatex -shell-escape Algorithm-template.tex
+
+注意：需要运行两次以生成目录
