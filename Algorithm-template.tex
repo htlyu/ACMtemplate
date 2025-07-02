@@ -10999,13 +10999,19 @@ for (int i = 1; i <= n; i++)
 
 $max$运算对加法的分配律:$max(a,b+c)=max(a,b)+max(a,c)$不成立
 
-故可以把加法视作乘法$max$运算视作加法 定义新的矩阵乘法运算,且该运算满足结合律,该矩阵乘法的规律如下
+故可以把加法视作乘法$\max$运算视作加法，定义新的广义矩阵乘法运算，且该运算满足结合律。
 
-$\begin{matrix}a&b\\c&d\end{matrix}\times\ \begin{matrix}e&f\\g&h\end{matrix}=\begin{matrix}max(a+e,b+g)&max(a+f,b+h)\\max(c+e,d+g)&max(c+f,d+h)\end{matrix}$
+广义矩阵乘法定义：对于两个$2 \times 2$矩阵$A$和$B$：
+$$A \otimes B = \begin{pmatrix}a&b\\c&d\end{pmatrix} \otimes \begin{pmatrix}e&f\\g&h\end{pmatrix} = \begin{pmatrix}\max(a+e,b+g) & \max(a+f,b+h) \\ \max(c+e,d+g) & \max(c+f,d+h)\end{pmatrix}$$
 
-考虑一下单位矩阵 即定义$e,f,g,h$使得左边的矩阵不变,可以得到
+对应的单位矩阵为：
+$$E = \begin{pmatrix}0 & -\infty \\ -\infty & 0\end{pmatrix}$$
 
-$E=\begin{matrix}0&-INF\\-INF&0\end{matrix}$
+验证：$A \otimes E = E \otimes A = A$
+
+\textbf{示例：}设$A = \begin{pmatrix}1&2\\3&4\end{pmatrix}$，$B = \begin{pmatrix}0&1\\2&0\end{pmatrix}$
+
+则$A \otimes B = \begin{pmatrix}\max(1+0,2+2) & \max(1+1,2+0) \\ \max(3+0,4+2) & \max(3+1,4+0)\end{pmatrix} = \begin{pmatrix}4&2\\6&4\end{pmatrix}$
 
 定义$f_{u,0}$和$f_{u,1}$分别为以$u$为根的子树中 不选/选 当前点的最大权独立集
 
@@ -11017,16 +11023,25 @@ $f_{u,0}=g_{u,0}+max(f_{son,0},f_{son,1})=max(f_{son,0}+g_{u,0},f_{son,1}+g_{u,0
 
 $f_{u,1}=g_{u,1}+f_{son,0}=max(f_{son,0}+g_{u,1},f_{son,1}+(-INF))$
 
-考虑矩阵转移
-$\begin{matrix}f_{son,u}&f_{son,1}\end{matrix}\times \begin{matrix}a&b\\c&d\end{matrix}=\begin{matrix}max(f_{son,0}+a,f_{son,1}+c)&max(f_{son,1}+c)\end{matrix}$
+考虑矩阵转移，我们希望通过矩阵乘法实现状态转移：
 
-$=\begin{matrix}f_{u,0}&f_{u,1}\end{matrix}=\begin{matrix}max(f_{son,0}+g_{u,0},f_{son,1}+g_{u,0})&max(f_{son,0}+g_{u,1},f_{son,1}+(-INF))\end{matrix}$
+设向量$V_{son} = \begin{pmatrix}f_{son,0} \\ f_{son,1}\end{pmatrix}$，转移矩阵$M_u = \begin{pmatrix}a&b\\c&d\end{pmatrix}$
 
-可以推出     $\begin{matrix}a&b\\c&d\end{matrix}=\begin{matrix}g_{u,0}&g{u,1}\\g_{u,0}&-INF\end{matrix}$
+则转移过程为：$V_u = M_u \times V_{son} = \begin{pmatrix}a&b\\c&d\end{pmatrix} \times \begin{pmatrix}f_{son,0} \\ f_{son,1}\end{pmatrix}$
 
-故可以在重链上做矩阵乘法转移:$\begin{matrix}f_{u,0}&f_{u,1}\end{matrix}=\begin{matrix}f_{son,0}&f_{son,1}\end{matrix}\times matrix_u$
+在广义矩阵乘法下：
+$$V_u = \begin{pmatrix}\max(a+f_{son,0}, b+f_{son,1}) \\ \max(c+f_{son,0}, d+f_{son,1})\end{pmatrix} = \begin{pmatrix}f_{u,0} \\ f_{u,1}\end{pmatrix}$$
 
-其中$matrix_u=\begin{matrix}g_{u,0}&g{u,1}\\g_{u,0}&-INF\end{matrix}$
+根据状态转移方程：
+\begin{align}
+f_{u,0} &= \max(f_{son,0}+g_{u,0}, f_{son,1}+g_{u,0}) \\
+f_{u,1} &= \max(f_{son,0}+g_{u,1}, f_{son,1}+(-\infty))
+\end{align}
+
+比较系数可得转移矩阵：
+$$M_u = \begin{pmatrix}g_{u,0} & g_{u,0} \\ g_{u,1} & -\infty\end{pmatrix}$$
+
+故可以在重链上做矩阵乘法转移：$V_u = M_u \times V_{son}$
 
 广义矩阵乘法的时候要注意单位阵不是普通的单位阵,要重新计算
 
@@ -11084,9 +11099,9 @@ void dfs2(int u, int t)
     }
     g[u](0, 1)= w[u], g[u](1, 1)=-INF;
     /*
-        a b g[u][0]g[u][1]
-                =
-        c d g[u][0]-INF
+        转移矩阵 g[u] = 
+        | g[u][0]  g[u][1] |
+        | g[u][0]   -INF   |
     */
     dfs2(son[u], t);
     ed[u] = ed[son[u]]; //重链的尾端可以通过重儿子的求得
