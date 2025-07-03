@@ -12536,9 +12536,11 @@ src=${1:-a.cpp}
 t=${2:-1s}
 bin=${src%.cpp}
 in=${bin}.in
-# 编译
-g++ -std=c++20 -Og -g -fsanitize=address \
-    -o${bin}_asan "$src" || { echo CE >&2; exit 1; }
+# 编译（仅在源文件更新时）
+if [ ! -f "${bin}_asan" ] || [ "$src" -nt "${bin}_asan" ]; then
+    g++ -std=c++20 -Og -g -fsanitize=address \
+        -o${bin}_asan "$src" || { echo CE >&2; exit 1; }
+fi
 # 不加检查 速度正常
 # g++ -std=c++20 -O2 -Wall -Wextra -o"$bin" "$src" || { echo CE >&2; exit 1; }
 # 记录开始时间（毫秒）
