@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{PAM}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{sz}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tot}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{last}\PYG{p}{;}
+\PYG{+w}{    }\PYG{c+c1}{//pam的节点数 pam加入的字符数 当前匹配到哪个指针}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{cnt}\PYG{p}{[}\PYG{n}{N}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{N}\PYG{p}{][}\PYG{n}{M}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{len}\PYG{p}{[}\PYG{n}{N}\PYG{p}{];}
+\PYG{+w}{    }\PYG{c+c1}{//节点所代表的不同的回文串的个数(其实就是深度) pam的指针 当前节点(回文串)的长度}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{ex}\PYG{p}{[}\PYG{n}{N}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{fail}\PYG{p}{[}\PYG{n}{N}\PYG{p}{];}\PYG{+w}{ }\PYG{c+c1}{//当前状态所表示回文串的出现次数 指向当前状态的最长回文真后缀}
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{[}\PYG{n}{N}\PYG{p}{];}\PYG{+w}{ }\PYG{c+c1}{//pam的字符}
+\PYG{+w}{    }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{st}\PYG{p}{[}\PYG{n}{N}\PYG{p}{];}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{node}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{l}\PYG{p}{)}\PYG{c+c1}{//建一个长度为l的新节点}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{sz}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{memset}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{sz}\PYG{p}{],}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{sizeof}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{sz}\PYG{p}{]);}
+\PYG{+w}{        }\PYG{n}{len}\PYG{p}{[}\PYG{n}{sz}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{l}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{fail}\PYG{p}{[}\PYG{n}{sz}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cnt}\PYG{p}{[}\PYG{n}{sz}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{sz}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{init}\PYG{p}{()}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{sz}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{last}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//初始化}
+\PYG{+w}{        }\PYG{n}{s}\PYG{p}{[}\PYG{n}{tot}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}\PYGZdl{}\PYGZsq{}}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//插入一个特殊字符}
+\PYG{+w}{        }\PYG{n}{node}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{node}\PYG{p}{(}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{//先建偶根 再建奇根}
+\PYG{+w}{        }\PYG{n}{fail}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//偶根的fail指针指向奇根}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{getfail}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{s}\PYG{p}{[}\PYG{n}{tot}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{len}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{[}\PYG{n}{tot}\PYG{p}{])}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fail}\PYG{p}{[}\PYG{n}{x}\PYG{p}{];}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//跳到可以匹配当前字符的最长回文真后缀}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{add}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{c}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{s}\PYG{p}{[}\PYG{o}{++}\PYG{n}{tot}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{c}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//加入当前字符}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{now}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{getfail}\PYG{p}{(}\PYG{n}{last}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{//跳到可以匹配当前字符的最长回文真后缀}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{c}\PYG{p}{])}\PYG{c+c1}{//如果说不存在 cXXXc这样的回文子串的状态}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{node}\PYG{p}{(}\PYG{n}{len}\PYG{p}{[}\PYG{n}{now}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{//那就新建一个}
+\PYG{+w}{            }\PYG{n}{fail}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{getfail}\PYG{p}{(}\PYG{n}{fail}\PYG{p}{[}\PYG{n}{now}\PYG{p}{])][}\PYG{n}{c}\PYG{p}{];}\PYG{+w}{ }\PYG{c+c1}{//更新一下fail}
+\PYG{+w}{            }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{c}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//更新一下转移}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n}{last}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{c}\PYG{p}{];}\PYG{+w}{ }\PYG{c+c1}{//更新一下当前的指针}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{st}\PYG{p}{[}\PYG{n}{last}\PYG{p}{])}\PYG{+w}{ }\PYG{n}{cnt}\PYG{p}{[}\PYG{n}{last}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cnt}\PYG{p}{[}\PYG{n}{fail}\PYG{p}{[}\PYG{n}{last}\PYG{p}{]]}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{st}\PYG{p}{[}\PYG{n}{last}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{ex}\PYG{p}{[}\PYG{n}{last}\PYG{p}{]}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}\PYG{n}{pam}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//树形dp上传每个串的出现次数}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{pushup}\PYG{p}{()\PYGZob{}}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{pam}\PYG{p}{.}\PYG{n}{sz}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{pam}\PYG{p}{.}\PYG{n}{ex}\PYG{p}{[}\PYG{n}{pam}\PYG{p}{.}\PYG{n}{fail}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]}\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{pam}\PYG{p}{.}\PYG{n}{ex}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{solve}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{pam}\PYG{p}{.}\PYG{n}{init}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{n}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{c+c1}{//动态加入字符, 求得以第i个字符结尾的回文子串个数}
+\PYG{+w}{        }\PYG{n}{pam}\PYG{p}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{l+s+sc}{\PYGZsq{}a\PYGZsq{}}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{pam}\PYG{p}{.}\PYG{n}{cnt}\PYG{p}{[}\PYG{n}{pam}\PYG{p}{.}\PYG{n}{last}\PYG{p}{]}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+s}{\PYGZdq{} \PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

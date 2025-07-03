@@ -223,6 +223,8 @@ int query(int x1, int y1, int x2, int y2)
 \end{minted}
 \subsubsection{FastRMQ(超快RMQ)}
 
+FastRMQ是一种常数很小的RMQ算法，在需要高效率时优于ST表。适用于静态数组的区间最值查询。
+
 % 时间复杂度：预处理$O(n)$，查询$O(1)$
 % 空间复杂度：$O(n)$
 \begin{minted}{cpp}
@@ -233,7 +235,7 @@ struct FastRMQ
     int n, numB, L;
     vector<T> data; // 1…n，有 data[0] 未用
     vector<u64> mask; // 块内位掩码
-    vector<T> pminv, sminv, st; // 扁平化稀疏表，大小 = L * numB
+    vector<T> pminv, sminv, st; // 扁平化ST表，大小 = L * numB
     // 传入 a[1..n]，a[0] 忽略
     void build(const vector<T>& a)
     {
@@ -328,21 +330,22 @@ struct FastRMQ
 vector<int> stk;
 for (int i = n; i >= 1; i--)
 {
-    while (stk.size() && w[stk.back()] <= w[i]) stk.pop_back(); //栈非空且当前值优于栈顶, 那么弹出栈顶
-    if (stk.size()) f[i] = stk.back(); //当前位置的答案就是栈顶
+    while (stk.size() && w[stk.back()] <= w[i]) stk.pop_back(); //栈非空且当前值优于栈顶，那么弹出栈顶
+    if (stk.size()) f[i] = stk.back(); //当前位置的答案就是栈顶。
     stk.push_back(i); //压入栈中
 }
 \end{minted}
+
 \subsection{单调队列}
 \subsubsection{一维单调队列}
 
-求滑动窗口中的最大值/最小值 其中k为滑动窗口的大小
+求滑动窗口中的最大值/最小值，其中k为滑动窗口的大小。
 \begin{minted}{cpp}
 int n, k, q[N], w[N], hh = 0, tt = -1;
 vector<int> minv, maxv; //滑动窗口的最小值和最大值
 for (int i = 1; i <= n; i++)
 {
-    if (hh <= tt && i - k >= q[hh]) hh++; // 如果窗口长度超过k 那么弹出
+    if (hh <= tt && i - k >= q[hh]) hh++; // 如果窗口长度超过k，那么弹出
     while (hh <= tt && w[q[tt]] >= w[i]) tt--;
     q[++tt] = i;
     if (i >= k) minv.push_back(w[q[hh]]);
@@ -385,7 +388,7 @@ for (int j = b; j <= m; j++)
 % 时间复杂度：插入$O(\log n)$，删除$O(\log n)$，查询$O(\log n)$（均摊）
 % 空间复杂度：$O(n)$
 
-当不需要查询前驱后继，只需要查询最值，并支持删除时，可以用可删堆代替multiset
+可删堆使用对顶堆的思想实现删除操作。当不需要查询前驱后继，只需要查询最值并支持删除时，可删堆的效率比multiset更高。
 \begin{minted}{cpp}
 struct Heap
 {
@@ -407,7 +410,7 @@ struct Heap
 \end{minted}
 \subsection{并查集}
 \subsubsection{扩展域并查集}
-要注意像2-SAT一样把该连的边都连上(即要把另一组反向边也连上)要注意数组需要开大一点
+扩展域并查集用于处理敌友关系等二元对立问题。要注意像2-SAT一样把该连的边都连上（即要把另一组反向边也连上），同时注意数组需要开大一点（通常是原来的3倍）。
 \begin{minted}{cpp}
 void solve()
 {
@@ -586,7 +589,9 @@ HashTable<int, 1090189> mp; //大小至少要开和存的东西一个量级
 \end{minted}
 \subsection{树状数组}
 \subsubsection{树状数组上二分(倍增)}
+
 查询第一个前缀和小于s的位置
+
 \begin{minted}{cpp}
 int query(int s)
 {
@@ -648,19 +653,19 @@ int query(int a, int b, int c, int d) { return query(c, d) - query(c, b - 1) - q
 
 如果是一边差分一边查询，可以利用增加一维时间轴，利用三维偏序解决
 
-首先利用容斥,将待查询矩形转化为四个矩形的查询。对于一个左上角$(1,1)$,右下角为$(x,y)$的矩形,记作矩形的面积为$sum_{x,y}$
-二维差分就是对某个点右下角的区域全部加上某个值,所以对于矩形$\{x_1,y_1,x_2,y_2,val\}$的矩形,
+首先利用容斥，将待查询矩形转化为四个矩形的查询。对于一个左上角$(1,1)$，右下角为$(x,y)$的矩形，记作矩形的面积为$sum_{x,y}$
+二维差分就是对某个点右下角的区域全部加上某个值，所以对于矩形$\{x_1,y_1,x_2,y_2,val\}$的矩形，
 可以拆分成四个差分$\{x_1,y_1,val\}$,\ $\{x_1,y_2+1,-val\}$,$\{x_2+1,y_1,-val\}$,$\{x_2+1,y_2+1,val\}$
 
-考虑一下差分数组和$sum$的关系:
+考虑一下差分数组和$sum$的关系：
 
-对于一个位置$(i,j)$,$d_{i,j}$表示差分数组的值,$p_{i,j}$表示点权,
+对于一个位置$(i,j)$，$d_{i,j}$表示差分数组的值，$p_{i,j}$表示点权，
 则$p_{i,j}=\sum_{s=1}^i\sum_{t=1}^jd_{s,t}$,$sum_{x,y}=\sum_{i=1}^x\sum_{j=1}^yp_{i,j}$,
 画一个图可知,$d_{i,j}$对$sum_{x,y}$的贡献为$(x-i+1)\times(y-j+1)\times d_{i,j}$
 
 即$sum_{x,y}=\sum_{i=1}^x\sum_{j=1}^y(x-i+1)\times (y-j+1)\times d_{i,j}$
 
-可以将式子拆为如下四部分,用四个树状数组维护即可:
+可以将式子拆为如下四部分，用四个树状数组维护即可：
 
 $(x+1)\times (y+1)\times \sum_{i=1}^x\sum_{j=1}^y d_{i,j}$
 
@@ -669,11 +674,11 @@ $-(y+1)\times \sum_{i=1}^x\sum_{j=1}^y i\times d_{i,j}$
 
 $\sum_{i=1}^x\sum_{j=1}^y i\times j\times d_{i,j}$
 
-若$d_{i,j}$对$sum_{x,y}$产生贡献,则必有$i\leqslant x\land j\leqslant y$,所以利用二维偏序处理即可
+若$d_{i,j}$对$sum_{x,y}$产生贡献，则必有$i\leqslant x\land j\leqslant y$，所以利用二维偏序处理即可
 
-例题:询问区间$[l,r]$中所有子区间的最小值的和
+例题：询问区间$[l,r]$中所有子区间的最小值的和。
 
-考虑每一个值作为最小值的贡献区间(用单调栈可以轻松求得),则问题变为一个二维加,二维查询的问题。
+考虑每一个值作为最小值的贡献区间(用单调栈可以轻松求得)，则问题变为一个二维加，二维查询的问题。
 
 \begin{minted}{cpp}
 int n, q, w[N], l[N], r[N], tr[4][N], ans[N];
@@ -815,13 +820,13 @@ int query(int u, int l, int r, int s)
 \subsubsection{动态开点线段树}
 % 时间复杂度：修改$O(\log n)$，查询$O(\log n)$
 % 空间复杂度：$O(m\log n)$，$m$为操作次数
-要注意空间有没有开够 或者会不会MLE  一定要估算好空间
+注意：动态开点线段树的空间复杂度为$O(m\log n)$，其中$m$为操作次数。通常需要预留$4 \times m \times \log n$的空间，防止MLE。
 
-例子：默认一开始所有值都是$1$。$t=1$：$[l,r]$都变为$0$；$t=2$：$[l,r]$都变为$1$，求总体的$\text{sum}$
+例子：默认一开始所有值都是$1$。$t=1$：$[l,r]$都变为$0$；$t=2$：$[l,r]$都变为$1$，求总体的$\text{sum}$。
 
-动态开点线段树比较重要的地方就是create函数 如果要用到一个节点 但是没有被创建出来 要提前创建出来
+动态开点线段树的核心是create函数。当需要访问一个节点但该节点尚未创建时，需要提前创建。
 
-传参的时候基本都要把$l,r$传进去 比较方便修改
+注意：传参时基本都要把$l,r$传进去，便于修改操作。
 
 \begin{minted}{cpp}
 const int N = 16000010;
@@ -1147,8 +1152,8 @@ int merge(int p, int q, int l, int r) //将q合并到p上
 void merge() { root[x] = merge(root[x], root[y], 1, N - 1); } //相当于x += y
 void modify() { root[x] = modify(root[x], 1, N - 1, z, 1); } //在x的这棵线段树上的z位置加1
 \end{minted}
-注意:对于合并操作p,q \quad q会直接归为p的一部分,会影响q节点答案的查询,
-所以一般要把询问挂到节点上,dfs解决询问,先解决儿子的,再解决父亲的,从而不会影响儿子的询问
+注意：对于合并操作p，q \quad q会直接归为p的一部分，会影响q节点答案的查询，
+所以一般要把询问挂到节点上，dfs解决询问，先解决儿子的，再解决父亲的，从而不会影响儿子的询问
 
 如果想要解决这个问题 可以在线段树合并的时候新建一个节点作为替代
 \begin{minted}{cpp}
@@ -1171,11 +1176,11 @@ int merge(int p, int q, int l, int r)
 
 例子：CF600E
 
-每个结点都有一个颜色,颜色是以编号表示的。$i$号结点的颜色编号为$c_i$。
+每个结点都有一个颜色，颜色是以编号表示的。$i$号结点的颜色编号为$c_i$。
 
-如果一种颜色在以$x$为根的子树内出现次数最多,称其在以 x为根的子树中占主导地位。显然,同一子树中可能有多种颜色占主导地位。
+如果一种颜色在以$x$为根的子树内出现次数最多，称其在以 x为根的子树中占主导地位。显然，同一子树中可能有多种颜色占主导地位。
 
-对于每一个$i\in[1,n]$求出以 $i$为根的子树中,占主导地位的颜色的编号和。
+对于每一个$i\in[1,n]$求出以 $i$为根的子树中，占主导地位的颜色的编号和。
 \begin{minted}{cpp}
 struct Node
 {
@@ -1246,6 +1251,7 @@ int main()
 \textbf{核心思想：}递归地将指定区间从原树中"切出"，分裂后原树该区间被清空。
 
 \textbf{注意事项：}参数p必须用引用，因为分裂后原节点会被清空。通常分裂后要重新合并。
+
 \begin{minted}{cpp}
 //可以考虑分裂完之后再合并
 int split(int & p, int l, int r, int ql, int qr)//对于p 分裂出ql和qr的区间
@@ -1267,7 +1273,7 @@ int split(int & p, int l, int r, int ql, int qr)//对于p 分裂出ql和qr的区
 \end{minted}
 例子:CF991G
 
-给出一个数列,有q个操作,每种操作是把区间$[l,r]$中等于x的数改成y.输出q步操作完的数列.
+给出一个数列，有q个操作，每种操作是把区间$[l,r]$中等于x的数改成y。输出q步操作完的数列。
 \begin{minted}{cpp}
 struct Node
 {
@@ -8891,7 +8897,7 @@ struct HASH
 }h;
 \end{minted}
 
-int128的单哈希
+int128 的单哈希
 
 \begin{minted}{cpp}
 const int P = 1709;
@@ -8908,9 +8914,9 @@ int get(int l, int r) {return (h[r] - (i128)h[l - 1] * p[r - l + 1] % mod + mod)
 % 时间复杂度：预处理$O(m)$，匹配$O(n+m)$  
 % 空间复杂度：$O(m)$
 
-$p$串去匹配$s$串    $p$串的长度为$m$    $s$串的长度为$n$
+KMP算法用于字符串匹配，其中$p$串（长度$m$）去匹配$s$串（长度$n$）。
 
-匹配的过程实质上是在求 以$s_i$结尾的子串里 能匹配到的p串的最大前缀
+匹配的本质是求以$s_i$结尾的子串中能匹配到的$p$串的最大前缀。
 
 \begin{minted}{cpp}
 int s[N], p[M], ne[M];
@@ -8995,7 +9001,7 @@ void Z(string s, string t)
     }
 }//z[i]是s与后缀s[i..n]的lcp p[i]是s与t的后缀t[i..n]的lcp
 \end{minted}
-\subsection{Trie}
+\subsection{Trie（字典树）}
 
 \begin{minted}{cpp}
 int tr[N][26], cnt[N], idx;
@@ -9315,9 +9321,12 @@ int query(int p, int q, int k, int v)//在第p + 1 - q版本的Trie中寻找异�
 \end{minted}
 \subsection{AC自动机}
 
-AC自动机类似于多模式串同时匹配的KMP,首先建出Trie,然后再建出失配指针加快匹配速度。
+% 时间复杂度：构建$O(\sum |s_i|)$，匹配$O(|T| + \sum |s_i|)$
+% 空间复杂度：$O(\sum |s_i| \times |\Sigma|)$
 
-\textbf{如果涉及到dp,计算价值等问题,要考虑清楚要不要上传子串贡献}
+AC自动机类似于多模式串同时匹配的KMP，首先建出Trie，然后再建出失配指针加快匹配速度。
+
+\textbf{注意：}如果涉及到dp或计算价值等问题，要考虑清楚是否需要上传子串贡献。
 
 \begin{minted}{cpp}
 struct ACAM

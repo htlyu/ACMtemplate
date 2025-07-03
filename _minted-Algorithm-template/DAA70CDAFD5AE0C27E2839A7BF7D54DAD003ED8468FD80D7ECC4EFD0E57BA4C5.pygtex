@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{merge}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{q}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{l}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{r}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{p}\PYG{o}{||!}\PYG{n}{q}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{p}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{q}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{nw}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{idx}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{l}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{r}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{nw}\PYG{p}{].}\PYG{n}{cnt}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{nw}\PYG{p}{].}\PYG{n}{maxv}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{p}\PYG{p}{].}\PYG{n}{cnt}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{q}\PYG{p}{].}\PYG{n}{cnt}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{nw}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{mid}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{l}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{r}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{nw}\PYG{p}{].}\PYG{n}{l}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{merge}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{p}\PYG{p}{].}\PYG{n}{l}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{q}\PYG{p}{].}\PYG{n}{l}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{l}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{mid}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{nw}\PYG{p}{].}\PYG{n}{r}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{merge}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{p}\PYG{p}{].}\PYG{n}{r}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{q}\PYG{p}{].}\PYG{n}{r}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{mid}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{r}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{pushup}\PYG{p}{(}\PYG{n}{nw}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{nw}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

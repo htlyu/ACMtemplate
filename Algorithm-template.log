@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.20)  3 JUL 2025 19:05
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.20)  4 JUL 2025 02:06
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -669,7 +669,19 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 23.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2023/10/27 v2.16 Sectioning titles
+\ttl@box=\box68
+\beforetitleunit=\skip82
+\aftertitleunit=\skip83
+\ttl@plus=\dimen279
+\ttl@minus=\dimen280
+\ttl@toksa=\toks34
+\titlewidth=\dimen281
+\titlewidthlast=\dimen282
+\titlewidthfirst=\dimen283
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 42.
 
 Package fontspec Info: Could not resolve font "PingFang SC/I" (it probably
 (fontspec)             doesn't exist).
@@ -773,83 +785,83 @@ runsystem(rm Algorithm-template.aex)...executed.
 (./Algorithm-template.aux)
 \openout1 = `Algorithm-template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 143.
+LaTeX Font Info:    ... okay on input line 143.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 124.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 124.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 124.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 124.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 124.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 124.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 124.
-LaTeX Font Info:    Redeclaring math accent \check on input line 124.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 124.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 124.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 124.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 124.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 124.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 143.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 143.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 143.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 143.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 143.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 143.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 143.
+LaTeX Font Info:    Redeclaring math accent \check on input line 143.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 143.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 143.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 143.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 143.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 124.
+(Font)              `operators' in the math version `normal' on input line 143.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 124.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 143.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 124.
+(Font)              `operators' in the math version `bold' on input line 143.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 124.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 143.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 124.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 143.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 124.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 143.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 124.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 143.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 124.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 143.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/FiraCode(0)/m/n on input line 124.
+(Font)                  OT1/cmtt/m/n --> TU/FiraCode(0)/m/n on input line 143.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 124.
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 143.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 124.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 143.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 124.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 143.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/FiraCode(0)/b/n on input line 124.
+(Font)                  OT1/cmtt/m/n --> TU/FiraCode(0)/b/n on input line 143.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -859,19 +871,19 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(34.14322pt, 540.60237pt, 22.76228pt)
-* v-part:(T,H,B)=(42.67912pt, 785.2959pt, 17.07182pt)
+* h-part:(L,W,R)=(39.83368pt, 529.22145pt, 28.45274pt)
+* v-part:(T,H,B)=(51.21504pt, 776.75998pt, 17.07182pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=540.60237pt
-* \textheight=785.2959pt
-* \oddsidemargin=-38.12677pt
-* \evensidemargin=-38.12677pt
-* \topmargin=-66.59087pt
+* \textwidth=529.22145pt
+* \textheight=776.75998pt
+* \oddsidemargin=-32.43631pt
+* \evensidemargin=-32.43631pt
+* \topmargin=-58.05495pt
 * \headheight=13.0pt
-* \headsep=25.0pt
+* \headsep=8.0pt
 * \topskip=10.0pt
-* \footskip=30.0pt
+* \footskip=12.0pt
 * \marginparwidth=57.0pt
 * \marginparsep=11.0pt
 * \columnsep=8.0pt
@@ -885,18 +897,18 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 124.
+Package hyperref Info: Link coloring ON on input line 143.
 (./Algorithm-template.out) (./Algorithm-template.out)
 \@outlinefile=\write5
 \openout5 = `Algorithm-template.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 127
+LaTeX Font Info:    Trying to load font information for U+msa on input line 146
 .
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 127
+LaTeX Font Info:    Trying to load font information for U+msb on input line 146
 .
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -913,7 +925,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 (./_minted-Algorithm-template/colorful.pygstyle)
-(./_minted-Algorithm-template/D1921B95CC3C605859E5B392F8C4E63ED003ED8468FD80D7E
+(./_minted-Algorithm-template/8D15E3DDE65EEB4509480D9157701B3ED003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
@@ -922,28 +934,83 @@ CC4EFD0E57BA4C5.pygtex)
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
+runsystem(command -v python3 && touch Algorithm-template.aex)...executed.
 
-(./_minted-Algorithm-template/BD26E273AAA52233CB9DC6E12216D276D003ED8468FD80D7E
+runsystem(rm Algorithm-template.aex)...executed.
+
+runsystem(python3 -c "import sys; import os; import textwrap; from io import op
+en; fname = os.path.expanduser(os.path.expandvars(\"Algorithm-template.pyg\"));
+ f = open(fname, \"r\", encoding=\"utf8\") if os.path.isfile(fname) else None; 
+t = f.readlines() if f is not None else None; t_opt = t if t is not None else [
+]; f.close() if f is not None else None; tmpfname = os.path.expanduser(os.path.
+expandvars(\"Algorithm-template.pyg\")); f = open(tmpfname, \"w\", encoding=\"u
+tf8\") if t is not None else None; fvstartnum = 0; fvstopnum = -1; s = max(0, f
+vstartnum-1); e = max(s, fvstopnum) if fvstopnum > 0 else len(t_opt); [f.write(
+textwrap.dedent(\"\".join(x))) for x in (t_opt[0:s], t_opt[s:e], t_opt[e:]) if 
+x and t is not None]; f.close() if t is not None else os.remove(tmpfname);")...
+executed.
+
+runsystem(pygmentize -l 'cpp' -f latex -P commandprefix=PYG -F tokenmerge -P st
+ripnl='False' -P encoding='utf8' -P texcomments='False' -P mathescape='False' -
+o _minted-Algorithm-template/DA9E7A3C9CAA3D9F2E9A61F9BD97AC6BD003ED8468FD80D7EC
+C4EFD0E57BA4C5.pygtex Algorithm-template.pyg)...executed.
+
+
+(./_minted-Algorithm-template/DA9E7A3C9CAA3D9F2E9A61F9BD97AC6BD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [1
 
 ]
-Underfull \vbox (badness 10000) detected at line 305
+Underfull \vbox (badness 10000) detected at line 323
  []
 
 
-Overfull \vbox (0.85321pt too high) detected at line 305
+Underfull \vbox (badness 10000) detected at line 323
  []
 
 [2]
 \openout3 = `Algorithm-template.pyg'.
 
+runsystem(python3 -c "import sys; import os; import textwrap; from io import op
+en; fname = os.path.expanduser(os.path.expandvars(\"Algorithm-template.pyg\"));
+ f = open(fname, \"r\", encoding=\"utf8\") if os.path.isfile(fname) else None; 
+t = f.readlines() if f is not None else None; t_opt = t if t is not None else [
+]; f.close() if f is not None else None; tmpfname = os.path.expanduser(os.path.
+expandvars(\"Algorithm-template.pyg\")); f = open(tmpfname, \"w\", encoding=\"u
+tf8\") if t is not None else None; fvstartnum = 0; fvstopnum = -1; s = max(0, f
+vstartnum-1); e = max(s, fvstopnum) if fvstopnum > 0 else len(t_opt); [f.write(
+textwrap.dedent(\"\".join(x))) for x in (t_opt[0:s], t_opt[s:e], t_opt[e:]) if 
+x and t is not None]; f.close() if t is not None else os.remove(tmpfname);")...
+executed.
 
-(./_minted-Algorithm-template/E5B9CE1F4A92D4AFC68855A52905F68ED003ED8468FD80D7E
+runsystem(pygmentize -l 'cpp' -f latex -P commandprefix=PYG -F tokenmerge -P st
+ripnl='False' -P encoding='utf8' -P texcomments='False' -P mathescape='False' -
+o _minted-Algorithm-template/2178BD76B512F5A07D01BCD11651FA90D003ED8468FD80D7EC
+C4EFD0E57BA4C5.pygtex Algorithm-template.pyg)...executed.
+
+
+(./_minted-Algorithm-template/2178BD76B512F5A07D01BCD11651FA90D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
+runsystem(python3 -c "import sys; import os; import textwrap; from io import op
+en; fname = os.path.expanduser(os.path.expandvars(\"Algorithm-template.pyg\"));
+ f = open(fname, \"r\", encoding=\"utf8\") if os.path.isfile(fname) else None; 
+t = f.readlines() if f is not None else None; t_opt = t if t is not None else [
+]; f.close() if f is not None else None; tmpfname = os.path.expanduser(os.path.
+expandvars(\"Algorithm-template.pyg\")); f = open(tmpfname, \"w\", encoding=\"u
+tf8\") if t is not None else None; fvstartnum = 0; fvstopnum = -1; s = max(0, f
+vstartnum-1); e = max(s, fvstopnum) if fvstopnum > 0 else len(t_opt); [f.write(
+textwrap.dedent(\"\".join(x))) for x in (t_opt[0:s], t_opt[s:e], t_opt[e:]) if 
+x and t is not None]; f.close() if t is not None else os.remove(tmpfname);")...
+executed.
 
-(./_minted-Algorithm-template/8507AC668D06C04A9172E65931E915D6D003ED8468FD80D7E
+runsystem(pygmentize -l 'cpp' -f latex -P commandprefix=PYG -F tokenmerge -P st
+ripnl='False' -P encoding='utf8' -P texcomments='False' -P mathescape='False' -
+o _minted-Algorithm-template/DE64F4B0DB35FE7178AFFFAF46543C9BD003ED8468FD80D7EC
+C4EFD0E57BA4C5.pygtex Algorithm-template.pyg)...executed.
+
+
+(./_minted-Algorithm-template/DE64F4B0DB35FE7178AFFFAF46543C9BD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
@@ -953,12 +1020,12 @@ CC4EFD0E57BA4C5.pygtex) [3]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/8B758F67547D45F75D0AC648CF6AE601D003ED8468FD80D7E
+(./_minted-Algorithm-template/0C9BC4BB2D5437E5F478D3CB6771E1C1D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/FE5F8EC1D2EDF31B304E75D104D5F93ED003ED8468FD80D7E
+(./_minted-Algorithm-template/50321526106C5FE75F203AFE5BBD6B54D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [4]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -973,18 +1040,18 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/E14E789CABB28772AABDAC8918446C2FD003ED8468FD80D7E
+(./_minted-Algorithm-template/58B4DD1B2B5466FDB3FD5A37C8555574D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [5]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/67800A7E926CA92B31592D38B01DC825D003ED8468FD80D7E
+(./_minted-Algorithm-template/C9491F8471249DCFDD5A60F8234B94B1D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [6]
 (./_minted-Algorithm-template/6F81C0625DDCECEB98BFF11B4EEFD2D8D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [6]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1003,13 +1070,13 @@ CC4EFD0E57BA4C5.pygtex) [7]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/DC91E4302F08C2C6344340CC0EF312B9D003ED8468FD80D7E
+(./_minted-Algorithm-template/5EA832C5A959382A8748B0F812E84E61D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
- [8]
+
 (./_minted-Algorithm-template/50077DFD8BED1FB0D6F90B95E9FCA778D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [8]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1017,9 +1084,9 @@ CC4EFD0E57BA4C5.pygtex)
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
- [9]
+
 (./_minted-Algorithm-template/02250A91D105341024875B1F78D7DBF1D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [9]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1029,10 +1096,10 @@ CC4EFD0E57BA4C5.pygtex) [10]
 
 
 (./_minted-Algorithm-template/EA587C8AA8BE831D7711282A2F1AC2E3D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [11]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [11]
 (./_minted-Algorithm-template/0EB33E46BA835F7A1103C0D3F531A655D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
@@ -1067,18 +1134,26 @@ CC4EFD0E57BA4C5.pygtex)
 CC4EFD0E57BA4C5.pygtex) [15]
 \openout3 = `Algorithm-template.pyg'.
 
- [16]
-(./_minted-Algorithm-template/C2B7B57CD385987595E6B47CAF6C085DD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [17]
+
+(./_minted-Algorithm-template/8FAEEC1E7440170560975842B2E76C0DD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [16]
+Underfull \vbox (badness 10000) detected at line 1456
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1456
+ []
+
+[17]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/14DA4353CD41EA16F5FD09C2AAF931FBD003ED8468FD80D7E
+(./_minted-Algorithm-template/A75157B57F7506BD8CE404B149378B18D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/11CC149CF2C62DA8CD69EA34A428E8CED003ED8468FD80D7E
+(./_minted-Algorithm-template/CE9C8975E22B27AC944AA34AD9F40F73D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [18]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1103,22 +1178,18 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/9CD15FD1B3511191A6C271CC10354585D003ED8468FD80D7E
+(./_minted-Algorithm-template/D3BED84755489BD32455580B7CBB059BD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [23]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/0DAAA8986E483809356F15F705FD1BA4D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (0.8247pt too high) detected at line 2143
- []
-
-[24]
-Underfull \vbox (badness 10000) detected at line 2143
+CC4EFD0E57BA4C5.pygtex) [24]
+Underfull \vbox (badness 10000) detected at line 2141
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2143
+Overfull \vbox (0.75598pt too high) detected at line 2141
  []
 
 [25] [26]
@@ -1126,16 +1197,12 @@ Underfull \vbox (badness 10000) detected at line 2143
 
 
 (./_minted-Algorithm-template/1703BFCDD9695C8B8E54655781F776DFD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (2.28732pt too high) detected at line 2332
- []
-
-[27]
-Underfull \vbox (badness 10000) detected at line 2332
+CC4EFD0E57BA4C5.pygtex) [27]
+Underfull \vbox (badness 10000) detected at line 2330
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2332
+Underfull \vbox (badness 10000) detected at line 2330
  []
 
 [28]
@@ -1147,7 +1214,7 @@ CC4EFD0E57BA4C5.pygtex) [29] [30] [31]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/7B621BEEF93889775588376E559B96C6D003ED8468FD80D7E
+(./_minted-Algorithm-template/A7ABE7216B2D74B11516E6A7DB08A88AD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [32]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1159,11 +1226,11 @@ CC4EFD0E57BA4C5.pygtex) [33]
 
 (./_minted-Algorithm-template/F7F02B229C091D77D6BCD5482890DD07D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [34]
-Underfull \vbox (badness 10000) detected at line 2928
+Underfull \vbox (badness 10000) detected at line 2922
  []
 
 
-Overfull \vbox (0.17679pt too high) detected at line 2928
+Underfull \vbox (badness 10000) detected at line 2922
  []
 
 [35]
@@ -1172,7 +1239,7 @@ Overfull \vbox (0.17679pt too high) detected at line 2928
 
 (./_minted-Algorithm-template/92A5484B1611139F47F62E328F234A33D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (0.87326pt too high) detected at line 3034
+Overfull \vbox (2.32817pt too high) detected at line 3028
  []
 
 [36]
@@ -1180,35 +1247,39 @@ Overfull \vbox (0.87326pt too high) detected at line 3034
 
 
 (./_minted-Algorithm-template/596106655626A43A105C9C11760E7EDCD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [37]
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (0.8678pt too high) detected at line 3093
+ []
+
+[37]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/573A078FCCC02E2BEB8298A42004BFBED003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [38]
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/CA969528002CA32178DD3E04EFAB66A9D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (0.95851pt too high) detected at line 3302
+Overfull \vbox (1.06947pt too high) detected at line 3180
  []
 
-[39]
+[38]
 \openout3 = `Algorithm-template.pyg'.
 
- [40]
+
+(./_minted-Algorithm-template/E57115F48275FA02AA2E6254086A09BCD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [39] [40]
+\openout3 = `Algorithm-template.pyg'.
+
+
 (./_minted-Algorithm-template/A81D5A7C6E9B61EC8948859A1089B9E5D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [41]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/E9885A1A7B94CA18788D55DF6FBBACBFD003ED8468FD80D7E
+(./_minted-Algorithm-template/43B10F4B1A49798C6B34168BC345CD09D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/0A04D470113F5BFE181B3417DE03EB42D003ED8468FD80D7E
+(./_minted-Algorithm-template/9B1F197DACA961AFCFE0EEC6997D3D7FD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [42]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1220,32 +1291,28 @@ CC4EFD0E57BA4C5.pygtex)
 
 (./_minted-Algorithm-template/F042125EFE54F9B89481FA5C29EC2D34D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [43]
+Underfull \vbox (badness 10000) detected at line 3627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3627
+ []
+
+[44]
 \openout3 = `Algorithm-template.pyg'.
 
- [44]
+
 (./_minted-Algorithm-template/065E7069346E07F20EC1909CA2356C7AD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Underfull \vbox (badness 10000) detected at line 3733
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3733
- []
-
-[45]
+CC4EFD0E57BA4C5.pygtex) [45]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/A34DFA4B3F9242001BD6E8597B20B27CD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (1.97072pt too high) detected at line 3820
- []
-
-[46]
+CC4EFD0E57BA4C5.pygtex) [46]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/8BB324B97F28A4263C0E2A1259A634C2D003ED8468FD80D7E
+(./_minted-Algorithm-template/F30A8D23E6AB905B0B230A50859A751BD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [47]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1260,7 +1327,7 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/BA538B41EB908C02E7A1FDE03C28FD58D003ED8468FD80D7E
+(./_minted-Algorithm-template/D1D976F633B25C756337701AB752A561D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [49]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1271,7 +1338,11 @@ CC4EFD0E57BA4C5.pygtex) [50]
 
 
 (./_minted-Algorithm-template/51121D4B8D98402C61BFE247AD8CC84BD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [51]
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (1.20334pt too high) detected at line 4168
+ []
+
+[51]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1280,23 +1351,27 @@ CC4EFD0E57BA4C5.pygtex) [52]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/3710FF1BFDD38D3252D67456CCC500B7D003ED8468FD80D7E
+(./_minted-Algorithm-template/7F052CF808FAF2AAD3DFB5947CA634DAD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+\openout3 = `Algorithm-template.pyg'.
+
+ [53]
+(./_minted-Algorithm-template/5020B1FB8D348B94C10E54DB139B5907D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/5020B1FB8D348B94C10E54DB139B5907D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [53]
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/6C7B35AAF2D647375663F8589BB1287DD003ED8468FD80D7E
+(./_minted-Algorithm-template/53AC9C5217992BE036172D597EBD9280D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [54]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/EB6AF8AA09F9398BD0338698E34F9E27D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [55]
+(./_minted-Algorithm-template/EFE25D0ED807C9500280D25A0A42732CD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (0.42784pt too high) detected at line 4449
+ []
+
+[55]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1305,24 +1380,32 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/81338CF69B229B3A12CE5AEED10F0D28D003ED8468FD80D7E
+(./_minted-Algorithm-template/03A75B815F21760DF535F3288ED04E8FD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [56]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/4FCCC39CF860EC9860E783E401163BA9D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [57]
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (0.57275pt too high) detected at line 4611
+ []
+
+[57]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/A1B5729C1B39A54731B58C78354E7FDED003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [58]
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (1.95801pt too high) detected at line 4682
+ []
+
+[58]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/E4AB74EA26517CF79AE14B11BDDC3CD3D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (0.54672pt too high) detected at line 4791
+Overfull \vbox (1.27467pt too high) detected at line 4773
  []
 
 [59]
@@ -1345,10 +1428,10 @@ CC4EFD0E57BA4C5.pygtex)
 
 
 (./_minted-Algorithm-template/0B0B5780FF1AE451602DCBACEEA977B2D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [61]
 \openout3 = `Algorithm-template.pyg'.
 
- [61]
+
 (./_minted-Algorithm-template/B3AC9D7F7341421EA8AC559DBC6C1B32D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
@@ -1364,13 +1447,13 @@ CC4EFD0E57BA4C5.pygtex) [62]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/8560061B030F8ACEDFA74B57A5A1ECE1D003ED8468FD80D7E
+(./_minted-Algorithm-template/31746E292F6C2E07E0BC4E78B1A38DAED003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [63]
 \openout3 = `Algorithm-template.pyg'.
 
-
-(./_minted-Algorithm-template/AC28AEC0BCC50C16436A37C22EA24010D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [64]
+ [64]
+(./_minted-Algorithm-template/CBB4DEF019C065CA316FFBC019ECE1F1D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1380,7 +1463,11 @@ CC4EFD0E57BA4C5.pygtex) [65]
 
 
 (./_minted-Algorithm-template/2BFEB02D5043C464D85E585E52D99944D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [66]
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (1.56331pt too high) detected at line 5296
+ []
+
+[66]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1388,39 +1475,39 @@ CC4EFD0E57BA4C5.pygtex) [66]
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [67]
 (./_minted-Algorithm-template/502D8FF347E960FC9546F7D1E10889C7D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [67]
+CC4EFD0E57BA4C5.pygtex) [68]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/E802FECBAF8C1802066B07485884FC85D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [68] [69]
+CC4EFD0E57BA4C5.pygtex) [69]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/DA53973CA032A15B7007CAC4393D6C9ED003ED8468FD80D7E
+(./_minted-Algorithm-template/EC7B408D6FDB4D432DD16FF4FF6422FAD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+\openout3 = `Algorithm-template.pyg'.
+
+ [70]
+(./_minted-Algorithm-template/CFADE864CBD7F6AF134D7DB60A4494FFD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/F1F92B01D7CD627EA3BCCEBA88A1EE10D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [70]
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/E241CA60BC4F1E2E398A1866028784B4D003ED8468FD80D7E
+(./_minted-Algorithm-template/2D059BBD1D8F490C7FEDEF54E59FE07AD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/FE63E07C7AB1A25BB402AE21AE02FE3CD003ED8468FD80D7E
+(./_minted-Algorithm-template/451640ABE869FABF57079013A79E69BCD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [71]
-Underfull \vbox (badness 10000) detected at line 5786
+Underfull \vbox (badness 10000) detected at line 5758
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5786
+Overfull \vbox (2.28018pt too high) detected at line 5758
  []
 
 [72]
@@ -1438,11 +1525,7 @@ CC4EFD0E57BA4C5.pygtex) [73]
 
 
 (./_minted-Algorithm-template/B270C0FC11BCAAA80F88D55D96F6810CD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (1.2163pt too high) detected at line 5939
- []
-
-[74]
+CC4EFD0E57BA4C5.pygtex) [74]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1451,13 +1534,17 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/20920925F86CD81D14746B26B66125DBD003ED8468FD80D7E
+(./_minted-Algorithm-template/A9466F99BCBE89C6104C774B69A2A564D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [75]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/3AB6E6EE924CCFBECC26BF84AD334D47D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [76]
+(./_minted-Algorithm-template/DF94711ED5ED2F4D43A24345A55A359ED003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (1.62813pt too high) detected at line 6080
+ []
+
+[76]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1477,20 +1564,20 @@ CC4EFD0E57BA4C5.pygtex)
 
 
 (./_minted-Algorithm-template/695F942431D8EB69C9AFF45BD067EF6AD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [78]
 \openout3 = `Algorithm-template.pyg'.
 
- [78]
+
 (./_minted-Algorithm-template/87953C588AA6795C3D9C3931360771F0D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [79]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/A4DCB74EDAF93E1FB6DD033485A5CC86D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+(./_minted-Algorithm-template/65DA8A8E4E32AB87C9757F63F37D591BD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [80]
 \openout3 = `Algorithm-template.pyg'.
 
- [80]
+
 (./_minted-Algorithm-template/EFE4D647D65925283F50FEF34512131DD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
@@ -1512,35 +1599,27 @@ CC4EFD0E57BA4C5.pygtex)
 
 
 (./_minted-Algorithm-template/94659EB2342CEEF02443E061C610D241D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [82]
 \openout3 = `Algorithm-template.pyg'.
 
- [82]
+
 (./_minted-Algorithm-template/0298D70B66CFBA604270A65897107E65D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/FD7F7B9C95A4B46F55DB412F91A3704DD003ED8468FD80D7E
+(./_minted-Algorithm-template/1956ADBDDB5F1B3CF0B3DB1627129AA5D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [83]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/5ACAA4110C1BC899D6306A8080EF9418D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (2.08896pt too high) detected at line 6736
- []
-
-[84]
+(./_minted-Algorithm-template/3D5F6D692FEF7A199851A797117FF778D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [84]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/88AB86469490A917B05136AD06B010E1D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (0.81963pt too high) detected at line 6847
- []
-
-[85]
+CC4EFD0E57BA4C5.pygtex) [85]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1549,23 +1628,27 @@ CC4EFD0E57BA4C5.pygtex) [86]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/01522F2B1DCAE3E6001D6EA7C6FF4E04D003ED8468FD80D7E
+(./_minted-Algorithm-template/71EAD02775B852232398DEB4032ABAECD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [87]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/141ED1C528141E83290DC5603E835AC5D003ED8468FD80D7E
+(./_minted-Algorithm-template/297603CF198A155D738D285FC295EBBED003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [88]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/8E85C7A955CA95A222B7AE5E493D06F5D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [89]
-Underfull \vbox (badness 10000) detected at line 7200
+(./_minted-Algorithm-template/644E01645D56A46B982C4B7A91D940D9D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (2.23367pt too high) detected at line 7157
+ []
+
+[89]
+Underfull \vbox (badness 10000) detected at line 7157
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7200
+Overfull \vbox (2.4053pt too high) detected at line 7157
  []
 
 [90]
@@ -1577,12 +1660,8 @@ CC4EFD0E57BA4C5.pygtex) [91]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/3660AEDE7E02BE8D6987C489F8DEBF01D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (1.69324pt too high) detected at line 7388
- []
-
-[92]
+(./_minted-Algorithm-template/27DEBC01B0F73B3B911F6DB050E4EC80D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [92]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1591,50 +1670,54 @@ CC4EFD0E57BA4C5.pygtex) [93]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/C5C331BB8FB5E0F1C12DAE98DAC2679DD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [94]
+(./_minted-Algorithm-template/7F01A4E55F55AF091CE47F1FEDB9442ED003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (1.12273pt too high) detected at line 7484
+ []
+
+[94]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/B0E2E18C27F1EA0FE6E01E4B5171D969D003ED8468FD80D7E
+(./_minted-Algorithm-template/AD06BFF6DEC89DD175904CF9D78CA8C0D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
-(./_minted-Algorithm-template/AA13735ECA2E4405E1DB1BB2EDDF16D2D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [95]
-Underfull \vbox (badness 10000) detected at line 7681
+ [95]
+(./_minted-Algorithm-template/2B8DCCB8940493126632265834C36EADD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Underfull \vbox (badness 10000) detected at line 7635
  []
 
 
-Underfull \vbox (badness 10000) detected at line 7681
+Overfull \vbox (1.62729pt too high) detected at line 7635
  []
 
 [96]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/CBE5790D07DC266D2DE7A5971CB91630D003ED8468FD80D7E
+(./_minted-Algorithm-template/46426E84AF2B360DA38D3398A431A9B4D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [97]
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [98]
 (./_minted-Algorithm-template/69DF7F63786148650727328B2414D765D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [98]
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/5F5F718FC061C5B38F81D794AA9867EAD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/E6667B5C5AF79C6135B7816273CF2E7AD003ED8468FD80D7E
+(./_minted-Algorithm-template/5F5F718FC061C5B38F81D794AA9867EAD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [99]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/F88B1382296FD65692AE4B483C7E1692D003ED8468FD80D7E
+(./_minted-Algorithm-template/E6667B5C5AF79C6135B7816273CF2E7AD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+\openout3 = `Algorithm-template.pyg'.
+
+
+(./_minted-Algorithm-template/4CC303A656C1297B6B5DA2493178D38BD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [100]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1648,18 +1731,14 @@ CC4EFD0E57BA4C5.pygtex) [101]
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [102]
 (./_minted-Algorithm-template/7635011915C9F1DC55706AA8FB2495DFD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
- [102]
-(./_minted-Algorithm-template/D2153974D2CF766E210DF67F2DF6D15BD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (0.59657pt too high) detected at line 8198
- []
 
-[103]
+(./_minted-Algorithm-template/D2153974D2CF766E210DF67F2DF6D15BD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [103]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1684,40 +1763,52 @@ CC4EFD0E57BA4C5.pygtex) [105]
 
 
 (./_minted-Algorithm-template/3AD61910A6C9A73280B8560AF9D301B4D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/FE4B985DA846C34D9A713F3CFB649848D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [106]
 \openout3 = `Algorithm-template.pyg'.
 
 
+(./_minted-Algorithm-template/056AD3E22280720462B584A78E99AF28D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+\openout3 = `Algorithm-template.pyg'.
+
+ [107]
 (./_minted-Algorithm-template/203C0C7CAD58F6FCAFCDA2899618449FD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [107]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/D59DF1E2673420AE481F0E478E11AD49D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [108] [109]
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/4E79C730E20F5FFD3ED31962239AA211D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [110]
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/4CF1CC2B8FC25D52750510F45CB91340D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [111]
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/292F409D81742AF40C785B8529F19578D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (0.58537pt too high) detected at line 8523
+ []
+
+[108] [109]
 \openout3 = `Algorithm-template.pyg'.
 
- [112]
+
+(./_minted-Algorithm-template/A679D5385037C1A0CC41211B8918144BD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Underfull \vbox (badness 5217) detected at line 8755
+ []
+
+[110]
+\openout3 = `Algorithm-template.pyg'.
+
+
+(./_minted-Algorithm-template/B89DE62CB22DF37A32EC4955B86FDE70D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (0.28036pt too high) detected at line 8864
+ []
+
+[111]
+\openout3 = `Algorithm-template.pyg'.
+
+
+(./_minted-Algorithm-template/8EAC324146563DDFCACB95706D05DA5CD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [112]
+\openout3 = `Algorithm-template.pyg'.
+
+
 (./_minted-Algorithm-template/2B8A75A71A223332193E46798562B6DBD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
@@ -1749,26 +1840,26 @@ CC4EFD0E57BA4C5.pygtex) [114]
 
 
 (./_minted-Algorithm-template/A996AE839DFC1705A7E80F0C327490B4D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [115]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/3F0FDE9B22AB843FC982EA2F13F7843ED003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [115] [116]
+(./_minted-Algorithm-template/56FCE7E6C9B7F25B435AB7CCB9387689D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [116]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/3F6CF8045C06992B40531C0B81F658D0D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+(./_minted-Algorithm-template/E4C9071061AD92739DB18779DBDDFDCCD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [117]
 \openout3 = `Algorithm-template.pyg'.
 
- [117]
+
 (./_minted-Algorithm-template/3740DCFB1BC8C202A10C803709FB7513D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/F2876D42E5763B8B605B95CD3480CB07D003ED8468FD80D7E
+(./_minted-Algorithm-template/FAFC48887A043E6E537D1EB97B6A702ED003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [118]
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1779,9 +1870,10 @@ Missing character: There is no ∼ (U+223C) in font [lmroman9-regular]:mapping=t
 x-text;!
 Missing character: There is no ∼ (U+223C) in font [lmroman6-regular]:mapping=te
 x-text;!
+[119]
 \openout3 = `Algorithm-template.pyg'.
 
-[119]
+
 (./_minted-Algorithm-template/F0FD77651C5C2ADA90042AFD7C1A6350D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [120]
 \openout3 = `Algorithm-template.pyg'.
@@ -1853,7 +1945,7 @@ x-text;!
 
 (./_minted-Algorithm-template/2AC656C3ECE28DB3F18D05D75547705AD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (0.88805pt too high) detected at line 9849
+Overfull \vbox (1.69313pt too high) detected at line 9779
  []
 
 [123]
@@ -1865,69 +1957,69 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/77C9A7898361344E4186FF6202412683D003ED8468FD80D7E
+(./_minted-Algorithm-template/93E963950095B5C20A93554C76A50D76D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/AF02EACB2B197D253C93D0D668C4C90DD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [124]
 \openout3 = `Algorithm-template.pyg'.
 
- [124]
+
 (./_minted-Algorithm-template/D1351CF83BC055B0537BD9EB10D0A851D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [125]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/FAB4563D2B048FB0F181D4055AC2DB89D003ED8468FD80D7E
+(./_minted-Algorithm-template/8FC0E466DCB9543126F427F67EEC3CE3D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [126]
-Underfull \vbox (badness 10000) detected at line 10226
+Underfull \vbox (badness 10000) detected at line 10155
  []
 
 
-Overfull \vbox (1.62447pt too high) detected at line 10226
+Overfull \vbox (2.30563pt too high) detected at line 10155
  []
 
 [127]
+Underfull \vbox (badness 10000) detected at line 10155
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10155
+ []
+
+[128]
 \openout3 = `Algorithm-template.pyg'.
 
- [128]
-(./_minted-Algorithm-template/02048B13912333E4479982031703E9FDD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Underfull \vbox (badness 10000) detected at line 10353
- []
 
-
-Underfull \vbox (badness 10000) detected at line 10353
- []
-
-[129]
+(./_minted-Algorithm-template/607FC2D8276E8240DF714ACB693DDCFDD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [129]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/F48E143D97BCFB21A8675FA4A6C36164D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/BC9CFCE6718E8433DB21DBC02B0E31E4D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [130]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/6ABFEF4049E7DD05167F9DC5824FA08ED003ED8468FD80D7E
+(./_minted-Algorithm-template/BC9CFCE6718E8433DB21DBC02B0E31E4D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+\openout3 = `Algorithm-template.pyg'.
+
+
+(./_minted-Algorithm-template/74BC142494AB42CFA2A1D9D606A0E5F1D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [131]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/BD263ECAE6BEE009E01105F04E906BB2D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [132]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/2BCB32B0A195B46FA5466328E9E93B6CD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [132]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1951,7 +2043,7 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/F46C1844014022C0E3443233E2388122D003ED8468FD80D7E
+(./_minted-Algorithm-template/C54FF293B23320B6F74603BE97BD1286D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
@@ -1960,9 +2052,9 @@ CC4EFD0E57BA4C5.pygtex)
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [135]
 (./_minted-Algorithm-template/8DAF066A34DDD9E4E6F7B921464FD6B5D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [135]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -1991,7 +2083,7 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/BFB1229DF230026E4979AB6CC6DAC9ADD003ED8468FD80D7E
+(./_minted-Algorithm-template/46400007D2A6F6642E21FA8A99225EBCD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [138]
 Missing character: There is no 即 (U+5373) in font [lmroman9-regular]:mapping=te
 x-text;!
@@ -1999,60 +2091,64 @@ x-text;!
 
 
 (./_minted-Algorithm-template/850C86E29F6696C9220F3D8942C91A1AD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-\openout3 = `Algorithm-template.pyg'.
-
-
-(./_minted-Algorithm-template/8FB04F0C0DE131D0923E9EE93E26EDE2D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [139]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/826326D1371029F9FD602D04963CBB15D003ED8468FD80D7E
+(./_minted-Algorithm-template/8FB04F0C0DE131D0923E9EE93E26EDE2D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [140]
-Underfull \vbox (badness 10000) detected at line 11321
- []
+\openout3 = `Algorithm-template.pyg'.
 
 
-Underfull \vbox (badness 10000) detected at line 11321
+(./_minted-Algorithm-template/826326D1371029F9FD602D04963CBB15D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+Overfull \vbox (0.41748pt too high) detected at line 11232
  []
 
 [141]
+Underfull \vbox (badness 10000) detected at line 11232
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11232
+ []
+
+[142]
 \openout3 = `Algorithm-template.pyg'.
 
- [142]
-(./_minted-Algorithm-template/C3BD7850E291F5C3FA18B236DFC40903D003ED8468FD80D7E
+
+(./_minted-Algorithm-template/990C68247A813894281E584439A50D5CD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [143]
 (./_minted-Algorithm-template/4778E927AE0192B3CC03A4E160F153CFD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [143]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/FFDFF973FD83883C2155BC0512E637C2D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-\openout3 = `Algorithm-template.pyg'.
-
- [144]
-(./_minted-Algorithm-template/D0D427F3D9DAF0B591EFE51BCF480454D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [144]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/C686D9F39DCB0DE6B4C9F177FE678587D003ED8468FD80D7E
+(./_minted-Algorithm-template/78BCFF54474FC6C416FE398B064FE51BD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
+\openout3 = `Algorithm-template.pyg'.
+
+
+(./_minted-Algorithm-template/03866BC6711E6B843AC68145A964D60FD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [145]
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [146]
 (./_minted-Algorithm-template/17EBA8757FBEF2B570B821E8EA238ECDD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/DED02EBFC7314A4D988CF1962AF61F76D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [146]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -2076,13 +2172,13 @@ CC4EFD0E57BA4C5.pygtex) [148]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/994B165DB70C2DB7B28E47A16ECA2332D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+(./_minted-Algorithm-template/600B434F609096D93ACD6F7EA6E57269D003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [149]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/99E91B51B1C4C3C56AD308E80051B1C0D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [149]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -2092,12 +2188,12 @@ CC4EFD0E57BA4C5.pygtex) [150]
 
 
 (./_minted-Algorithm-template/8E8763105F287AA13F762D0E577A6AFCD003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
+CC4EFD0E57BA4C5.pygtex) [151]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/D4FC6ED2903A115467332AC0F57C3B33D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [151]
+(./_minted-Algorithm-template/C4F921410649DD63923D88C310CE281ED003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -2127,31 +2223,27 @@ CC4EFD0E57BA4C5.pygtex)
 
 
 (./_minted-Algorithm-template/7A9C85B40CC4665EF0691E776EC99733D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [154]
+CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
-(./_minted-Algorithm-template/0BBA03C76D85F6B067DD688FA8CC2082D003ED8468FD80D7E
+ [154]
+(./_minted-Algorithm-template/05403F7F9694C9C1144D0E5C4651212BD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/280B192ED71A41C3672FA80AD4AEB78CD003ED8468FD80D7E
+(./_minted-Algorithm-template/F95E0D5AB44F828167B420DA989D0D7DD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/B63FCA2003A2EA45A059A36F72F063A6D003ED8468FD80D7E
+(./_minted-Algorithm-template/532616781E8FBB948751DEED7E1B3948D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex) [155]
 \openout3 = `Algorithm-template.pyg'.
 
 
 (./_minted-Algorithm-template/E2D9552BA9EB8FBA6C2E111D9C824676D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex)
-Overfull \vbox (1.55786pt too high) detected at line 12444
- []
-
-[156]
+CC4EFD0E57BA4C5.pygtex) [156]
 \openout3 = `Algorithm-template.pyg'.
 
 
@@ -2215,21 +2307,21 @@ CC4EFD0E57BA4C5.pygtex) [159]
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/52A7DA911CBEF21241F70ECF72548033D003ED8468FD80D7E
+(./_minted-Algorithm-template/87A3824CE7F19FFEF1C01910ADB077EBD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/21E780670B8F68E9F69BA100C2F6DEA7D003ED8468FD80D7E
+(./_minted-Algorithm-template/1A9427FE45252A1230D8D864F8EC99E1D003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
- [160]
+
 (./_minted-Algorithm-template/8281BA9BC96412DA262523169C92362AD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
-
+ [160]
 (./_minted-Algorithm-template/60461336B9A232B45311ECD453B11AAAD003ED8468FD80D7E
 CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
@@ -2245,24 +2337,41 @@ CC4EFD0E57BA4C5.pygtex)
 \openout3 = `Algorithm-template.pyg'.
 
 
-(./_minted-Algorithm-template/58EF0528FF0AC6241AC1A6FC457158F7D003ED8468FD80D7E
-CC4EFD0E57BA4C5.pygtex) [161] [162] (./Algorithm-template.aux)
+(./_minted-Algorithm-template/0A41ABA3D3958358FD64F637D3C4719CD003ED8468FD80D7E
+CC4EFD0E57BA4C5.pygtex) [161]
+runsystem(rm _minted-Algorithm-template/585CFEB8553A43040F5BB8DBABBA22F6D003ED8
+468FD80D7ECC4EFD0E57BA4C5.pygtex)...executed.
+
+runsystem(rm _minted-Algorithm-template/C26ACE249C6C014B9069936930FB0913D003ED8
+468FD80D7ECC4EFD0E57BA4C5.pygtex)...executed.
+
+runsystem(rm _minted-Algorithm-template/DE0A4CDE58E54321BE307C27FED9DEAED003ED8
+468FD80D7ECC4EFD0E57BA4C5.pygtex)...executed.
+
+ [162] (./Algorithm-template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/07/14>
  ***********
-Package rerunfilecheck Info: File `Algorithm-template.out' has not changed.
-(rerunfilecheck)             Checksum: CB72025B0B47FDAA30BC35EC859AB81B;19012.
+
+
+Package rerunfilecheck Warning: File `Algorithm-template.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Algorithm-template.out':
+(rerunfilecheck)             Before: CB72025B0B47FDAA30BC35EC859AB81B;19012
+(rerunfilecheck)             After:  5FF1858B4CF622EF1F6CBFE9CEBE6C28;19052.
 runsystem(rm Algorithm-template.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 22573 strings out of 474773
- 610127 string characters out of 5757724
- 2023839 words of memory out of 5000000
- 43691 multiletter control sequences out of 15000+600000
+ 22916 strings out of 474773
+ 617717 string characters out of 5757724
+ 2022839 words of memory out of 5000000
+ 44030 multiletter control sequences out of 15000+600000
  573133 words of font info for 134 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 93i,12n,118p,1208b,888s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 93i,12n,118p,1208b,902s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on Algorithm-template.pdf (166 pages).

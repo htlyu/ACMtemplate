@@ -1,0 +1,91 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{LCT}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{Node}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{fa}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rev}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{sz}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{vir\PYGZus{}sz}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//实链的大小 虚子树的大小}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{N}\PYG{p}{];}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{stk}\PYG{p}{[}\PYG{n}{N}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{top}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{pushup}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{u}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{c+c1}{//实儿子的信息加上虚儿子的信息}
+\PYG{+w}{        }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{sz}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]].}\PYG{n}{sz}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]].}\PYG{n}{sz}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{vir\PYGZus{}sz}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{c+c1}{//查子树sz之前要makeroot}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{pushrev}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{u}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{swap}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]),}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{rev}\PYG{o}{\PYGZca{}=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{pushdown}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{u}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{rev}\PYG{p}{)}
+\PYG{+w}{            }\PYG{n}{pushrev}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]),}\PYG{+w}{ }\PYG{n}{pushrev}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]),}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{rev}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{isr}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{u}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{u}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{u}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{u}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{rotate}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{y}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{z}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{k}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{isr}\PYG{p}{(}\PYG{n}{y}\PYG{p}{))}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{z}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{z}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{fa}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{z}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{n}{k}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{n}{k}\PYG{+w}{ }\PYG{o}{\PYGZca{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{];}
+\PYG{+w}{        }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{n}{k}\PYG{+w}{ }\PYG{o}{\PYGZca{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]].}\PYG{n}{fa}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{n}{k}\PYG{+w}{ }\PYG{o}{\PYGZca{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{fa}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{pushup}\PYG{p}{(}\PYG{n}{y}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{pushup}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{splay}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)}\PYG{c+c1}{//把x旋转到splay的根}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{r}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{stk}\PYG{p}{[}\PYG{n}{top}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{isr}\PYG{p}{(}\PYG{n}{r}\PYG{p}{))}\PYG{+w}{ }\PYG{n}{stk}\PYG{p}{[}\PYG{o}{++}\PYG{n}{top}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{r}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{r}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{top}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{pushdown}\PYG{p}{(}\PYG{n}{stk}\PYG{p}{[}\PYG{n}{top}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{]);}
+\PYG{+w}{        }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{isr}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{y}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{z}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{isr}\PYG{p}{(}\PYG{n}{y}\PYG{p}{))}
+\PYG{+w}{                }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{((}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)}\PYG{o}{\PYGZca{}}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{z}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{))}\PYG{+w}{ }\PYG{n}{rotate}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{                }\PYG{k}{else}\PYG{+w}{ }\PYG{n}{rotate}\PYG{p}{(}\PYG{n}{y}\PYG{p}{);}
+\PYG{+w}{            }\PYG{n}{rotate}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{access}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)}\PYG{c+c1}{//在原树上, 建立一条根到x的实链}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{z}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{y}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{y}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{fa}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{splay}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{//加上新变成虚边所连的子树的贡献, 减去刚刚变成实边所连的子树的贡献}
+\PYG{+w}{            }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{vir\PYGZus{}sz}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]].}\PYG{n}{sz}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{sz}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{pushup}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n}{splay}\PYG{p}{(}\PYG{n}{z}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{maker}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{access}\PYG{p}{(}\PYG{n}{x}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{pushrev}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{findr}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{access}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}\PYG{+w}{ }\PYG{n}{pushdown}\PYG{p}{(}\PYG{n}{x}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{];}
+\PYG{+w}{        }\PYG{n}{splay}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}\PYG{+w}{ }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{c+c1}{//在原树上创建一条从x到y的实边路径, 并把y变为根节点}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{split}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{maker}\PYG{p}{(}\PYG{n}{x}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{access}\PYG{p}{(}\PYG{n}{y}\PYG{p}{);}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{link}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{c+c1}{//在父亲结点的虚子树值中加上新子结点的子树大小贡献}
+\PYG{+w}{        }\PYG{n}{maker}\PYG{p}{(}\PYG{n}{x}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{maker}\PYG{p}{(}\PYG{n}{y}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{fa}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{vir\PYGZus{}sz}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{sz}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{cut}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{maker}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{findr}\PYG{p}{(}\PYG{n}{y}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{fa}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{\PYGZam{}\PYGZam{}!}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}
+\PYG{+w}{            }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{fa}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{pushup}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{maker}\PYG{p}{(}\PYG{n}{y}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{//顺便让y变为根}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}\PYG{n}{lct}\PYG{p}{;}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{solve}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{n}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{lct}\PYG{p}{.}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{sz}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{q}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{opt}\PYG{p}{;}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{cin}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{opt}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{opt}\PYG{o}{==}\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{lct}\PYG{p}{.}\PYG{n}{link}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{else}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{lct}\PYG{p}{.}\PYG{n}{cut}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{);}
+\PYG{+w}{            }\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{lct}\PYG{p}{.}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{x}\PYG{p}{].}\PYG{n}{sz}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{lct}\PYG{p}{.}\PYG{n}{tr}\PYG{p}{[}\PYG{n}{y}\PYG{p}{].}\PYG{n}{sz}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{lct}\PYG{p}{.}\PYG{n}{link}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{);}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{merge}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{PII}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{segs}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{PII}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{sort}\PYG{p}{(}\PYG{n}{segs}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{segs}\PYG{p}{.}\PYG{n}{end}\PYG{p}{());}\PYG{+w}{ }\PYG{c+c1}{//排序}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{st}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mf}{\PYGZhy{}2e9}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ed}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mf}{\PYGZhy{}2e9}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//起始点 终点}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{seg}\PYG{o}{:}\PYG{n}{segs}\PYG{p}{)}\PYG{c+c1}{//遍历}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{ed}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{seg}\PYG{p}{.}\PYG{n}{first}\PYG{p}{)}\PYG{c+c1}{//如果上一个终点比这个点左端点小的话}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{ed}\PYG{o}{!=}\PYG{l+m+mf}{\PYGZhy{}2e9}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(\PYGZob{}}\PYG{n}{st}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ed}\PYG{p}{\PYGZcb{});}\PYG{+w}{ }\PYG{c+c1}{//上一个区间合并}
+\PYG{+w}{            }\PYG{n}{st}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{seg}\PYG{p}{.}\PYG{n}{first}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ed}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{seg}\PYG{p}{.}\PYG{n}{second}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//如果是第一个区间 就收录}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{else}\PYG{+w}{ }\PYG{n}{ed}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{max}\PYG{p}{(}\PYG{n}{ed}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{seg}\PYG{p}{.}\PYG{n}{second}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{//右端点取最大}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{ed}\PYG{o}{!=}\PYG{l+m+mf}{\PYGZhy{}2e9}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(\PYGZob{}}\PYG{n}{st}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ed}\PYG{p}{\PYGZcb{});}\PYG{+w}{ }\PYG{c+c1}{//收录最后第一个区间}
+\PYG{+w}{    }\PYG{n}{segs}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//返回区间合并结果}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
