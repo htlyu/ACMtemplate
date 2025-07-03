@@ -16,12 +16,31 @@
 \setlength{\columnsep}{8pt}  % 两栏之间的间距大小
 \setlength\columnseprule{0.16pt} % 分割线
 \setlength{\headheight}{13pt} % 修复页眉高度警告
+
+% 缩小模板间距（不影响代码块）
+\setlength{\parskip}{0pt}  % 段落间距
+\setlength{\headsep}{8pt}  % 页眉与正文间距
+\setlength{\footskip}{12pt} % 页脚间距
+
+% 缩小标题间距
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{8pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
+\titlespacing*{\subsection}{0pt}{6pt plus 1pt minus 1pt}{3pt plus 1pt minus 1pt}
+\titlespacing*{\subsubsection}{0pt}{4pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
+
+% 缩小复杂度注释和代码块之间的间距
+\setlength{\topsep}{2pt}   % 环境前后间距
+\setlength{\partopsep}{1pt} % 段落前环境间距
+
+% 设置minted环境的紧凑间距
+\BeforeBeginEnvironment{minted}{\vspace{-2pt}}
+\AfterEndEnvironment{minted}{\vspace{-3pt}}
 %===============================环境参数===============================%
 \hypersetup{
     colorlinks=true,
     linkcolor=black
 }
-\linespread{1.15}
+\linespread{1.08}  % 稍微减小行距
 %=============================页眉、页脚设置==============================%
 \pagestyle{fancy}
 \lhead{Callmeplayxcpc}
@@ -138,7 +157,6 @@
 
 %============================数据结构============================%
 \section{数据结构}
-
 \subsection{ST表}
 \subsubsection{一维ST表}
 % 时间复杂度：预处理$O(n\log n)$，查询$O(1)$
@@ -171,7 +189,6 @@ array<int, 2> query(int l, int r)
     return max(st[l][k], st[r - (1 << k) + 1][k]);
 }
 \end{minted}
-
 \subsubsection{二维ST表}
 % 时间复杂度：预处理$O(nm\cdot\log n\cdot\log m)$，查询$O(1)$
 % 空间复杂度：$O(nm\cdot\log n\cdot\log m)$
@@ -204,7 +221,6 @@ int query(int x1, int y1, int x2, int y2)
         f[k1][k2][x1][y2 - (1 << k2) + 1], f[k1][k2][x2 - (1 << k1) + 1][y2 - (1 << k2) + 1]});
 }
 \end{minted}
-
 \subsubsection{FastRMQ(超快RMQ)}
 
 % 时间复杂度：预处理$O(n)$，查询$O(1)$
@@ -303,7 +319,6 @@ struct FastRMQ
     }
 };
 \end{minted}
-
 \subsection{单调栈}
 
 求数组里每个数左边\,/\,右边第一个大于\,/\,小于它的数
@@ -318,9 +333,7 @@ for (int i = n; i >= 1; i--)
     stk.push_back(i); //压入栈中
 }
 \end{minted}
-
 \subsection{单调队列}
-
 \subsubsection{一维单调队列}
 
 求滑动窗口中的最大值/最小值 其中k为滑动窗口的大小
@@ -342,7 +355,6 @@ for (int i = 1; i <= n; i++)
     if (i >= k) maxv.push_back(w[q[hh]]);
 }
 \end{minted}
-
 \subsubsection{二维单调队列}
 \begin{minted}{cpp}
 int h[N][N], w[N][N], n, m, q[N], hh, tt, ans;
@@ -369,7 +381,6 @@ for (int j = b; j <= m; j++)
     }
 }
 \end{minted}
-
 \subsection{可删堆}
 % 时间复杂度：插入$O(\log n)$，删除$O(\log n)$，查询$O(\log n)$（均摊）
 % 空间复杂度：$O(n)$
@@ -394,7 +405,6 @@ struct Heap
     int size() { return qPush.size() - qErase.size(); }
 }heap;
 \end{minted}
-
 \subsection{并查集}
 \subsubsection{扩展域并查集}
 要注意像2-SAT一样把该连的边都连上(即要把另一组反向边也连上)要注意数组需要开大一点
@@ -478,7 +488,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{带权并查集}
 \begin{minted}{cpp}
 int p[N], d[N], sz[N], T, x, y;
@@ -539,7 +548,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{哈希}
 为了卡常，可以尝试手写哈希表。
 \begin{minted}{cpp}
@@ -576,9 +584,7 @@ struct HashTable
 };
 HashTable<int, 1090189> mp; //大小至少要开和存的东西一个量级
 \end{minted}
-
 \subsection{树状数组}
-
 \subsubsection{树状数组上二分(倍增)}
 查询第一个前缀和小于s的位置
 \begin{minted}{cpp}
@@ -597,7 +603,6 @@ void add(int l, int r, int d) { add(tr1, l, d), add(tr2, l, d * l), add(tr1, r +
 int sum(int x) { return (x + 1) * query(tr1, x) - query(tr2, x); }
 int query(int l, int r) { return sum(r) - sum(l - 1); }
 \end{minted}
-
 \subsubsection{二维树状数组(单点修改+区间查询)}
 \begin{minted}{cpp}
 void add(int x, int y, int v) //单点修改(x, y) 权值 += v
@@ -614,7 +619,6 @@ int query(int x, int y) //查询以(x, y)为右下角的矩形的权值和
 }//查询(a, b)为左上角, (c, d)为右下角的矩形
 int query(int a, int b, int c, int d) { return query(c, d) - query(a - 1, d) - query(c, b - 1) + query(a - 1, b - 1); }
 \end{minted}
-
 \subsubsection{二维树状数组(区间查询+区间修改)}
 
 \begin{minted}{cpp}
@@ -638,7 +642,6 @@ void add(int a, int b, int c, int d, int k) { add(a, b, k), add(c + 1, b, -k), a
 int query(int a, int b, int c, int d) { return query(c, d) - query(c, b - 1) - query(a - 1, d) + query(a - 1, b - 1); }//求(a, b), (c, d) 为顶点的矩形区域内的所有数字的和
 
 \end{minted}
-
 \subsubsection{离线二维差分+二维查询}
 
 利用二维差分+二维偏序解决
@@ -715,7 +718,6 @@ void solve()
         else ans[ty]+= val * query(x, y);
 }
 \end{minted}
-
 \subsection{线段树}
 \subsubsection{线段树上二分}
 \textbf{用途：}在区间上找满足条件的最右/左端点，如前缀和$\leq k$的最大位置。
@@ -763,7 +765,6 @@ void query_sum(int u, int l, int r, int & sum, int & x)//查询l~r之间 l~x的�
     }
 }
 \end{minted}
-
 \subsubsection{标记永久化(堆式线段树)}
 \textbf{用途：}优化线段树的懒标记下传，减少pushdown操作。
 
@@ -811,7 +812,6 @@ int query(int u, int l, int r, int s)
     return res;
 }
 \end{minted}
-
 \subsubsection{动态开点线段树}
 % 时间复杂度：修改$O(\log n)$，查询$O(\log n)$
 % 空间复杂度：$O(m\log n)$，$m$为操作次数
@@ -930,7 +930,6 @@ int query(int p, int l, int r, int ql, int qr, int s)
     return res;
 }
 \end{minted}
-
 \subsubsection{主席树}
 \textbf{用途：}静态区间第k小，可持久化数据结构，支持查询历史版本。
 
@@ -1014,7 +1013,6 @@ int main()
     while (m--) cout << query(root[r], 0, (int)2e5, l)<<"\n";
 }
 \end{minted}
-
 \subsubsection{区间修改主席树}
 
 一个长度为 $N$ 的数组 $\{A\}$,$4$ 种操作:
@@ -1105,7 +1103,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{线段树合并}
 \textbf{用途：}将两棵动态开点线段树合并成一棵，常用于树上问题的信息合并。
 
@@ -1243,7 +1240,6 @@ int main()
     dfs(1, -1);
 }
 \end{minted}
-
 \subsubsection{线段树分裂}
 \textbf{用途：}将一棵线段树按指定区间分裂成两棵树，常用于区间移动和分组问题。
 
@@ -1347,7 +1343,6 @@ int main()
     for (int i = 1; i <= n; i++) cout << w[i]<<" ";
 }
 \end{minted}
-
 \subsubsection{线段树分治}
 \textbf{用途：}处理有删除操作的动态维护问题，特别是删除操作难以直接处理时。
 
@@ -1563,7 +1558,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{李超线段树}
 维护线段(使用前记得build)
 \begin{minted}{cpp}
@@ -1831,7 +1825,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{单侧递归线段树更新}
 单点修改 \quad 求有多少个点满足前面所有点和$(0,0)$的连线斜率都小于它和$(0,0)$的连线斜率
 
@@ -1854,7 +1847,6 @@ void pushup(int u)
     tr[u].sum = tr[u << 1].sum + cal(u << 1 | 1, tr[u << 1].maxk);
 }
 \end{minted}
-
 \subsubsection{吉司机线段树}
 
 \textbf{区间取min,区间求和}
@@ -2330,7 +2322,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{历史线段树}
 \textbf{用途：}维护区间历史最值，支持区间加法、区间赋值操作。
 
@@ -2738,9 +2729,7 @@ void solve()
     for (int i = 1; i <= q; i++) write(ans[i]), putchar('\n');
 }
 \end{minted}
-
 \subsection{平衡树}
-
 \subsubsection{Splay}
 以翻转一个正序排列为例
 \begin{minted}{cpp}
@@ -2824,7 +2813,6 @@ int main()
     output(root); //中序遍历输出
 }
 \end{minted}
-
 \subsubsection{FHQ\_Treap}
 \textbf{用途：}可持久化平衡树，支持分裂、合并操作，常用于区间操作。
 
@@ -3300,7 +3288,6 @@ void solve()
     }
 }
 \end{minted}
-
 
 \subsection{Link-Cut Tree(LCT)}
 \textbf{关键操作：}
@@ -3819,9 +3806,7 @@ struct LCT
 }lct;
 \end{minted}
 
-
 \subsection{分块}
-
 \subsubsection{支持区间加法 区间内小于某个数的元素个数(区间重构)}
 todo:利用归并可以做到更优的复杂度
 \begin{minted}{cpp}
@@ -3895,7 +3880,6 @@ int main()
 
 }
 \end{minted}
-
 \subsubsection{分块在线解决区间众数}
 \begin{minted}{cpp}
 int w[N], id[N], n, m, x, len, cnt[N];
@@ -3970,7 +3954,6 @@ int main()
     while (m--) cout << query(l, r) << "\n";
 }
 \end{minted}
-
 \subsection{莫队}
 \begin{minted}{cpp}
 struct Query
@@ -4047,7 +4030,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsubsection{带修莫队}
 \begin{minted}{cpp}
 struct Query
@@ -4178,7 +4160,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsubsection{回滚莫队}
 一般用于处理一些删去后不能统计的信息,如最大值,删去后无法知道新的最大值,则使用回滚莫队
 \begin{minted}{cpp}
@@ -4302,7 +4283,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsubsection{树上莫队}
 如果将树换成一个序列,那么就是一个经典的基础莫队问题,等于是要在树上做莫队算法,这就是一个树上莫队问题。
 有一个通用的做法能将树上的问题统一变成区间中的问题。我们将这棵树按照欧拉序列的形式写成一个序列。
@@ -4445,7 +4425,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsection{偏序问题}
 \subsubsection{二维偏序}
 \begin{minted}{cpp}
@@ -4516,7 +4495,6 @@ void cdq(int l, int r)
     for (i = l, j = 0; i <= r; i++, j++) v[i] = w[j];
 }
 \end{minted}
-
 \subsubsection{四维偏序}
 
 四维偏序优化dp
@@ -4597,7 +4575,6 @@ void solve()
     cout << ans<<"\n";
 }
 \end{minted}
-
 \subsubsection{高维偏序}
 bitset 解决高维偏序  n个向量的m维偏序
 \begin{minted}{cpp}
@@ -4626,7 +4603,6 @@ int main()
     }
 }//算完之后 假如bitset[i]中j为1的话 代表i完全大于j
 \end{minted}
-
 \subsection{整体二分}
 \textbf{用途：}离线解决带修改的区间第k小、区间rank等问题。
 
@@ -4789,7 +4765,6 @@ int main()
     solve(0, INF, 0, cnt - 1);
 }
 \end{minted}
-
 \subsection{猫树分治}
 猫树可以支持不修改的高速查询区间信息。
 
@@ -4860,7 +4835,6 @@ void solve()
 
 %============================树============================%
 \section{树}
-
 \subsection{最近公共祖先}
 \subsubsection{树剖求LCA}
 \begin{minted}{cpp}
@@ -4875,7 +4849,6 @@ int lca(int a, int b)
     return a;
 }
 \end{minted}
-
 \subsubsection{树剖求k级祖先}
 需要根据深度特判一下k级祖先是否存在
 \begin{minted}{cpp}
@@ -4889,7 +4862,6 @@ int query(int x, int k)
     return yingshe[dfn[x] - k];
 }//yingshe是dfn的反函数
 \end{minted}
-
 \subsubsection{DFS序求LCA}
 \begin{minted}{cpp}
 int h[N], ne[N << 1], e[N << 1], idx, dfn[N], minv[N][19], cnt;
@@ -4914,7 +4886,6 @@ void solve()//要记得处理ST表
             minv[i][k] = get(minv[i][k - 1], minv[i + (1 << k - 1)][k - 1]);
 }
 \end{minted}
-
 \subsection{最小生成树}
 \subsubsection{Prim}
 \begin{minted}{cpp}
@@ -4937,7 +4908,6 @@ int prim()
     return res;
 }
 \end{minted}
-
 \subsubsection{Kruskal重构树}
 以大根堆为例:
 
@@ -5135,7 +5105,6 @@ void solve()
     for (int i = 0; i < Q; i++) cout << (ans[i] > 0)<<"\n";
 }
 \end{minted}
-
 \subsubsection{Boruvka}
 Boruvka算法的执行流程是:对于当前每个连通块,都找到其伸出去的最小的边,然后进行合并。
 每次合并,连通块数量至少减半,故合并次数是$O(logn)$的。每次对于所有集合寻找最小边的时间假如是$O(f)$,
@@ -5183,7 +5152,6 @@ void solve()
     else cout<<"orz\n";
 }
 \end{minted}
-
 \subsection{重链剖分}
 \begin{minted}{cpp}
 void dfs1(int u, int father, int dep) //如果重复调用 要清空son 调用dfs1(root, -1, 1)
@@ -5445,7 +5413,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsection{点分治}
 主要变化的就是cal,getpath,get三个函数
 
@@ -5528,7 +5495,6 @@ int main()
     cout << cal(0) << "\n";
 }
 \end{minted}
-
 \subsection{树上启发式合并}
 \textbf{用途：}处理子树统计问题，避免对每个节点重新统计整个子树。
 
@@ -5784,7 +5750,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{笛卡尔树}
 \begin{minted}{cpp}
 struct DT
@@ -5821,7 +5786,6 @@ struct DT
     }
 }dt;
 \end{minted}
-
 \subsection{树哈希}
 给定两棵树,第一棵树有$n$个点,第二棵树有$n+1$个点,已知第二棵树是第一棵树加上一个叶节点,
 然后将节点的编号打乱得到的,求这个多余的叶节点的编号
@@ -5939,7 +5903,6 @@ void dfs2(int u, int fa)
 \end{minted}
 
 \section{图论}
-
 \subsection{拓扑排序}
 一般来说 做dp的时候 再开一个$pre$数组记录前驱进行dp
 
@@ -5950,9 +5913,7 @@ void dfs2(int u, int fa)
 对原图建反图,求一个字典序最大的拓扑序,拓扑序的反序即为所求,因为尽量把大的都放在后面了,留出前面的位置小的
 
 \textbf{注意拓扑dp的时候 不一定是入队才能更新}
-
 \subsection{最短路}
-
 \subsubsection{Dijkstra}
 朴素 Dijkstra
 \begin{minted}{cpp}
@@ -6130,7 +6091,6 @@ int bellman_ford()
     else return dist[n];
 }
 \end{minted}
-
 \subsubsection{SPFA}
 
 SPFA求最短路
@@ -6192,7 +6152,6 @@ bool spfa()
     return false;
 }
 \end{minted}
-
 \subsubsection{Floyd}
 
 Floyd求最小环(输出最小环的长度)
@@ -6305,13 +6264,11 @@ void solve()
     cout << res(1, n)<<"\n";
 }
 \end{minted}
-
 \subsubsection{分层图最短路}
 
 求$1\rightarrow n$的最短路。(允许走$k$条免费边$(k\leqslant 10)$)
 
 建出$k+1$层的分层图,每层图都正常连边,层与层之间连边,代价为0。从第$i$层走到第$i+1$层的含义是用了一条免费边。要注意的是,答案不一定在最后一层,因为不一定需要走$k$条免费边。
-
 \subsubsection{同余最短路}
 
 给定$n,a_{1...n},l,r$,求出有多少$b\in [l,r]$可以使等式$\sum\limits_{i=1}^n{a_ix_i}=b$存在非负整数解
@@ -6378,7 +6335,6 @@ void solve()
     cout << cal(r) - cal(l - 1)<<"\n";
 }
 \end{minted}
-
 \subsection{差分约束}
 (1) 求不等式组的可行解:
 
@@ -6479,7 +6435,6 @@ void solve()
     for (int i = 1; i <= n; i++) cout << dist[i] - dist[i - 1]<<" ";
 }
 \end{minted}
-
 \subsection{强连通分量}
 
 DAG上的性质:
@@ -6531,7 +6486,6 @@ void build_graph()//建新图
 }// for (int i = 1; i <= n; i++) if (!dfn[i]) tarjan(i);
 \end{minted}
 
-
 \subsection{边双连通分量}
 
 \begin{minted}{cpp}
@@ -6576,7 +6530,6 @@ void dfs(int u, int fa)
     }
 }
 \end{minted}
-
 \subsection{点双连通分量}
 点双一般用圆方树解决。同一个点有可能属于多个点双,为了更好地刻画点双的性质,引入圆方树解决点双问题。圆方树是一棵方点和圆点交替的一棵树。每一个方点代表着一个点双,每一个圆点是原始的点。夹在若干个方点之间的圆点是割点,否则若一个圆点是叶子,则这个点不是割点
 
@@ -6629,7 +6582,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{圆方树}
 
 \textbf{点双}
@@ -6845,7 +6797,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{2-SAT}
 
 将 $a\lor b$转化为$\neg a\rightarrow b$和$\neg b\rightarrow a$(建边)
@@ -7198,7 +7149,6 @@ void solve()
     }
 }
 \end{minted}
-
 
 \subsection{欧拉路径}
 
@@ -7557,9 +7507,7 @@ void solve()
     cout << ans<<"\n";
 }
 \end{minted}
-
 \subsection{优化建图}
-
 \subsubsection{线段树优化建图}
 
 边有: \quad 点向点连边 \quad 点向区间连边 \quad 区间向点连边 \quad 三种类型,求最短路
@@ -7787,11 +7735,9 @@ void solve()
 }
 \end{minted}
 
-
 \subsubsection{前后缀优化建图}
 
 某个点向一个区间的前缀/后缀连边时可以用前后缀优化建图,如拓扑排序,2-SAT,详见2—SAT的前后缀优化建图。
-
 \subsubsection{ST表优化建图}
 
 \begin{minted}{cpp}
@@ -7824,7 +7770,6 @@ struct ST_graph
 }st;
 \end{minted}
 
-
 \subsection{网络流/二分图}
 
 二分图的性质:
@@ -7842,7 +7787,6 @@ struct ST_graph
 最大流=最小割=最小权点覆盖
 
 最大权独立集=总点权和 - 最小权点覆盖
-
 \subsubsection{二分图染色}
 
 \begin{minted}{cpp}
@@ -7874,7 +7818,6 @@ bool check()
     return flag;
 }
 \end{minted}
-
 \subsubsection{二分图最大匹配}
 
 匈牙利算法
@@ -7910,7 +7853,6 @@ int Match()
     return res;
 }
 \end{minted}
-
 \subsubsection{二分图博弈}
 
 仿照求解二分图最大匹配可行边必经边的思路,将跑完$Dinic$ 算法后的残量网络$G_0$进行 SCC 缩点。
@@ -8004,7 +7946,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{最大流}
 \textbf{用途：}求网络最大流，常用于二分图最大匹配、最小割等问题。
 
@@ -8069,7 +8010,6 @@ int dinic()
     return r;
 }
 \end{minted}
-
 \subsubsection{无源汇上下界可行流}
 
 \begin{minted}{cpp}
@@ -8112,7 +8052,6 @@ for (int i = 1; i <= n; i++)//用流量守恒平衡一下
     if (C[i] > 0) add(S, i, C[i]), tot += C[i];
     else if (C[i] < 0) add(i, T, -C[i]);
 \end{minted}
-
 \subsubsection{有源汇上下界最大流}
 
 \begin{minted}{cpp}
@@ -8196,7 +8135,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{有源汇上下界最小流}
 
 大部分和最大流一样,最后是退流
@@ -8211,7 +8149,6 @@ else
     cout << res - dinic()<<"\n"; //可行流 - 最大流
 }
 \end{minted}
-
 \subsubsection{最小割}
 
 最小割=最大流(最大流最小割定理)
@@ -8253,7 +8190,6 @@ void solve()
         if (st[i]^st[i + n]) cout << i<<" ";
 }
 \end{minted}
-
 \subsubsection{最小费用流}
 
 整数版
@@ -8360,11 +8296,9 @@ void EK(int & flow, double & cost)
     }
 }
 \end{minted}
-
 \subsubsection{有源汇上下界费用流}
 
 注意上下界网络流是强行让下界流的,所以没有算下界的流量花费,所以最后结果要加上每一个下界$\times$ 单位流量。
-
 \subsubsection{KM算法(二分图最大权完美匹配)}
 
 第一行输出是最大权的匹配结果,第二行是完美匹配下右部第i个点相匹配的左部点的编号
@@ -8483,7 +8417,6 @@ void solve()
     cout << ans<<"\n";
 }
 \end{minted}
-
 \subsubsection{网络流的有关模型}
 
 最大流=最小割
@@ -8814,7 +8747,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{退流操作}
 
 在网络流中,若动态加边可以通过dinic很好的保证时间,如果是删边,则需要通过退流操作完成,并删去边.
@@ -8926,7 +8858,6 @@ void solve()
 \end{minted}
 
 \section{字符串}
-
 \subsection{字符串哈希}
 % 时间复杂度：预处理$O(n)$，查询$O(1)$
 % 空间复杂度：$O(n)$
@@ -8973,7 +8904,6 @@ void init(string s)
 }
 int get(int l, int r) {return (h[r] - (i128)h[l - 1] * p[r - l + 1] % mod + mod) % mod; }
 \end{minted}
-
 \subsection{KMP}
 % 时间复杂度：预处理$O(m)$，匹配$O(n+m)$  
 % 空间复杂度：$O(m)$
@@ -9003,7 +8933,6 @@ void match()
     }
 }
 \end{minted}
-
 \subsubsection{KMP自动机}
 
 \begin{minted}{cpp}
@@ -9044,7 +8973,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{Z函数 (exKMP)}
 
 \begin{minted}{cpp}
@@ -9067,7 +8995,6 @@ void Z(string s, string t)
     }
 }//z[i]是s与后缀s[i..n]的lcp p[i]是s与t的后缀t[i..n]的lcp
 \end{minted}
-
 \subsection{Trie}
 
 \begin{minted}{cpp}
@@ -9095,7 +9022,6 @@ int query(char str[])
     return cnt[p];
 }
 \end{minted}
-
 \subsubsection{01Trie}
 
 01trie一定要记得 清空的时候从$[0,idx]$清空
@@ -9356,7 +9282,6 @@ void solve()
     cout << ans<<"\n";
 }
 \end{minted}
-
 \subsubsection{可持久化Trie}
 
 和可持久化线段树比较像,操作也基本一样
@@ -9388,7 +9313,6 @@ int query(int p, int q, int k, int v)//在第p + 1 - q版本的Trie中寻找异�
 //root[i] = insert(root[i - 1], M - 1, w[i]);
 //query(root[l - 1], root[r], M - 1, w[x])
 \end{minted}
-
 \subsection{AC自动机}
 
 AC自动机类似于多模式串同时匹配的KMP,首先建出Trie,然后再建出失配指针加快匹配速度。
@@ -9516,7 +9440,6 @@ AC自动机上DP
 ACAM的状态转移为dp刻画了转移方向,考虑在ACAM的节点上dp,
 
 有状态转移方程$f_{i,tr_{j,u}}=max\{f_{i-1,j}+cnt_{tr_{j,u}}\}(u\in \sum)$ 
-
 \subsubsection{二进制分组AC自动机(动态)}
 
 维护一个字符串集合,支持三种操作:
@@ -9625,7 +9548,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{后缀数组}
 
 $rk_i:$第$i$个后缀的排名
@@ -9786,7 +9708,6 @@ $\Delta=len_{new}-lcp_{pre_{new},next_{new}}+lcp_{pre_{new},new}+lcp_{new,next_{
 给定字符串$s,t$ 求 $lcp_{s,t}$允许失配 $k(k\leqslant 10)$次
 
 将两个字符串拼在一起,跑后缀数组。利用$lcp_{i,j}=\min\limits_{k=rk_i+1}^{rk_j}height_k$不断求$lcp$。失配一次就往后跳,继续求$lcp$,直到失配$k$次。
-
 \subsection{后缀自动机}
 \textbf{用途：}处理字符串所有子串的问题，如子串去重、字典序第k小子串等。
 
@@ -9917,7 +9838,6 @@ for (int i = 1, p = 1, cnt = 0; i <= n; i++)
 快速定位子串
 
 给定区间$[l,r]$,求$s[l,r]$在SAM上的对应状态:在构建SAM时容易预处理$s_{1,i}$所表示的状态$pos_i$。从$pos_r$开始在$parent$树上倍增找到最浅的,$len\ge r-l+1$的状态$p$即为所求。
-
 \subsubsection{广义后缀自动机}
 
 \begin{minted}{cpp}
@@ -10351,7 +10271,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{Manacher}
 
 统一奇偶回文串,$R_i$是扩展后字符串的最长回文半径,那么以当前位置为回文中心的回文串长度是$R_i-1$
@@ -10372,7 +10291,6 @@ void manacher(string & s)
     }
 }
 \end{minted}
-
 \subsection{回文自动机}
 
 TODO:可撤销回文自动机
@@ -10467,7 +10385,6 @@ void solve()
     cout << ans<<'\n';
 }
 \end{minted}
-
 \subsection{bitset优化字符串匹配}
 
 例题 CF914F
@@ -10551,7 +10468,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{字符串问题中的根号分治思想}
 
 例子:CF710F,三种操作,加字符串,删字符串,查询集合中所有字符串在给定串中出现的次数,强制在线。
@@ -10563,7 +10479,6 @@ void solve()
 正解:GSAM+线段树合并。
 
 设置一个阈值$B$,长度大于$B$的查询串不超过$\frac{\sum|q_i|}{B}$个,对这些串直接跑$KMP$暴力,复杂度是$O(\frac{\sum|q_i|}{B}\sum|s_i|)$。对于长度不大于$B$的串,考虑预处理答案。枚举模板串中长度为$[1,B]$的所有子串,记录下它们的出现次数,利用哈希优化到$O(B\sum|s_i|)$。故总复杂度为$O(\frac{\sum|q_i|}{B}\sum|s_i|+B\sum|s_i|)$,当B取$\sqrt{\sum|q_i|}$时,复杂度最优,为$O(\sqrt{\sum|q_i|}\sum|s_i|)$。
-
 \subsection{Border Series}
 
 一个串S的所有Border按长度排序后,可以被划分为$O(logn)$个等差数列
@@ -10618,7 +10533,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsubsection{Palindrome series}
 \textbf{用途：}利用回文串的周期性质，将回文后缀划分为$O(\log n)$个等差数列，优化DP转移。
 
@@ -10705,23 +10619,19 @@ void solve()
 \end{minted}
 
 \section{动态规划}
-
 \subsection{背包}
-
 \subsubsection{01背包}
 
 \begin{minted}{cpp}
 for (int i = 1; i <= n; i++)
     for (int j = v; j >= vi; j--) f[j] = max(f[j], f[j - vi] + wi);
 \end{minted}
-
 \subsubsection{完全背包}
 
 \begin{minted}{cpp}
 for (int i = 1; i <= n; i++)
     for (int j = vi; j <= v; j++) f[j] = max(f[j], f[j - vi] + wi);
 \end{minted}
-
 
 \subsubsection{二进制优化多重背包}
 
@@ -10737,7 +10647,6 @@ for (auto[v, w]:item)
     for (int i = m; i >= v; i--)
         f[i] = max(f[i], f[i - v] + w);
 \end{minted}
-
 \subsubsection{分组背包}
 
 \begin{minted}{cpp}
@@ -10749,7 +10658,6 @@ for (int i = 1; i <= n; i++)
             if (j >= v[k]) f[j] = max(f[j], f[j - v[k]] + w[k]);
 }
 \end{minted}
-
 \subsubsection{树上背包}
 
 树上每个节点都有点权,最多选m个儿子,求最大价值
@@ -10784,7 +10692,6 @@ int main()
     cout << f[1][m];
 }
 \end{minted}
-
 \subsection{换根DP}
 
 \begin{minted}{cpp}
@@ -10857,7 +10764,6 @@ void solve()
         if (f[i] + v[i] > ans) ans = f[i] + v[i];
 }
 \end{minted}
-
 \subsection{状压DP}
 
 $O(3^n)$枚举子集
@@ -10870,7 +10776,6 @@ for (int i = 1; i < (1 << n); i++)
         if (!j) break;
     }
 \end{minted}
-
 \subsection{单调队列优化dp}
 若转移范围是一段区间,而且区间的左右端点是单调移动的,可以使用单调队列维护
 
@@ -10970,7 +10875,6 @@ void solve()
     cout << dp[n]<<"\n";
 }
 \end{minted}
-
 \subsection{基环树DP}
 
 \begin{minted}{cpp}
@@ -11027,7 +10931,6 @@ struct Ringtree
 }tr;
 //tr.init(n)初始化 tr.add(a, b)加边 最后tr.build()处理基环树
 \end{minted}
-
 \subsection{斜率优化}
 
 DP式子形如$f_i=\min\limits_{j=0}^{i-1} \{t(j)-g(i)\times r(j)+h(i)\}$ 把$t(j)$视作$y_j$,把$g(i)$视作$k_i$,把$r(j)$视作$x_j$,把$f_i-h(i)$视作$b_i$
@@ -11096,7 +10999,6 @@ for (int i = 1; i <= n; i++)
     q[++tt] = i;
 }
 \end{minted}
-
 \subsection{动态DP}
 \textbf{用途：}解决带修改的树上DP问题，如动态点权的最大权独立集。
 
@@ -11319,7 +11221,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{决策单调性优化转移}
 
 给出 $N$,以及 $A_{1...N},B_{1...N}$。对于每个 $k\in [1,N]$,找出一个 $1...N$ 的集合 $S$,满足 $|S|=k$ 且 $\sum\limits_{i\in S}A_i-\max\limits_{i\in S}B_i$ 最大,输出这个值。
@@ -11480,9 +11381,7 @@ void solve()
 \end{minted}
 
 \section{数论}
-
 \subsection{质数/约数}
-
 \subsubsection{由线性筛求所有约数}
 
 \begin{minted}{cpp}
@@ -11502,7 +11401,6 @@ vector<int> getDiv(int x)
     return v;
 }
 \end{minted}
-
 \subsubsection{PollardRho}
 
 \begin{minted}{cpp}
@@ -11616,14 +11514,12 @@ struct Pollard_Rho
     }
 }pr;
 \end{minted}
-
 \subsection{线性预处理逆元}
 
 \begin{minted}{cpp}
 inv[1] = 1;
 for (int i = 2; i <= n; i++) inv[i] = (mod - mod / i) * inv[mod % i] % mod;
 \end{minted}
-
 \subsection{Exgcd}
 
 \begin{minted}{cpp}
@@ -11670,7 +11566,6 @@ else
     }
 }
 \end{minted}
-
 \subsection{中国剩余定理}
 
 给定 $n$ 组非负整数 $a_i, b_i$ ,求解关于 $x$ 的方程组的最小非负整数解。
@@ -11731,7 +11626,6 @@ int excrt(int n)
 \end{minted}
 
 \section{线性代数}
-
 \subsection{矩阵}
 
 定义矩阵类
@@ -11760,7 +11654,6 @@ auto operator * (Matrix < m, n > m1, Matrix < n, p > m2)
     return res;
 }//访问矩阵A[i][j]就是A(i, j)
 \end{minted}
-
 \subsection{高斯消元}
 
 \begin{minted}{cpp}
@@ -11822,7 +11715,6 @@ int gauss()//高斯消元
     return 0; //行满秩 返回有唯一解
 }
 \end{minted}
-
 \subsubsection{bitset优化解异或方程组}
 
 \begin{minted}{cpp}
@@ -11845,7 +11737,6 @@ std::vector<bool> GaussElimination(
   return ans;
 }
 \end{minted}
-
 \subsection{求行列式}
 
 模数非质数的情况下也适用
@@ -11881,7 +11772,6 @@ int cal()
     return (ans % mod + mod) % mod;
 }
 \end{minted}
-
 \subsection{线性基}
 \textbf{用途：}处理异或运算相关问题，如最大/最小异或值、第k小异或值等。
 
@@ -12084,7 +11974,6 @@ bitset < N> query_max()
 \end{minted}
 
 \section{杂项}
-
 \subsection{斐波那契结论}
 
 $f_{n+m}=f_{m-1}\times f_n+f_m\times f_{n+1}$
@@ -12150,7 +12039,6 @@ F_{n}F_{m+1}+F_{n-1}F_{m} \ \ \ \ \ \ \ \  F_nF_m+F_{n-1}F_{m-1}
 \end{array}
 $$
 当$i<0,f_i=(-1)^{i-1}\times f_{-i}$
-
 \subsection{切比雪夫距离与曼哈顿距离转化}
 
 欧式距离:$|AB|=\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$
@@ -12174,7 +12062,6 @@ $=max\{|(x_1+y_1)-(x_2+y_2)|,|(x_1-y_1)-(x_2-y_2)|\}$
 相应的,曼哈顿距离转切比雪夫距离为$(x,y)\rightarrow (x+y,x-y)$
 
 结论:将每个点逆时针旋转$45^\circ$,再缩小到原来的一半,再求解曼哈顿距离即可
-
 \subsection{快速排序求第k小}
 
 \begin{minted}{cpp}
@@ -12195,7 +12082,6 @@ int qsearch(int l, int r, int k)//在l和r之间找第k大
 //std写法: nth_element(w + 1, w + k, w + n + 1); //让第k小的元素归位 之后输出w[k]即可
 //这个函数不仅能够完成上述任务 还能使得前k小都集中在[1, k] 在不要求顺序求前k小的时候很有用
 \end{minted}
-
 \subsection{归并排序}
 
 \begin{minted}{cpp}
@@ -12215,7 +12101,6 @@ void mergesort(int l, int r)
     for (i = l, j = 0; i <= r; i++, j++) w[i] = temp[j]; //将临时数组的数复制回原数组
 }
 \end{minted}
-
 \subsection{二分的01分数规划}
 
 若要选一些物品(个数有限制)满足$\sum\limits_{i=1}^k\frac{a_i}{b_i}$最大
@@ -12250,7 +12135,6 @@ void solve()
     }
 }
 \end{minted}
-
 \subsection{三分}
 
 实数三分
@@ -12278,7 +12162,6 @@ while (l + 2 < r)
 int ans = f(l); //答案可能在l~r之间
 for (int i = l + 1; i <= r; i++) ans = min(ans, f(i));
 \end{minted}
-
 \subsection{折半搜索}
 
 分成两半搜索出一些状态,最后再将两半合并起来统计答案,如下题用的是二分
@@ -12331,7 +12214,6 @@ void solve()
     cout << ans<<"\n";
 }
 \end{minted}
-
 \subsection{区间合并}
 
 \begin{minted}{cpp}
@@ -12351,7 +12233,6 @@ void merge(vector<PII> &segs)
     segs = res; //返回区间合并结果
 }
 \end{minted}
-
 \subsection{快读快写}
 
 \begin{minted}{cpp}
@@ -12442,7 +12323,6 @@ void write(int x)
     putchar(x % 10+'0');
 }
 \end{minted}
-
 \subsubsection{交互高速IO}
 
 \begin{minted}{cpp}
@@ -12510,21 +12390,18 @@ int main()
     return 0;
 }
 \end{minted}
-
 \subsection{开启O3优化}
 第二行不一定支持,一般来说第一行够用了
 \begin{minted}{cpp}
 #pragma GCC optimize("O3, unroll - loops")
 #pragma GCC target("avx2, bmi, bmi2, lzcnt, popcnt")
 \end{minted}
-
 \subsection{卡时}
 比如要卡在两秒以内
 
 \begin{minted}{cpp}
 if (clock() >= 1.9 * CLOCKS_PER_SEC) break;
 \end{minted}
-
 \subsection{运行脚本}
 \begin{minted}{bash}
 #!/bin/bash
@@ -12556,7 +12433,6 @@ echo "run time: $((e-s)) ms"
 # 以程序自身退出码退出
 exit $st
 \end{minted}
-
 \subsection{对拍}
 
 \begin{minted}{cpp}
@@ -12573,7 +12449,6 @@ for (int i = 0; i < 10000; i++)
     else if (i % 20 == 0) cout<<"OK "<<i<<"\n";
 }
 \end{minted}
-
 \subsubsection{构造题的对拍}
 
 例如构造$n$个数的和为$m$
@@ -12632,7 +12507,6 @@ void solve()
     cout << m - n + 1<<"\n";
 }
 \end{minted}
-
 \subsubsection{随机生成整数序列}
 
 \begin{minted}{cpp}
@@ -12645,7 +12519,6 @@ int main()
     for (int i = 1; i <= n; i++) cout << rd(1, 100)<<" ";
 }
 \end{minted}
-
 \subsubsection{生成一棵树}
 
 \begin{minted}{cpp}
@@ -12666,7 +12539,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsubsection{生成一个简单图}
 
 \begin{minted}{cpp}
@@ -12694,7 +12566,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsubsection{生成一个简单联通图}
 
 \begin{minted}{cpp}
@@ -12726,7 +12597,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsection{测空间}
 
 \begin{minted}{cpp}
@@ -12735,7 +12605,6 @@ long long a[5000000];
 bool ed;
 cout << fixed << setprecision(3) << (&ed-&st) / 1048576.0 << " MB\n";
 \end{minted}
-
 \subsection{pbds}
 好用的哈希表(define int long long要插在中间)
 \begin{minted}{cpp}
@@ -12774,7 +12643,6 @@ int main()
     }
 }
 \end{minted}
-
 \subsection{bitset}
 
 \begin{minted}{cpp}
@@ -12788,14 +12656,12 @@ bs.count() 得到bitset里面1的个数
 bs._Find_first() 得到bitset里第一个1的位置 如果不存在则返回bitset大小
 bs._Find_next(x) 得到x后面第一个1的位置 如果不存在则返回bitset大小
 \end{minted}
-
 \subsection{vector}
 
 \begin{minted}{cpp}
 vector dp(n, vector<int> (m, 0));
 vector<vector<int>> e(n);
 \end{minted}
-
 \subsection{VScode比赛设置}
 
 \textbf{通用设置:}
@@ -12819,7 +12685,6 @@ vector<vector<int>> e(n);
 \item setting-cph,-std=c++17,-O2 -Wall
 \item ${g++ -o \ \ a \ \ a.cpp }$编译,./a运行执行文件
 \end{enumerate}
-
 \subsection{比赛注意事项}
 
 注意数据范围有没有开够(数组大小,不要RE)
