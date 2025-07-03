@@ -10,6 +10,7 @@ import re
 import argparse
 import sys
 import os
+from typing import List, Tuple
 
 class LatexTemplateFormatter:
     def __init__(self):
@@ -50,18 +51,52 @@ class LatexTemplateFormatter:
             (r'(\w)\{', r'\1 {'),
             # 逗号后加空格
             (r',(\S)', r', \1'),
-            # 运算符前后加空格 (更精确的匹配)
-            (r'(\w)([\+\-\*/%]|==|!=|<=|>=|&&|\|\||<<|>>)(\w)', r'\1 \2 \3'),
-            (r'(\w)(=)([^=])', r'\1 \2 \3'),
-            (r'([^=<>!])(=)(\w)', r'\1\2 \3'),
+            # 逻辑运算符前后加空格 (优先处理)
+            (r'([)\w\]])(&&|\|\|)([(\w\[])', r'\1 \2 \3'),
+            # 比较运算符前后加空格 (避免影响模板)
+            (r'([)\w\]])(==|!=|<=|>=)([(\w\[])', r'\1 \2 \3'),
+            (r'([)\w\]])\s*(<|>)\s*([(\w\[])', r'\1 \2 \3'),
+            # 赋值运算符前后加空格
+            (r'([)\w\]])\s*(=)\s*([^=])', r'\1 \2 \3'),
+            # 算术运算符前后加空格
+            (r'([)\w\]])\s*([\+\-\*/%])\s*([(\w\[])', r'\1 \2 \3'),
+            # 位运算符前后加空格 (避免影响模板的>>)
+            (r'([)\w\]])\s*(<<)\s*([(\w\[])', r'\1 \2 \3'),
             # if/for/while后加空格
             (r'\b(if|for|while|switch)\(', r'\1 ('),
             # else前后加空格
             (r'}else', r'} else'),
             (r'else{', r'else {'),
-            # 括号内侧不要空格
+            # 关键字前后空格（变量声明等）
+            (r'>(\w)', r'> \1'),
+            # 括号内侧空格处理
             (r'\(\s+', '('),
             (r'\s+\)', ')'),
+            # 分号后空格
+            (r';(\S)', r'; \1'),
+            # 移除多余空格
+            (r'  +', ' '),
+            
+            # ============ 模板格式化规则 (最后应用以避免被其他规则影响) ============
+            # 修复模板角括号间的空格问题 - 简单模板
+            (r'(\w+)\s*<\s*([^<>,]+)\s*>', r'\1<\2>'),
+            # 修复嵌套模板的空格问题
+            (r'(\w+)\s*<\s*(\w+)\s*<\s*([^<>]+)\s*>\s*>', r'\1<\2<\3>>'),
+            # 修复三重嵌套模板
+            (r'(\w+)\s*<\s*(\w+)\s*<\s*(\w+)\s*<\s*([^<>]+)\s*>\s*>\s*>', r'\1<\2<\3<\4>>>'),
+            # 修复priority_queue等复杂模板
+            (r'priority_queue\s*<\s*([^,<>]+)\s*,\s*vector\s*<\s*([^<>]+)\s*>\s*,\s*greater\s*<\s*([^<>]+)\s*>\s*>', r'priority_queue<\1, vector<\2>, greater<\3>>'),
+            # 修复std::vector<bool>等标准库模板
+            (r'std\s*::\s*vector\s*<\s*([^<>]+)\s*>', r'std::vector<\1>'),
+            (r'std\s*::\s*(\w+)\s*<\s*([^<>]+)\s*>', r'std::\1<\2>'),
+            # 修复template声明
+            (r'template\s*<\s*([^<>]+)\s*>', r'template<\1>'),
+            # 修复numeric_limits等
+            (r'numeric_limits\s*<\s*([^<>]+)\s*>', r'numeric_limits<\1>'),
+            # 最终清理模板空格
+            (r'<\s+', '<'),
+            (r'\s+>', '>'),
+            (r'>\s+>', '>>'),
         ]
         
         for line in lines:
@@ -197,6 +232,28 @@ class LatexTemplateFormatter:
         snippet_parts.append("")
         
         return '\n'.join(snippet_parts)
+    
+    def validate_template_formatting(self, content: str) -> List[Tuple[int, str]]:
+        """验证模板格式化是否正确"""
+        lines = content.split('\n')
+        issues = []
+        
+        # 检查常见的模板格式化问题
+        template_patterns = [
+            (r'\w\s+<\s+\w', '模板角括号内有多余空格'),
+            (r'>\s+>', '模板结束符间有空格'),
+            (r'vector\s*<\s*\w+\s*>', 'vector模板格式不正确'),
+            (r'priority_queue\s*<[^>]+>\s*>', 'priority_queue模板格式不正确'),
+            (r'template\s*<\s*[^>]+\s*>', 'template声明格式不正确'),
+            (r'numeric_limits\s*<\s*\w+\s*>', 'numeric_limits模板格式不正确'),
+        ]
+        
+        for line_num, line in enumerate(lines, 1):
+            for pattern, description in template_patterns:
+                if re.search(pattern, line):
+                    issues.append((line_num, f"{description}: {line.strip()}"))
+        
+        return issues
     
     def format_file(self, filepath: str, output_filepath: str = None) -> None:
         """格式化整个LaTeX文件"""
