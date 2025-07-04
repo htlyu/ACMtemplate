@@ -221,9 +221,7 @@ int query(int x1, int y1, int x2, int y2)
         f[k1][k2][x1][y2 - (1 << k2) + 1], f[k1][k2][x2 - (1 << k1) + 1][y2 - (1 << k2) + 1]});
 }
 \end{minted}
-\subsubsection{FastRMQ(超快RMQ)}
-
-FastRMQ是一种常数很小的RMQ算法，在需要高效率时优于ST表。适用于静态数组的区间最值查询。
+\subsubsection{状压RMQ}
 
 % 时间复杂度：预处理$O(n)$，查询$O(1)$
 % 空间复杂度：$O(n)$
@@ -321,6 +319,7 @@ struct FastRMQ
     }
 };
 \end{minted}
+
 \subsection{单调栈}
 
 求数组里每个数左边\,/\,右边第一个大于\,/\,小于它的数
@@ -467,6 +466,7 @@ void solve()
     while (k--)
     {
         int t, x, y;
+        cin >> t >> x >> y;
         if (x > n || y > n || (x == y && t == 2)) res++;
         else if (t == 1)//x和y是同类
         {
@@ -494,13 +494,13 @@ void solve()
 \subsubsection{带权并查集}
 \begin{minted}{cpp}
 int p[N], d[N], sz[N], T, x, y;
-for (int i = 1; i < N; i++) p[i] = i, s[i] = 1;
+for (int i = 1; i < N; i++) p[i] = i, sz[i] = 1;
 while (T--)
 {
     int px = find(x), py = find(y);
     if (op=='M')//将x这个集合整体合并到y(移动到y的后面)
     {
-        d[px] = s[py]; //到根的距离
+        d[px] = sz[py]; //到根的距离
         sz[py]+= sz[px]; //一定是操作根 不要乱操作find之类的
         p[px] = py;
     }
@@ -597,7 +597,7 @@ int query(int s)
 {
     int pos = 0;
     for (int i = 16; i >= 0; i--)
-        if (pos + (1 << i) <= n && tr[pos + (1 << i)] <= s) pos+ = (1 << i), s -= tr[pos];
+        if (pos + (1 << i) <= n && tr[pos + (1 << i)] <= s) pos += (1 << i), s -= tr[pos];
     return pos;
 }
 \end{minted}
@@ -798,7 +798,7 @@ void build(int u, int l, int r)
 }
 void modify(int u, int l, int r, int v)
 {
-    tr[u].sum+ = (min(tr[u].r, r) - max(tr[u].l, l) + 1) * v;
+    tr[u].sum += (min(tr[u].r, r) - max(tr[u].l, l) + 1) * v;
     if (l <= tr[u].l && r >= tr[u].r)
     {
         tr[u].tag += v;
@@ -1498,7 +1498,7 @@ void solve()
     build(1, 0, lsh.size() - 2);
     for (int i = 0; i < v.size(); i++)
     {
-        if (i) ans+ = (v[i][0] - v[i - 1][0]) * tr[1].len;
+        if (i) ans += (v[i][0] - v[i - 1][0]) * tr[1].len;
         auto[x, y1, y2, sign] = v[i];
         y1 = find(y1), y2 = find(y2);
         modify(1, y1, y2 - 1, sign);
@@ -2268,7 +2268,7 @@ void modify_add(int u, int l, int r, int v)
 {
     if (l <= tr[u].l && r >= tr[u].r)
     {
-        tr[u].sum+ = (tr[u].r - tr[u].l + 1) * v;
+        tr[u].sum += (tr[u].r - tr[u].l + 1) * v;
         tr[u].maxv += v;
         tr[u].maxh = max(tr[u].maxv, tr[u].maxh);
         if (tr[u].se!=-INF) tr[u].se += v;
@@ -6320,7 +6320,7 @@ int cal(int n)
 {
     int res = 0;
     for (int i = 0; i < a[1]; i++)
-        if (n >= dist[i]) res+ = (n - dist[i]) / a[1] + 1;
+        if (n >= dist[i]) res += (n - dist[i]) / a[1] + 1;
     return res;
 }
 void solve()
@@ -9021,9 +9021,9 @@ int query(char str[])
     int p = 0;
     for (int i = 0; str[i]; i++)
     {
-        int u = tr[i]-'a';
+        int u = str[i]-'a';
         if (!tr[p][u]) return 0; //如果不存在当前节点 返回0
-        p = son[p][u];
+        p = tr[p][u];
     }
     return cnt[p];
 }
@@ -11136,8 +11136,8 @@ void dfs2(int u, int t)
         int j = e[i];
         if (j == son[u] || j == fa[u]) continue;
         dfs2(j, j);
-        g[u](0, 0) = g[u](1, 0)+= max(f[j][0], f[j][1]);
-        g[u](0, 1)+= f[j][0];
+        g[u](0, 0) += max(f[j][0], f[j][1]);
+        g[u](0, 1) += f[j][0];
     }
     f[u][0] = g[u](0, 0) + max(f[son[u]][0], f[son[u]][1]);
     f[u][1] = g[u](0, 1) + f[son[u]][0];
@@ -11623,7 +11623,7 @@ int excrt(int n)
         int k1, k2;
         int d = exgcd(m1, m2, k1, k2);
         if ((a2 - a1) % d) break;
-        k1* = (a2 - a1) / d;
+        k1 *= (a2 - a1) / d;
         k1 = (k1 % (m2 / d) + m2 / d) % (m2 / d);
         x = k1 * m1 + a1;
         int m = abs(m1 / d * m2);
