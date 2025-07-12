@@ -16,66 +16,6 @@ def format_cpp_code(code_block):
     lines = code_block.split('\n')
     formatted_lines = []
     
-    cpp_rules = [
-        # 移除行尾空格
-        (r'\s+$', ''),
-        
-        # ============ 模板格式化规则 (最后应用) ============
-        
-        # ============ 常规格式化规则 ============
-        # { 前加空格
-        (r'(\w)\{', r'\1 {'),
-        # 逗号后加空格 (但不影响模板参数)
-        (r',(\S)', r', \1'),
-        # 逻辑运算符前后加空格 (优先处理)
-        (r'([)\w\]])(&&|\|\|)([(\w\[])', r'\1 \2 \3'),
-        # 比较运算符前后加空格 (避免影响模板)
-        (r'([)\w\]])(==|!=|<=|>=)([(\w\[])', r'\1 \2 \3'),
-        (r'([)\w\]])\s*(<|>)\s*([(\w\[])', r'\1 \2 \3'),
-        # 赋值运算符前后加空格
-        (r'([)\w\]])\s*(=)\s*([^=])', r'\1 \2 \3'),
-        # 算术运算符前后加空格
-        (r'([)\w\]])\s*([\+\-\*/%])\s*([(\w\[])', r'\1 \2 \3'),
-        # 位运算符前后加空格 (避免影响模板的>>)
-        (r'([)\w\]])\s*(<<)\s*([(\w\[])', r'\1 \2 \3'),
-        # if/for/while后加空格
-        (r'\b(if|for|while|switch)\(', r'\1 ('),
-        # else前后加空格
-        (r'}else', r'} else'),
-        (r'else{', r'else {'),
-        # 关键字前后空格（变量声明等）
-        (r'>(\w)', r'> \1'),
-        # 括号内侧空格处理
-        (r'\(\s+', '('),
-        (r'\s+\)', ')'),
-        # 分号后空格
-        (r';(\S)', r'; \1'),
-        # 移除多余空格
-        (r'  +', ' '),
-        
-        # ============ 模板格式化规则 (最后应用以避免被其他规则影响) ============
-        # 修复模板角括号间的空格问题 - 简单模板
-        (r'(\w+)\s*<\s*([^<>,]+)\s*>', r'\1<\2>'),
-        # 修复模板角括号间的空格问题 - 带逗号的模板（先处理逗号空格）
-        # 修复嵌套模板的空格问题
-        (r'(\w+)\s*<\s*(\w+)\s*<\s*([^<>]+)\s*>\s*>', r'\1<\2<\3>>'),
-        # 修复三重嵌套模板
-        (r'(\w+)\s*<\s*(\w+)\s*<\s*(\w+)\s*<\s*([^<>]+)\s*>\s*>\s*>', r'\1<\2<\3<\4>>>'),
-        # 修复priority_queue等复杂模板
-        (r'priority_queue\s*<\s*([^,<>]+)\s*,\s*vector\s*<\s*([^<>]+)\s*>\s*,\s*greater\s*<\s*([^<>]+)\s*>\s*>', r'priority_queue<\1, vector<\2>, greater<\3>>'),
-        # 修复std::vector<bool>等标准库模板
-        (r'std\s*::\s*vector\s*<\s*([^<>]+)\s*>', r'std::vector<\1>'),
-        (r'std\s*::\s*(\w+)\s*<\s*([^<>]+)\s*>', r'std::\1<\2>'),
-        # 修复template声明
-        (r'template\s*<\s*([^<>]+)\s*>', r'template<\1>'),
-        # 修复numeric_limits等
-        (r'numeric_limits\s*<\s*([^<>]+)\s*>', r'numeric_limits<\1>'),
-        # 最终清理模板空格
-        (r'<\s+', '<'),
-        (r'\s+>', '>'),
-        (r'>\s+>', '>>'),
-    ]
-    
     for line in lines:
         # 保持原始缩进
         indent_match = re.match(r'^(\s*)', line)
@@ -86,13 +26,87 @@ def format_cpp_code(code_block):
             formatted_lines.append('')
             continue
         
-        # 应用C++格式化规则
-        for pattern, replacement in cpp_rules:
-            content = re.sub(pattern, replacement, content)
-        
+        # 应用格式化规则
+        content = apply_formatting_rules(content)
         formatted_lines.append(indent + content)
     
     return '\n'.join(formatted_lines)
+
+def apply_formatting_rules(content):
+    """应用格式化规则"""
+    # 移除行尾空格
+    content = content.rstrip()
+    
+    # ============ 运算符间距修复 ============
+    # 双字符运算符 - 精确替换
+    operators_2char = ['>=', '<=', '==', '!=', '<<', '>>', '&&', '||', 
+                       '+=', '-=', '*=', '/=', '%=', '^=', '|=', '&=']
+    
+    for op in operators_2char:
+        # 用前瞻和后顾确保不影响其他结构
+        content = re.sub(rf'([a-zA-Z0-9_\]\)])\s*{re.escape(op)}\s*([a-zA-Z0-9_\[\(\-])', 
+                        rf'\1 {op} \2', content)
+    
+    # 单字符运算符 - 避免影响模板
+    # 算术运算符 (需要转义特殊字符)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*\+\s*([a-zA-Z0-9_\[\(\-])', r'\1 + \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*-\s*([a-zA-Z0-9_\[\(])', r'\1 - \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*\*\s*([a-zA-Z0-9_\[\(])', r'\1 * \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*/\s*([a-zA-Z0-9_\[\(])', r'\1 / \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*%\s*([a-zA-Z0-9_\[\(])', r'\1 % \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*&\s*([a-zA-Z0-9_\[\(\-])', r'\1 & \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*\|\s*([a-zA-Z0-9_\[\(])', r'\1 | \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*\^\s*([a-zA-Z0-9_\[\(])', r'\1 ^ \2', content)
+    
+    # 比较运算符 (特别处理，避免模板冲突)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*<\s*([a-zA-Z0-9_\[\(])', r'\1 < \2', content)
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*>\s*([a-zA-Z0-9_\[\(])', r'\1 > \2', content)
+    
+    # 赋值运算符
+    content = re.sub(r'([a-zA-Z0-9_\]\)])\s*=\s*([^=])', r'\1 = \2', content)
+    
+    # ============ 关键字格式化 ============
+    # if/for/while后加空格
+    content = re.sub(r'\b(if|for|while|switch)\(', r'\1 (', content)
+    
+    # else前后加空格
+    content = re.sub(r'}else', '} else', content)
+    content = re.sub(r'else{', 'else {', content)
+    
+    # { 前加空格
+    content = re.sub(r'(\w)\{', r'\1 {', content)
+    
+    # 逗号后加空格
+    content = re.sub(r',(\S)', r', \1', content)
+    
+    # 分号后加空格
+    content = re.sub(r';(\S)', r'; \1', content)
+    
+    # ============ 模板格式化 ============
+    # 简化模板格式化 - 移除模板内外多余空格
+    # 单参数模板
+    content = re.sub(r'(\w+)\s*<\s*([^<>,]+)\s*>\s*', r'\1<\2> ', content)
+    # 双参数模板  
+    content = re.sub(r'(\w+)\s*<\s*([^<>,]+)\s*,\s*([^<>,]+)\s*>\s*', r'\1<\2, \3> ', content)
+    
+    # 处理嵌套模板的 >> 
+    content = re.sub(r'>\s*>', '>>', content)
+    
+    # 清理模板结尾多余空格 (除非后面跟着字母)
+    content = re.sub(r'>\s+(?![a-zA-Z_])', '>', content)
+    
+    # 模板后跟变量名时确保有空格
+    content = re.sub(r'>([a-zA-Z_])', r'> \1', content)
+    
+    # ============ 清理空格 ============
+    # 括号内侧空格
+    content = re.sub(r'\(\s+', '(', content)
+    content = re.sub(r'\s+\)', ')', content)
+    
+    # 多余空格
+    content = re.sub(r'  +', ' ', content)
+    
+    return content
 
 def format_latex_cpp_blocks(content):
     """格式化LaTeX文件中的C++代码块"""
@@ -151,6 +165,17 @@ def test_formatting_rules():
         ("for(int i=0;i<n;i++)", "for (int i = 0; i < n; i++)"),
         ("a+b*c", "a + b * c"),
         ("vector<int>v(n,0);", "vector<int> v(n, 0);"),
+        # 新增：间距修复测试
+        ("i>=0", "i >= 0"),
+        ("hh<=tt", "hh <= tt"),
+        ("N<<1", "N << 1"),
+        ("l+r>>1", "l + r >> 1"),
+        ("1<<i", "1 << i"),
+        ("data[i]<cur", "data[i] < cur"),
+        ("w[q[tt]]>=w[i]", "w[q[tt]] >= w[i]"),
+        ("m^=1ULL", "m ^= 1ULL"),
+        ("sz[py]+=sz[px]", "sz[py] += sz[px]"),
+        ("i&-i", "i & -i"),
     ]
     
     print("🧪 测试格式化规则...")
