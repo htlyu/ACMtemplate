@@ -28,20 +28,19 @@ The main template is organized into the following sections:
 
 ### Compile LaTeX
 ```bash
-pdflatex Algorithm-template.tex
+xelatex -shell-escape Algorithm-template.tex
 ```
 
-### Full compilation with bibliography
+### Full compilation with table of contents
 ```bash
-pdflatex Algorithm-template.tex
-bibtex Algorithm-template
-pdflatex Algorithm-template.tex  
-pdflatex Algorithm-template.tex
+xelatex -shell-escape Algorithm-template.tex
+xelatex -shell-escape Algorithm-template.tex
 ```
 
 ### Clean generated files
 ```bash
-rm -f *.aux *.bbl *.log *.out *.synctex.gz *.toc
+rm -f *.aux *.log *.out *.synctex.gz *.toc *.pyg
+rm -rf _minted-Algorithm-template/
 ```
 
 ## Template Configuration
