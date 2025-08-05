@@ -8,8 +8,8 @@ set -euo pipefail
 echo "🔧 开始格式化C++代码..."
 
 # 检查Python脚本是否存在
-if [ ! -f "format_tex_cpp.py" ]; then
-    echo "❌ 错误: format_tex_cpp.py 脚本不存在"
+if [ ! -f "format_tex_cpp_v2.py" ]; then
+    echo "❌ 错误: format_tex_cpp_v2.py 脚本不存在"
     exit 1
 fi
 
@@ -42,7 +42,7 @@ done
 
 # 运行格式化脚本
 echo "🏃 执行格式化..."
-if python3 format_tex_cpp.py $BACKUP_FLAG $DRY_RUN_FLAG $VALIDATE_FLAG "$TARGET_FILE"; then
+if python3 format_tex_cpp_v2.py $BACKUP_FLAG $DRY_RUN_FLAG $VALIDATE_FLAG "$TARGET_FILE"; then
     if [ -n "$DRY_RUN_FLAG" ]; then
         echo "👀 预览模式完成"
         exit 0

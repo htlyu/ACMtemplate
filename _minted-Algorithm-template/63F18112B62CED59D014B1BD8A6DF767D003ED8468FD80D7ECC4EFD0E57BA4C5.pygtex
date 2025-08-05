@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{clock}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{l+m+mf}{1.9}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{CLOCKS\PYGZus{}PER\PYGZus{}SEC}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{break}\PYG{p}{;}
-\end{Verbatim}

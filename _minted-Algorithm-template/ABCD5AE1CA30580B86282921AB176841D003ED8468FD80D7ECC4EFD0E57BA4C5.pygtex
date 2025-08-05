@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+cp}{\PYGZsh{}pragma GCC optimize(\PYGZdq{}O3, unroll \PYGZhy{} loops\PYGZdq{})}
-\PYG{c+cp}{\PYGZsh{}pragma GCC target(\PYGZdq{}avx2, bmi, bmi2, lzcnt, popcnt\PYGZdq{})}
-\end{Verbatim}
