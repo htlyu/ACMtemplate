@@ -60,10 +60,10 @@
 \lhead{Callmeplayxcpc}
 \chead{scutsky's template}
 \rhead{Page \thepage}
-\lfoot{} 
+\lfoot{}
 \cfoot{}
 \rfoot{}
-\renewcommand{\headrulewidth}{0.45pt} 
+\renewcommand{\headrulewidth}{0.45pt}
 \renewcommand{\footrulewidth}{0pt}
 %=============================页眉、页脚设置==============================%
 
@@ -119,7 +119,7 @@
 
 % 自定义颜色定义以增强语法高亮
 \definecolor{cppkeyword}{RGB}{86, 156, 214}      % 关键字蓝色
-\definecolor{cppstring}{RGB}{206, 145, 120}      % 字符串橙色  
+\definecolor{cppstring}{RGB}{206, 145, 120}      % 字符串橙色
 \definecolor{cppcomment}{RGB}{106, 153, 85}      % 注释绿色
 \definecolor{cppnumber}{RGB}{181, 206, 168}      % 数字青绿色
 \definecolor{cpptype}{RGB}{78, 201, 176}         % 类型青色
@@ -175,7 +175,7 @@
 % 时间复杂度：预处理$O(n\log n)$，查询$O(1)$
 % 空间复杂度：$O(n\log n)$
 \begin{minted}{cpp}
-int st[N][M], w[N], n; // 使用 ST 表时一定要记得调用 build
+int st[N][M], w[N], n; // 使用 \texttt{ST} 表时一定要记得调用 build
 void build()
 {
     for (int i = 0; i <= __lg(n); i++)
@@ -305,7 +305,7 @@ struct FastRMQ
         }
     }
     // 查询 1 - indexed 区间 [l..r] 最小值
-    inline T query(int l, int r) const
+    inline T query(int l, int r) cons
     {
         if (l < 1 || r > n || l > r) return numeric_limits<T>::max();
         int b0 = (l - 1) / BLOCK, b1 = (r - 1) / BLOCK;
@@ -800,7 +800,7 @@ void solve()
 
 故采取遍历获得满足条件的端点,是可以保持连续的
 
-二分通常都是一部分连续的可以,一部分连续的不可以 
+二分通常都是一部分连续的可以,一部分连续的不可以
 
 假如满足条件的点都会在左边,那么每次都优先递归左区间,就会在查询区间中从左到右查询
 
@@ -885,7 +885,7 @@ int query(int u, int l, int r, int s)
 \subsubsection{动态开点线段树}
 % 时间复杂度：修改$O(\log n)$，查询$O(\log n)$
 % 空间复杂度：$O(m\log n)$，$m$为操作次数
-注意：动态开点线段树的空间复杂度为$O(m\log n)$，其中$m$为操作次数。通常需要预留$4 \times m \times \log n$的空间，防止MLE。
+注意：动态开点线段树的空间复杂度为$O(m\log n)$，其中$m$为操作次数。通常需要预留$4 \times m \times \log n$的空间，防止\texttt{MLE}。
 
 例子：默认一开始所有值都是$1$。$t=1$：$[l, r]$都变为$0$；$t=2$：$[l, r]$都变为$1$，求总体的$\text{sum}$。
 
@@ -1007,7 +1007,7 @@ int query(int p, int l, int r, int ql, int qr, int s)
 
 \textbf{关键：}相邻版本只有$O(\log n)$个节点不同，通过复用节点节省空间。
 
-\textbf{空间：}$O(n\log n)$个节点，开$N*20$一般够用。
+\textbf{空间：}$O(n\log n)$个节点，开$N \times 20$一般够用。
 \begin{minted}{cpp}
 struct Node
 {
@@ -1926,13 +1926,13 @@ void pushup(int u)
 
 吉司机线段树的过程如下:
 
-假设我们要对于区间$[l, r]$中的数对$x$取min,我们首先将$[l, r]$拆分成线段树上若干个区间 
+假设我们要对于区间$[l, r]$中的数对$x$取min,我们首先将$[l, r]$拆分成线段树上若干个区间
 $[l_i, r_i]$对于每个$[l_i, r_i]$:
 
 如果它的最大值$\leqslant x$那么显然此次操作没有任何效果,直接 return 即可。
 
-如果$x$小于最大值 $maxv$,但大于（注意,这里必须是严格大于,否则的话也会出问题）严格次大值 
-$se$,那么显然有且只有$c$个最大值会变为 
+如果$x$小于最大值 $maxv$,但大于（注意,这里必须是严格大于,否则的话也会出问题）严格次大值
+$se$,那么显然有且只有$c$个最大值会变为
 $x$,我们可以简单维护一个标记 $tag$ 表示这段区间内最大值会增加 $tag$
 ,然后令 $tag$←$tag+(x-maxv)$即可,由于更新完之后最大值依然严格大于次大值,因此最大值个数不会发生变化。
 
@@ -2052,7 +2052,7 @@ void solve()
 \textbf{带区间加的线段树}
 
 额外加一个懒标记 stag,表示除了最大值之外的其他数都要增加 stag,
-区间加v时令对应区间的tag和stag都加v,区间取min时只会影响 tag,不会影响 
+区间加v时令对应区间的tag和stag都加v,区间取min时只会影响 tag,不会影响
 stag的值。下推标记就和普通吉司机树一样正常推即可。复杂度$O(n\log^2 n)$
 
 \begin{minted}{cpp}
@@ -2214,7 +2214,7 @@ int query(int cur, int l, int r, int a, int b)
 \textbf{求一个点被取最小值的次数}
 
 额外维护一个标记 ctag表示被取最小值的次数,对于上面情况中的第二种$(smx < x<mx)$,
-直接令ctag加一即可,下推 ctag 时就对于左右儿子中最大值等于该区间原来的最大值的区间把 
+直接令ctag加一即可,下推 ctag 时就对于左右儿子中最大值等于该区间原来的最大值的区间把
 ctag传给他们即可。
 
 查询时就一路将ctag推到叶子节点处,输出对应叶子节点的 ctag即可。
@@ -2622,8 +2622,8 @@ $q$ 次询问，每次给定 $l, r, x, y$，请求出
 \]
 的值。
 
-扫描线，维护每个颜色最右端的一个出现位置 $cur$，一个区间的答案就是区间内最左端的 $cur$，  
-所以每一个以 $cur$ 为答案的都是一段连续的区间。考虑用 $\texttt{set}$ 维护颜色段，每次删除一个元素并且添加一个元素，  
+扫描线，维护每个颜色最右端的一个出现位置 $cur$，一个区间的答案就是区间内最左端的 $cur$，
+所以每一个以 $cur$ 为答案的都是一段连续的区间。考虑用 $\texttt{set}$ 维护颜色段，每次删除一个元素并且添加一个元素，
 同时修改一段区间的端点下标即可，可以转化为区间加。
 
 还是维护历史版本和，这很简单了，维护向量
@@ -2635,16 +2635,16 @@ $q$ 次询问，每次给定 $l, r, x, y$，请求出
 修改操作乘以矩阵
 \[
 \begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
+1 & 0 & 0
+0 & 1 & 0
 k & 0 & 1
 \end{bmatrix},
 \]
 更新版本和乘以矩阵
 \[
 \begin{bmatrix}
-1 & 1 & 0 \\
-0 & 1 & 0 \\
+1 & 1 & 0
+0 & 1 & 0
 0 & 0 & 1
 \end{bmatrix},
 \]
@@ -2655,20 +2655,20 @@ k & 0 & 1
 矩阵乘法：
 \[
 \begin{bmatrix}
-1 & a & 0 \\
-0 & 1 & 0 \\
+1 & a & 0
+0 & 1 & 0
 b & c & 1
 \end{bmatrix}
 \times
 \begin{bmatrix}
-1 & A & 0 \\
-0 & 1 & 0 \\
+1 & A & 0
+0 & 1 & 0
 B & C & 1
 \end{bmatrix}
 =
 \begin{bmatrix}
-1 & A + a & 0 \\
-0 & 1 & 0 \\
+1 & A + a & 0
+0 & 1 & 0
 b + B & Ab + c + C & 1
 \end{bmatrix}
 \]
@@ -2678,8 +2678,8 @@ b + B & Ab + c + C & 1
 \begin{bmatrix} \text{pos} & \text{sum} & \text{len} \end{bmatrix}
 \times
 \begin{bmatrix}
-1 & A & 0 \\
-0 & 1 & 0 \\
+1 & A & 0
+0 & 1 & 0
 B & C & 1
 \end{bmatrix}
 =
@@ -3252,20 +3252,20 @@ void solve()
 
 3. R pos val 将第$pos$个元素变为$val$
 
-4. Q l r k 询问$(\sum\limits_{i=l}^{r} A[i] \times (i - l + 1) ^ k)$,保证$0 \leqslant k \leqslant 10$
+4. Q l r k 询问$(\sum\limits_{i=l}^{r} A[i] \times {(i - l + 1)}^k)$,保证$0 \leqslant k \leqslant 10$
 
 考虑平衡树上的合并 需要合并$[l, mid-1],[mid, mid],[mid+1, r]$三个区间
 
-$\sum\limits_{i=l}^{r}a[i]\times(i-l+1)^k=\sum\limits_{i=l}^{mid-1}a[i]\times(i-l+1)^k+
-a[mid]\times(i-mid+1)^k+\sum\limits_{i=mid+1}^{r}a[i]\times(i-l+1)^k\\ \quad =\text{ans}_{l, k}+a[mid]\times 
-(i-mid+1)^k+\sum\limits_{i=mid+1}^{r}a[i]\times(i-l+1)^k$
+$\sum\limits_{i=l}^{r}a[i]\times{(i-l+1)}^k=\sum\limits_{i=l}^{mid-1}a[i]\times{(i-l+1)}^k+
+a[mid]\times{(i-mid+1)}^k+\sum\limits_{i=mid+1}^{r}a[i]\times{(i-l+1)}^k\\ \quad =\text{ans}_{l, k}+a[mid]\times
+{(i-mid+1)}^k+\sum\limits_{i=mid+1}^{r}a[i]\times{(i-l+1)}^k$
 
 前两部分是好处理的，考虑如何计算第三部分，可以利用二项式定理展开
 
-$\sum\limits_{i=mid+1}^ra[i]\times(i-l+1)^k=\sum\limits_{i=mid+1}^ra[i]\times
-\sum\limits_{j=0}^k\binom{k}{j}(i-mid)^j(mid-l+1)^{k-j}
-\\ \quad =\sum\limits_{j=0}^k\sum\limits_{i=mid+1}^r(i-mid)^ja[i]\binom{k}{j}(mid-l+1)^{k-j}
-=\sum\limits_{j=0}^kans_{r, j}\binom{k}{j}(mid-l+1)^{k-j}$
+$\sum\limits_{i=mid+1}^ra[i]\times{(i-l+1)}^k=\sum\limits_{i=mid+1}^ra[i]\times
+\sum\limits_{j=0}^k\binom{k}{j}{(i-mid)}^j{(mid-l+1)}^{k-j}
+\\ \quad =\sum\limits_{j=0}^k\sum\limits_{i=mid+1}^r{(i-mid)}^ja[i]\binom{k}{j}{(mid-l+1)}^{k-j}
+=\sum\limits_{j=0}^kans_{r, j}\binom{k}{j}{(mid-l+1)}^{k-j}$
 
 \begin{minted}{cpp}
 struct FHQ_Treap
@@ -3660,7 +3660,7 @@ struct LCT
         splay(x); return x;
     }
     void link(int x, int y) { maker(x); if (findr(y) != x) tr[x].fa = y; }
-    void cut(int x)//cut的时候不能makeroot
+    void cut(int x)//cut的时候不能makeroo
     {
         access(x), splay(x);
         tr[x].s[0] = tr[tr[x].s[0]].fa = 0;
@@ -3712,7 +3712,7 @@ struct LCT
     void pushup(int u)
     {//实儿子的信息加上虚儿子的信息
         tr[u].sz = tr[tr[u].s[0]].sz + 1 + tr[tr[u].s[1]].sz + tr[u].vir_sz;
-    } // 查子树sz之前要makeroot
+    } // 查子树sz之前要makeroo
     void pushrev(int u) { swap(tr[u].s[0], tr[u].s[1]), tr[u].rev ^= 1; }
     void pushdown(int u)
     {
@@ -4529,10 +4529,10 @@ for (auto & [x, sign, y, id]:v)//利用数据结构解决第二维偏序
 
 对于每个查询点,插入一个事件 $(X, Y, 1, sign, Z_1, Z_2)$
 
-正确性:先按照x坐标排序保证x的顺序是对的,再通过归并排序保证y的顺序是对的,通过$0/1$区分原始点和查询点 
+正确性:先按照x坐标排序保证x的顺序是对的,再通过归并排序保证y的顺序是对的,通过$0/1$区分原始点和查询点
 保证原始点都在查询点之前插入 然后$(Z_1, Z_2)$的贡献通过树状数组相减得到。
 
-即$\sum\limits_{z_i\leqslant Z_2}-\sum\limits_{z_i\leqslant Z_1-1}$  
+即$\sum\limits_{z_i\leqslant Z_2}-\sum\limits_{z_i\leqslant Z_1-1}$
 注意这个式子是通过树状数组算出来的,所以要保证原始点和查询点的z坐标都在树状数组的值域内,若不满足则要先进行离散化。
 \begin{minted}{cpp}
 void cdq(int l, int r)
@@ -4847,7 +4847,7 @@ int main()
 在查询$[l, r]$这段区间的信息时,将线段树上代表$[l, l]$和$[r, r]$的区间的节点的$LCA$求出来,设这个节点$p$所代表的区间是$[L, R]$。
 可以知道$[l, r]$区间一定跨越了$[L, R]$的中点$mid$,且$l\in[L, mid], r\in[mid+1, r]$。在建树的时候预处理出$[L, mid]$的后缀信息和$[mid+1, R]$的前缀信息,查询的时候拼凑起来即可。
 
-现在瓶颈在于快速求得$\text{LCA}$，不需要用$\text{ST}$表的$O(n\log n)-O(1)$的技巧，可以利用堆式建树，将这个序列补成$2$的整次幂，然后建线段树。
+现在瓶颈在于快速求得$\text{LCA}$，不需要用$\texttt{ST}$表的$O(n\log n)-O(1)$的技巧，可以利用堆式建树，将这个序列补成$2$的整次幂，然后建线段树。
 此时,线段树上的两个节点的$LCA$编号,就是两个节点二进制编号的$LCP$。且有结论$lcp(x, y)=x >> log(x\oplus y)$,即可快速查询$LCA$。
 
 若猫树的空间开销过大，难以承受，且问题可以离线，可以采用猫树分治，即将询问分配到猫树上的每个节点，查询该节点上的询问时才需要将猫树这个节点建出来，整个过程和整体二分较为类似。
@@ -5092,7 +5092,7 @@ void scutsky()
 例:IOI2018狼人
 
 给一个n个点, m条边的无向图,再给定Q个询问,每次询问,给定起点s和t,再给定两个限制L, R,要求在1状态下不能经过编号$\leqslant L$的点,
-在2状态下不能经过编号$\ge R$的点 ,起始状态是1,可以在中途变为2,问s能否到t
+在2状态下不能经过编号$\ge R$的点 ,起始状态是1,可以在中途变为2,问s能否到
 
 建出两个重构树,对s和t分别在两个重构树上倍增,二维数点两个子树是否有交集
 
@@ -5997,14 +5997,14 @@ void dijkstra(int start)
     memset(dist, 0x3f, sizeof dist);
     memset(vis, false, sizeof vis);
     dist[start] = 0;
-    
+
     for (int i = 0; i < n - 1; i++) {
         int u = -1;
         for (int j = 1; j <= n; j++) {
             if (!vis[j] && (u == -1 || dist[u] > dist[j])) u = j;
         }
         vis[u] = true;
-        
+
         for (int v = 1; v <= n; v++) {
             if (g[u][v] != INF) {
                 dist[v] = min(dist[v], dist[u] + g[u][v]);
@@ -6031,19 +6031,19 @@ void dijkstra(int src)
     memset(dist, 0x3f, sizeof dist);
     memset(vis, false, sizeof vis);
     dist[src] = 0;
-    
+
     priority_queue<PII, vector<PII>, greater<PII>> pq;
     pq.push({0, src});
-    
+
     while (!pq.empty()) {
         int d = pq.top().first, u = pq.top().second;
         pq.pop();
-        
+
         if (vis[u]) continue;
         vis[u] = true;
-        
+
         if (u != src) tree_edges.push_back(pre[u]);
-        
+
         for (int i = h[u]; ~i; i = ne[i]) {
             int v = e[i];
             if (dist[v] > dist[u] + w[i]) {
@@ -6681,7 +6681,7 @@ void solve()
 
 于是可以建立圆方树,方点的权值为点双中的最小圆点权值。然后原图就变成了一棵树,询问时就可以直接树剖套线段树求路径最小值了
 
-一个圆点的权值变动,可能会引发与之相连的方点权值变动(当这个圆点是点双中的的最小权值点时会发生这件事情)。那么我们可以对每个方点维护一个multiset,里面存所有与之相邻的圆点权值,然后权值就是multiset中的最小值,每次修改就删掉原来的权值,插入新的权值。然后我们每修改一个圆点的权值,我们就遍历与之相邻的所有方点并按上述方法修改multiset
+一个圆点的权值变动,可能会引发与之相连的方点权值变动(当这个圆点是点双中的的最小权值点时会发生这件事情)。那么我们可以对每个方点维护一个multiset,里面存所有与之相邻的圆点权值,然后权值就是multiset中的最小值,每次修改就删掉原来的权值,插入新的权值。然后我们每修改一个圆点的权值,我们就遍历与之相邻的所有方点并按上述方法修改multise
 
 对于一个方点, multiset里面存它所有子节点的权值。然后修改一个圆点时,就只需要动它父亲的multiset(它的父亲必然是一个方点)。询问时,仍然可以正常询问,只不过如果lca是一个方点,那还要额外计算$fa_{lca}$的权值对答案的贡献
 
@@ -8124,7 +8124,7 @@ void solve()
 }
 \end{minted}
 
-若是有源汇上下界可行流,则正常建图就行,源汇为s和t
+若是有源汇上下界可行流,则正常建图就行,源汇为s和
 
 再新建一个S, T用来平衡流量
 
@@ -8204,7 +8204,7 @@ void solve()
         add(a, b, c, d);
     }
     int tot = 0;
-    for (int i = 1; i <= n; i++)//这里是操作所有点 包括s和t 一定要注意有没有包含s, t
+    for (int i = 1; i <= n; i++)//这里是操作所有点 包括s和t 一定要注意有没有包含s,
         if (C[i] >0) add(S, i, C[i]), tot += C[i];
         else if (C[i] < 0) add(i, T, -C[i]);
     add(t, s, INF);
@@ -8680,7 +8680,7 @@ void solve()
 
 \textbf{偏序集的最小链覆盖问题}
 
-定义 : 
+定义 :
 
 偏序集: 元素之间存在大小关系,允许不可比(无定义)的情况出现。但是比较一定有传递性,且不能互相矛盾。
 
@@ -8707,7 +8707,7 @@ void solve()
 
 根据 Dilworth 定理,一个 DAG 中最长反链的大小,等于其最小链划分的大小。
 
-最小链划分:在 DAG 中选出若干条链,每个点恰好属于其中一条链,且链数尽量少。  
+最小链划分:在 DAG 中选出若干条链,每个点恰好属于其中一条链,且链数尽量少。
 
 需要注意的是,这里对“链”的定义,不需要是 DAG 中连续的一条链,只需要前一个点能通过路径到达后一个点即可。你也可以理解为:一条连续的链,挖掉中间的一些点,形成的点集也算作“链”。
 
@@ -8719,51 +8719,51 @@ void solve()
 
 这里给出使用二分图匹配求最小不可重链覆盖的方法。
 
-考虑从每个点自成一条链的形态出发,此时恰好有 $n$ 条链。  
+考虑从每个点自成一条链的形态出发,此时恰好有 $n$ 条链。
 
 可以发现最终答案一定是合并(首尾相接)若干条链形成的。考虑重新描述这个过程:
 
-对于一个点,它在最终的链上,一定只有最多一个前驱,和最多一个后继。  
+对于一个点,它在最终的链上,一定只有最多一个前驱,和最多一个后继。
 
 我们考虑把每个点拆成入点和出点,那么入点和出点应该只能匹配上最多一个点(表示前驱或者后继)。
 
-这似乎是二分图匹配的形式,具体地,我们考虑:  
+这似乎是二分图匹配的形式,具体地,我们考虑:
 
-把一个点 $x$ 拆成两个点:$x_{out}$ 和 $x_{in}$,表示出点和入点。  
+把一个点 $x$ 拆成两个点:$x_{out}$ 和 $x_{in}$,表示出点和入点。
 
 对于一条边 $x \to y$,连接 $x_{out}$ 与 $y_{in}$,表示原图中 $x$ 的出边指向 $y$(这条边是 $y$ 的入边)。
 
 那么最终形成了一个二分图,左侧是所有 $x_{out}$,右侧是所有 $x_{in}$。而且所有边都是连接左侧的点和右侧的点的。
 
 
-在这个二分图 $G = \langle \langle V_{out}, V_{in} \rangle , E'\rangle$ 上做二分图最大匹配:  
+在这个二分图 $G = \langle \langle V_{out}, V_{in} \rangle , E'\rangle$ 上做二分图最大匹配:
 
-每一个匹配边 $x_{out} \leftrightarrow y_{in}$ 都可以还原原图中链的一条边 $x \to y$。  
+每一个匹配边 $x_{out} \leftrightarrow y_{in}$ 都可以还原原图中链的一条边 $x \to y$。
 
 每匹配 $1$ 条边,链的个数就减少 $1$,则有最小链覆盖的大小等于 $n$ 减去最大匹配的大小。
 
 从右侧(in)的非匹配点(这里为 $B$,可能有多个)开始 DFS,右侧的点只能走非匹配边向左访问,左侧的点(out)只能走匹配边向右访问:
 
-我们取左侧被 DFS 到的点,以及右侧没被 DFS 到的点,记做集合 $S$,可以证明 $S$ 是一个最小点覆盖。  
+我们取左侧被 DFS 到的点,以及右侧没被 DFS 到的点,记做集合 $S$,可以证明 $S$ 是一个最小点覆盖。
 
 证明:
 
-1. 首先有:最小点覆盖等于最大匹配。我们可以证明 $|S| = m$。  
+1. 首先有:最小点覆盖等于最大匹配。我们可以证明 $|S| = m$。
 这是因为:右侧的非匹配点一定都被 DFS 到了,所以在右侧选取的必然是匹配点。如果一个右侧的匹配点没被选取,即它被 DFS 到了,而这只有可能是因为它在左侧匹配到的点被 DFS 到了,那么左侧匹配到的点就会被选上。即是:每条匹配边的两端点恰好会被选一个。而左侧的非匹配点一定不会被 DFS 到,这是因为如果被 DFS 到了,必然会形成一条交错路(匈牙利算法中的),不满足最大匹配的条件。所以有且仅有匹配边的端点会被选上,而且每条匹配边的两端点恰好被选一个,所以 $\boldsymbol{|S| = m}$。
 
-2. $S$ 可以覆盖所有的边。  
+2. $S$ 可以覆盖所有的边。
 我们把边按照左右端点是否被 DFS 到,分成 $2 \times 2 = 4$ 类。那么如果出现了左端点没被 DFS 到,但是右端点被 DFS 到了的边,它才不会被覆盖。然而这是不可能的,这是因为对于一个右侧被 DFS 到的点,与它相连的左侧的点一定都被 DFS 到了。
 
-然后有最大独立集等于最小点覆盖的补集。也就是只要选出左侧没被 DFS 到的点和右侧被 DFS 到的点就行了。  
+然后有最大独立集等于最小点覆盖的补集。也就是只要选出左侧没被 DFS 到的点和右侧被 DFS 到的点就行了。
 
 回到 DAG 的情况(注意到我们举的例子并不是 DAG 导出的二分图,所以这个例子不能用来解释最长反链):
 
 令最大独立集为 $I$,考虑选出所有 $x_{out}$ 和 $x_{in}$ 都属于 $I$ 的点,记做集合 $A$,它们构成一个最长反链。
 
 证明:
-先证 $A$ 的确是一个反链:这是容易的,因为任取 $x \in A$,$x_{in}$ 就一定是被 DFS 到的点,而 $x_{out}$ 一定是没被 DFS 到的点,任何两个 $x, y \in A$ 之间若是有连边就和 DFS 的过程冲突了。  
+先证 $A$ 的确是一个反链:这是容易的,因为任取 $x \in A$,$x_{in}$ 就一定是被 DFS 到的点,而 $x_{out}$ 一定是没被 DFS 到的点,任何两个 $x, y \in A$ 之间若是有连边就和 DFS 的过程冲突了。
 
-首先有 $|I| = 2n - |S| = 2n - m$,而 $|I| - |A|$ 可以看作是满足「$x_{out}$ 或 $x_{in}$ 属于 $I$」的 $x$ 的个数,显然这样的 $x$ 不会超过 $n$ 个,所以 $|I| - |A| \leqslant n$,所以 $|A| \geqslant |I| - n = n - m$。  
+首先有 $|I| = 2n - |S| = 2n - m$,而 $|I| - |A|$ 可以看作是满足「$x_{out}$ 或 $x_{in}$ 属于 $I$」的 $x$ 的个数,显然这样的 $x$ 不会超过 $n$ 个,所以 $|I| - |A| \leqslant n$,所以 $|A| \geqslant |I| - n = n - m$。
 
 但是 $A$ 再大,也不能大过 $n - m$,所以 $|A| = n - m$,也就是一个最长反链。
 
@@ -8988,7 +8988,7 @@ void init(string s)
 int get(int l, int r) {return (h[r] - (i128)h[l - 1] * p[r - l + 1] % mod + mod) % mod; }
 \end{minted}
 \subsection{KMP}
-% 时间复杂度：预处理$O(m)$，匹配$O(n+m)$  
+% 时间复杂度：预处理$O(m)$，匹配$O(n+m)$
 % 空间复杂度：$O(m)$
 
 KMP算法用于字符串匹配，其中$p$串（长度$m$）去匹配$s$串（长度$n$）。
@@ -9525,7 +9525,7 @@ AC自动机上DP
 
 ACAM的状态转移为dp刻画了转移方向,考虑在ACAM的节点上dp,
 
-有状态转移方程$f_{i, tr_{j, u}}=\max\{f_{i-1, j}+cnt_{tr_{j, u}}\}(u\in \sum)$ 
+有状态转移方程$f_{i, tr_{j, u}}=\max\{f_{i-1, j}+cnt_{tr_{j, u}}\}(u\in \sum)$
 \subsubsection{二进制分组AC自动机(动态)}
 
 维护一个字符串集合,支持三种操作:
@@ -9779,7 +9779,7 @@ void SA(string & ss)
 
 如果考虑正常做,每添加一个字符,所有的后缀都会增加一个字符,并不好做。考虑把字符串倒过来,每次在前面添加一个字符,那么所有后缀都没有变,只是增加了一个新的后缀。考虑新增加的这个后缀对答案的影响。
 
-$\Delta=len_{new}-lcp_{pre_{new}, next_{new}}+lcp_{pre_{new}, new}+lcp_{new, next_{new}}$ 
+$\Delta=len_{new}-lcp_{pre_{new}, next_{new}}+lcp_{pre_{new}, new}+lcp_{new, next_{new}}$
 
 用链表实现前后继的操作,用ST表实现$O(1)$查询两个后缀的$lcp$
 
@@ -10379,8 +10379,6 @@ void manacher(string & s)
 \end{minted}
 \subsection{回文自动机}
 
-TODO:可撤销回文自动机
-
 \begin{minted}{cpp}
 struct PAM
 {
@@ -10470,7 +10468,123 @@ void solve()
     }
     cout << ans<<'\n';
 }
+
+\subsection{可撤销回文自动机}
+
+可撤销回文自动机支持在字符串末尾添加和删除字符，动态维护所有回文子串信息。
+
+\textbf{核心优化}：使用$mem[u][c]$数组预计算从节点$u$开始匹配字符$c$时应该跳转的位置，避免重复的$fail$跳转，使得每次操作摊还时间复杂度为$O(1)$。
+
+设$mem[u][c] = v$表示从节点$u$开始，当匹配字符$c$失败时，应该跳转到的节点$v$，满足：
+$$mem[u][c] = \begin{cases}
+u & \text{如果} s[|s| - len[u] - 1] = c
+mem[fail[u]][c] & \text{否则}
+\end{cases}$$
+
+\textbf{例题}：牛客14055F
+- 给定模板字符串$S$，生成长度为$n$的字符串$T$
+- 对$T$的每个回文子串$P$，得分为$OCC_S(P)$（$P$在$S$中的出现次数）
+- 目标：计算$\sum_{T \in \Sigma^n} V(T)$，其中$V(T) = \sum_{\substack{1 \leq i \leq j \leq n \\ T[i..j]\text{是回文}}} OCC_S(T[i..j])$
+- 支持对$S$末尾动态添加/删除字符
+
+\begin{minted}{cpp}
+struct Palindromic_AutoMaton
+{
+    vector<int> str; // 存储字符串
+    int nxt[N][A], fail[N], len[N]; // 转移边，失配边，回文串长度
+    int num[N], w[N], fa[N], last, tot; // 出现次数，权值，父节点，当前节点，总节点数
+    int mem[N][A]; // 优化查找fail的数组
+    stack<pair<int, bool>> ops; // 操作栈：(上一个节点, 是否新建节点)
+
+    void clear()
+    {
+        len[fail[1] = 0] = 0; // 偶根
+        len[fail[0] = 1] = -1; // 奇根
+        str.clear();
+        str.push_back(-1); // 边界字符
+        last = 0, tot = 1;
+        while (!ops.empty()) ops.pop();
+        w[0] = w[1] = 0;
+        memset(mem[1], 0, sizeof mem[1]);
+        for (int ch = 0; ch < A; ch++) mem[0][ch] = 1; // 奇根的mem全指向奇根
+        memset(nxt[0], 0, sizeof nxt[0]);
+        memset(nxt[1], 0, sizeof nxt[1]);
+    }
+
+    int newnode(int _len)
+    {
+        len[++tot] = _len;
+        fail[tot] = num[tot] = w[tot] = 0;
+        memset(mem[tot], 0, sizeof mem[tot]);
+        memset(nxt[tot], 0, sizeof nxt[tot]);
+        return tot;
+    }
+
+    void append(int ch)
+    {
+        str.push_back(ch);
+        int fat = last, strlen = str.size() - 1;
+        // 使用mem数组优化：如果当前节点不能匹配，直接跳到预计算的位置
+        if (str[strlen - len[last] - 1] != str[strlen]) fat = mem[fat][ch];
+        bool create_new = false;
+        if (!nxt[fat][ch]) // 需要新建节点
+        {
+            create_new = true;
+            int cur = newnode(len[fat] + 2);
+            fa[cur] = fat; // 记录父节点便于撤销
+            fail[cur] = nxt[mem[fat][ch]][ch]; // 设置失配指针
+            // 更新mem数组：继承fail节点的mem，并修正当前字符
+            for (int i = 0; i < A; i++) mem[cur][i] = mem[fail[cur]][i];
+            mem[cur][str[strlen - len[fail[cur]]]] = fail[cur];
+            nxt[fat][ch] = cur;
+            // 根据题目要求计算权值
+            if (len[cur] <= L) w[cur] = 1ll * pw[L - len[cur]] * (L - len[cur] + 1) % mod;
+            w[cur] = (w[cur] + w[fail[cur]]) % mod; // 继承fail节点权值
+        }
+        ops.push({last, create_new}); // 记录操作
+        last = nxt[fat][ch];
+        ++num[last];
+        ans = (ans + w[last]) % mod;
+    }
+
+    void cancel() // 撤销操作
+    {
+        if (ops.empty()) return;
+        auto [pos, flag] = ops.top();
+        ops.pop();
+        ans = (ans + mod - w[last]) % mod; // 减去贡献
+        if (flag) // 如果创建了新节点，需要删除
+        {
+            --tot;
+            nxt[fa[last]][str.back()] = 0; // 删除父节点到该节点的边
+        }
+        last = pos; // 恢复上一个状态
+        str.pop_back(); // 删除字符
+    }
+} pam;
+void solve()
+{
+    ans = 0;
+    cin >> L >> m >> s;
+    pam.clear();
+    for (auto c : s) pam.append(c - 'a');
+    cout << ans << "\n";
+    while (m--)
+    {
+        int opt;
+        cin >> opt;
+        if (opt == 2) pam.cancel();
+        else
+        {
+            string t;
+            cin >> t;
+            for (auto c : t) pam.append(c - 'a');
+        }
+        cout << ans << "\n";
+    }
+}
 \end{minted}
+
 \subsection{bitset优化字符串匹配}
 
 例题 CF914F
@@ -10869,15 +10983,15 @@ for (int i = 1; i < (1 << n); i++)
 
 例:给定$k$个时间段,每个时间段可以翻转,求$2n$时间后,两面同样时间的最小翻转数是多少
 
-\begin{equation}  
-f_{i, j}=\left\{  
+\begin{equation}
+f_{i, j}=\left\{
         \begin{array}{lr}
-        f_{i-1, j}\\
-        f_{i-1, k}+1(k\in[max(0, l_i-j), r_i-j])\\
+        f_{i-1, j}
+        f_{i-1, k}+1(k\in[max(0, l_i-j), r_i-j])
         f_{i-1, k}+2(k\in[max(0, j-len, j)])
-        \end{array}  
-\right.  
-\end{equation} 
+        \end{array}
+\right.
+\end{equation}
 
 第一个方程直接维护即可
 
@@ -11029,7 +11143,7 @@ DP式子形如$f_i=\min\limits_{j=0}^{i-1} \{t(j)-g(i)\times r(j)+h(i)\}$ 把$t(
 
 例:当方程为$f_i=\min\limits_{j=0}^{i-1}\{f_j-(t_i+s)c_j+t_i\times c_i+s\times c_n\}$
 
-变为$f_j=(t_i+s)*c_j+(f_i-t_i*c_i-s\times c_n)$
+变为$f_j=(t_i+s) \times c_j+(f_i-t_i \times c_i-s\times c_n)$
 
 由于每次加入的点横坐标单调递增,利用单调栈维护每一个$(c_j, f_j)$形成的下凸壳即可
 
@@ -11409,7 +11523,7 @@ void dp()
 
 考虑$f_{j, i}$为以$i$结尾,分成$j$个子段的最小代价。
 
-显然有dp方程$f_{j, i}=min\{f_{j-1, k}+cal(k+1, i)\}$ 
+显然有dp方程$f_{j, i}=min\{f_{j-1, k}+cal(k+1, i)\}$
 
 显然对于每一层的$i$来说,决策点单调不降,考虑到$cal$的贡献比较难算,但是在分治的时候,指针移动是比较单调的,移动次数不会很多,可以利用类似莫队指针移动的方式快速计算贡献。
 
@@ -11976,7 +12090,7 @@ void solve()
 
 \textbf{区间线性基}
 
-离线构造前缀线性基 \quad 把询问挂到右端点上 \quad 
+离线构造前缀线性基 \quad 把询问挂到右端点上 \quad
 
 再用奇怪的手段操作维护时间 \quad 查询的时候根据左端点的限制去查
 
@@ -12054,7 +12168,7 @@ bitset<N > query_max()
     return res;
 }
 // 使用示例：处理大整数的线性基
-// bitset<N > x; 先将大整数转换为bitset
+// bitset<N > x; 先将大整数转换为bitse
 // insert(x); 插入到线性基中
 \end{minted}
 
@@ -12066,58 +12180,58 @@ $f_{n+m}=f_{m-1}\times f_n+f_m\times f_{n+1}$
 \begin{array}{l}
 \because F_n=F_{n-1}+F_{n-2} \\[3mm]
 \therefore
-\begin{pmatrix}F_1\\
+\begin{pmatrix}F_1
 F_0
 \end{pmatrix}
 \begin{bmatrix}
-1 \ \  1\\
+1 \ \  1
 1 \ \  0
 \end{bmatrix}
 ^n=
 \begin{pmatrix}
-F_{n+1} \\
+F_{n+1}
 F_n
 \end{pmatrix}\\[5mm]
 \therefore
 \begin{bmatrix}
-1 \ \  1\\
+1 \ \  1
 1 \ \  0
 \end{bmatrix}
 ^n=
 \begin{pmatrix}
-F_{n+1} \ \  F_n \\
+F_{n+1} \ \  F_n
 F_n \ \   F_{n-1}
 \end{pmatrix}\\[5mm]
 \because
 \begin{bmatrix}
-1 \ \  1\\
+1 \ \  1
 1 \ \ 0
 \end{bmatrix}
 ^{n+m}=
 \begin{bmatrix}
-1 \ \  1\\
+1 \ \  1
 1 \ \  0
 \end{bmatrix}^n
 \begin{bmatrix}
-1 \ \  1\\
+1 \ \  1
 1 \ \  0
 \end{bmatrix}
 ^m\\[5mm]
-\therefore 
+\therefore
 \begin{pmatrix}
-F_{n+m+1} \ \   F_{n+m}\\
+F_{n+m+1} \ \   F_{n+m}
 F_{n+m} \ \ F_{n+m-1}
 \end{pmatrix}=
 \begin{pmatrix}
-F_{n+1} \ \ F_{n}\\
+F_{n+1} \ \ F_{n}
 F_{n} \ \  F_{n-1}
 \end{pmatrix}
 \begin{pmatrix}
-F_{m+1} \ \  F_{m}\\
+F_{m+1} \ \  F_{m}
 F_{m} \ \  F_{m-1}
 \end{pmatrix}\\=
 \begin{pmatrix}
-F_{n+1}F_{m+1}+F_nF_m \ \ \ \ \ \ \ \   F_{n+1}F_m+F_{n}F_{m-1}\\
+F_{n+1}F_{m+1}+F_nF_m \ \ \ \ \ \ \ \   F_{n+1}F_m+F_{n}F_{m-1}
 F_{n}F_{m+1}+F_{n-1}F_{m} \ \ \ \ \ \ \ \  F_nF_m+F_{n-1}F_{m-1}
 \end{pmatrix}\\[3mm]
 \therefore F_{n+m}=F_{n+1}F_{m}+F_{n}F_{m-1}
@@ -12431,7 +12545,7 @@ namespace io
         iptr = nxt;
         return ret;
     }
-    inline double read_double() noexcept
+    inline double read_double() noexcep
     { // 读入浮点数
         char * nxt;
         double ret = strtod(iptr, &n nxt);
@@ -12500,11 +12614,11 @@ bin=${src%.cpp}
 in=${bin}.in
 # 编译（仅在源文件更新时）
 if [ ! -f "${bin}_asan" ] || [ "$src" -nt "${bin}_asan" ]; then
-    g++ -std=c++20 -Og -g -fsanitize=address \
-        -o${bin}_asan "$src" || { echo CE >&2; exit 1; }
+    g++ -std=c++20 -Og -g -fsanitize=address
+        -o${bin}_asan "$src" || { echo \texttt{CE} >&2; exit 1; }
 fi
 # 不加检查 速度正常
-# g++ -std=c++20 -O2 -Wall -Wextra -o"$bin" "$src" || { echo CE >&2; exit 1; }
+# g++ -std=c++20 -O2 -Wall -Wextra -o"$bin" "$src" || { echo \texttt{CE} >&2; exit 1; }
 # 记录开始时间（毫秒）
 s=$(date +%s%3N)
 # 运行并限时
@@ -12514,9 +12628,9 @@ e=$(date +%s%3N)
 # 输出运行时间
 echo "run time: $((e-s)) ms"
 # 处理超时
-[ $st -eq 124 ] && echo TLE
+[ $st -eq 124 ] && echo \texttt{TLE}
 # 以程序自身退出码退出
-exit $st
+exit $s
 \end{minted}
 \subsection{对拍}
 
@@ -12528,17 +12642,17 @@ for (int i = 0; i < 10000; i++)
     system("./std<./data.in >./std.out"); //system("std.exe<data.in > std.out");
     if (system("diff ./test.out ./std.out"))//system("fc test.out std.out")
     {
-        cout<<"WA\n";
+        cout<<"\texttt{WA}\n";
         return 0;
     }
-    else if (i % 20 == 0) cout<<"OK "<<i<<"\n";
+    else if (i % 20 == 0) cout<<"\texttt{OK} "<<i<<"\n";
 }
 \end{minted}
 \subsubsection{构造题的对拍}
 
 例如构造$n$个数的和为$m$
 
-duipai.cpp
+\texttt{duipai.cpp}
 \begin{minted}{cpp}
 for (int i = 0; i < 10000; i++)
 {
@@ -12548,14 +12662,14 @@ for (int i = 0; i < 10000; i++)
     system("./yes > yes.out");
     if (system("diff ./check.out ./yes.out"))
     {
-        cout<<"WA\n";
+        cout<<"\texttt{WA}\n";
         return ;
     }
-    else if (i % 20 == 0) cout<<"OK "<<i << endl;
+    else if (i % 20 == 0) cout<<"\texttt{OK} "<<i << endl;
 }
 \end{minted}
 
-data.cpp
+\texttt{data.cpp}
 \begin{minted}{cpp}
 void solve()
 {
@@ -12564,7 +12678,7 @@ void solve()
 }
 \end{minted}
 
-test.cpp
+\texttt{test.cpp}
 \begin{minted}{cpp}
 void solve()
 {
@@ -12576,12 +12690,12 @@ void solve()
 }
 \end{minted}
 
-yes.cpp(用来对check结果作判断)
+\texttt{yes.cpp}(用来对check结果作判断)
 \begin{minted}{cpp}
 void solve() { cout<<"yes\n"; }
 \end{minted}
 
-check.cpp
+\texttt{check.cpp}
 \begin{minted}{cpp}
 void solve()
 {
@@ -12730,16 +12844,148 @@ int main()
 \end{minted}
 \subsection{bitset}
 
+\subsubsection{基本操作}
 \begin{minted}{cpp}
-__builtin_popcount(x) __builtin_popcountll(x) 返回x的二进制中有多少个1
-bitset<N> bs; 声明一个长度为 N 的 bitset
-bs.set() bs全部变为1
-bs.reset() bs全部变为0
-bs.set(x) x这一位变为1
-bs.reset(x) x这一位变为0
-bs.count() 得到bitset里面1的个数
-bs._Find_first() 得到bitset里第一个1的位置 如果不存在则返回bitset大小
-bs._Find_next(x) 得到x后面第一个1的位置 如果不存在则返回bitset大小
+#include <bitset>
+bitset<N> bs;                   // 声明长度为 N 的 bitse
+bs.set()                        // 全部变为1
+bs.reset()                      // 全部变为0
+bs.set(x)                       // x这一位变为1
+bs.reset(x)                     // x这一位变为0
+bs.flip()                       // 全部取反
+bs.flip(x)                      // x这一位取反
+bs[x]                           // 访问第x位
+bs.count()                      // 返回1的个数
+bs.size()                       // 返回bitset的大小
+bs.any()                        // 是否存在1
+bs.none()                       // 是否全为0
+bs.test(x)                      // 测试第x位是否为1
+bs._Find_first()                // 第一个1的位置，不存在返回size()
+bs._Find_next(x)                // x后面第一个1的位置，不存在返回size()
+__builtin_popcount(x)           // 返回x的二进制中1的个数
+__builtin_popcountll(x)         // 64位版本
+\end{minted}
+
+\subsubsection{运算操作}
+\begin{minted}{cpp}
+bitset<N> a, b;
+a & b                           // 按位与
+a | b                           // 按位或
+a ^ b                           // 按位异或
+~a                              // 按位取反
+a << k                          // 左移k位
+a >> k                          // 右移k位
+a <<= k; a >>= k;              // 原地移位
+\end{minted}
+
+\subsubsection{应用场景}
+\begin{itemize}
+\item \textbf{01背包优化：} 转移方程 $dp |= dp << w_i$，复杂度 $O(\frac{n \cdot W}{w})$
+\item \textbf{完全背包优化：} 二进制拆分，$dp |= dp << (2^k \cdot w_i)$
+\item \textbf{集合运算：} 两个bitset取或可快速判断集合是否有交集
+\item \textbf{状态压缩：} 用一位表示一个状态，节省空间
+\end{itemize}
+
+\subsubsection{手写bitset}
+当需要实现STL bitset不支持的操作或动态大小时，可以手写实现：
+
+\begin{minted}{cpp}
+struct Bitset
+{
+    using u64 = uint64_t;
+    static const int BitNum = 64;
+    vector<u64> data; int size, n; u64 mask;
+    
+    Bitset(int _n = 0) : n(_n)
+    {
+        size = (n >> 6) + ((n & 63) ? 1 : 0);
+        data.assign(size, 0);
+        int rem = n & 63;
+        mask = rem ? ((1ull << rem) - 1) : ~0ull;
+    }
+    void reset() { fill(data.begin(), data.end(), 0); }
+    void set(int pos, bool val = true)
+    {
+        int idx = size - (pos >> 6) - 1, bit = pos & 63;
+        if (val) data[idx] |= (1ull << bit);
+        else data[idx] &= ~(1ull << bit);
+    }
+    bool test(int pos) const
+    {
+        int idx = size - (pos >> 6) - 1, bit = pos & 63;
+        return data[idx] & (1ull << bit);
+    }
+    Bitset& operator<<=(int v)
+    {
+        if (v < 0) { *this >>= -v; return *this; }
+        int whole = v >> 6; v &= 63;
+        for (int i = 0; i + whole < size; i++) data[i] = data[i + whole];
+        for (int i = size - whole; i < size; i++) data[i] = 0;
+        if (v > 0)
+        {
+            u64 carry = 0;
+            for (int i = size - 1; i >= 0; i--)
+            {
+                u64 new_carry = data[i] >> (BitNum - v);
+                data[i] = (data[i] << v) | carry;
+                carry = new_carry;
+            }
+        }
+        data[0] &= mask; return *this;
+    }
+    Bitset& operator>>=(int v)
+    {
+        if (v < 0) { *this <<= -v; return *this; }
+        int whole = v >> 6; v &= 63;
+        for (int i = size - 1; i >= whole; i--) data[i] = data[i - whole];
+        for (int i = whole - 1; i >= 0; i--) data[i] = 0;
+        if (v > 0)
+        {
+            u64 carry = 0;
+            for (int i = 0; i < size; i++)
+            {
+                u64 new_carry = (data[i] & ((1ull << v) - 1)) << (BitNum - v);
+                data[i] = (data[i] >> v) | carry;
+                carry = new_carry;
+            }
+        }
+        data[0] &= mask; return *this;
+    }
+    Bitset operator&(const Bitset& other) const
+    {
+        Bitset result(n);
+        for (int i = 0; i < size; i++) result.data[i] = data[i] & other.data[i];
+        return result;
+    }
+    Bitset operator|(const Bitset& other) const
+    {
+        Bitset result(n);
+        for (int i = 0; i < size; i++) result.data[i] = data[i] | other.data[i];
+        return result;
+    }
+    Bitset operator^(const Bitset& other) const
+    {
+        Bitset result(n);
+        for (int i = 0; i < size; i++) result.data[i] = data[i] ^ other.data[i];
+        return result;
+    }
+    Bitset operator~() const
+    {
+        Bitset result(n);
+        for (int i = 0; i < size; i++) result.data[i] = ~data[i];
+        result.data[0] &= mask; return result;
+    }
+    bool any() const { for (int i = 0; i < size; i++) if (data[i]) return true; return false; }
+    bool none() const { return !any(); }
+    int count() const
+    {
+        int cnt = 0;
+        for (int i = 0; i < size; i++) cnt += __builtin_popcountll(data[i]);
+        return cnt;
+    }
+    void flip() { *this = ~(*this); }
+    void flip(int pos) { set(pos, !test(pos)); }
+};
 \end{minted}
 \subsection{vector}
 
@@ -12747,33 +12993,33 @@ bs._Find_next(x) 得到x后面第一个1的位置 如果不存在则返回bitset
 vector dp(n, vector<int>(m, 0));
 vector<vector<int>> e(n);
 \end{minted}
-\subsection{VScode比赛设置}
+\subsection{\texttt{VSCode}比赛设置}
 
 \textbf{通用设置:}
 \begin{enumerate}
-\item 创建专门的代码文件夹并在 VSCode 中打开
+\item 创建专门的代码文件夹并在 \texttt{VSCode} 中打开
 \item \texttt{File \textrightarrow{} Auto Save}，启用自动保存
 \item 创建测试 \texttt{.cpp} 文件，运行后编辑 \texttt{launch.json}，将 \texttt{externalConsole} 设为 \texttt{true}
-\item \texttt{File \textrightarrow{} Preferences \textrightarrow{} Keyboard Shortcuts}，删除 F11 快捷键，将 F5 的功能改为 F11
-\item Windows 系统：右键终端标题栏 \textrightarrow{} 设置 \textrightarrow{} 默认值 \textrightarrow{} 高级 \textrightarrow{} 关闭行为 \textrightarrow{} 从不自动关闭
+\item \texttt{File \textrightarrow{} Preferences \textrightarrow{} Keyboard Shortcuts}，删除 \texttt{F11} 快捷键，将 \texttt{F5} 的功能改为 \texttt{F11}
+\item \texttt{Windows} 系统：右键终端标题栏 \textrightarrow{} 设置 \textrightarrow{} 默认值 \textrightarrow{} 高级 \textrightarrow{} 关闭行为 \textrightarrow{} 从不自动关闭
 \item 电源设置：高性能模式，屏幕永不变暗
 \item 注意：可能需要点击齿轮图标才能找到 \texttt{launch.json}
 \end{enumerate}
 
-\textbf{Ubuntu:}
+\textbf{\texttt{Ubuntu}:}
 \begin{enumerate}
 \item 在桌面创建文件夹 \texttt{xcpc}
-\item 打开 VSCode，点击侧边栏第一个图标 \textrightarrow{} \texttt{Open Folder} \textrightarrow{} \texttt{Desktop/xcpc} \textrightarrow{} \texttt{Open} \textrightarrow{} 选择信任
+\item 打开 \texttt{VSCode}，点击侧边栏第一个图标 \textrightarrow{} \texttt{Open Folder} \textrightarrow{} \texttt{Desktop/xcpc} \textrightarrow{} \texttt{Open} \textrightarrow{} 选择信任
 \item 展开文件夹，新建 \texttt{a.cpp} 文件
 \item \texttt{File \textrightarrow{} Auto Save}，启用自动保存
-\item \texttt{File \textrightarrow{} Preferences \textrightarrow{} Keyboard Shortcuts}，搜索 \texttt{cph}，找到 \texttt{run-testcases}，改为 F11
+\item \texttt{File \textrightarrow{} Preferences \textrightarrow{} Keyboard Shortcuts}，搜索 \texttt{cph}，找到 \texttt{run-testcases}，改为 \texttt{F11}
 \item \texttt{Settings \textrightarrow{} CPH}，设置编译参数：\texttt{-std=c++17 -O2 -Wall}
 \item \texttt{g++ -o a a.cpp} 编译，\texttt{./a} 运行执行文件
 \end{enumerate}
 \subsection{比赛注意事项}
 
 \begin{itemize}
-\item 注意数据范围：确保数组大小足够，避免 RE
+\item 注意数据范围：确保数组大小足够，避免 \texttt{RE}
 \item 增加有效沟通，减少无效沟通
 \item 注意运算过程中的溢出问题
 \item 调试特殊样例，手工构造多组测试数据
@@ -12784,6 +13030,8 @@ vector<vector<int>> e(n);
 \item 检查 \texttt{n}、\texttt{m} 等变量是否在全局和局部均有定义
 \item 计算几何：精度设为 \texttt{1e-12}，全部使用 \texttt{long double}，避免精度问题
 \end{itemize}
+
+
 
 \subsection{u群图}
 \begin{figure}[h]

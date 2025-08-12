@@ -1,0 +1,566 @@
+\documentclass[a4paper,9pt,twocolumn]{ctexart}
+\usepackage[a4paper,left=1cm,right=1cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{1.5em}
+\pagestyle{plain}
+
+\title{Python在算法竞赛中的使用指南}
+\author{scutsky}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\subsection{Python 在算法竞赛中的使用}
+
+\subsubsection{Python 优势}
+\begin{itemize}
+\item 语法简洁，开发效率高
+\item 内置高精度整数，无需担心溢出
+\item 丰富的内置数据结构（list, dict, set, tuple）
+\item 强大的内置函数和标准库
+\item 适合处理字符串、大数运算等问题
+\end{itemize}
+
+\subsubsection{常用技巧}
+
+\textbf{快速输入输出详解：}
+
+\textit{1. 基础输入输出优化}
+\begin{minted}{python}
+import sys
+
+# 最重要的优化：替换input函数
+input = sys.stdin.readline
+# 原理：input()每次调用都会刷新缓冲区，而readline()批量读取
+
+# 读取单个整数（注意strip()去除换行符）
+n = int(input().strip())
+# 或者更简洁（int会自动处理空白符）
+n = int(input())
+
+# 读取多个整数
+a, b, c = map(int, input().split())
+
+# 读取整数列表
+arr = list(map(int, input().split()))
+
+# 读取字符串（需要strip去除换行符）
+s = input().strip()
+
+# 快速输出（减少缓冲区刷新）
+print(result, flush=False)  # 默认False，不立即刷新
+\end{minted}
+
+\textit{2. 大量数据的极速输入}
+\begin{minted}{python}
+import sys
+from io import StringIO
+
+# 方法1：一次性读取所有输入
+data = sys.stdin.read().split()
+index = 0
+
+def next_int():
+    global index
+    result = int(data[index])
+    index += 1
+    return result
+
+def next_str():
+    global index
+    result = data[index]
+    index += 1
+    return result
+
+# 使用方法
+n = next_int()
+m = next_int()
+arr = [next_int() for _ in range(n)]
+
+# 方法2：使用缓冲区读取
+def fast_input():
+    buffer = []
+    while True:
+        line = sys.stdin.readline()
+        if not line:
+            break
+        buffer.extend(line.split())
+    return iter(buffer)
+
+# 方法3：预读取固定行数
+def read_lines(n):
+    return [sys.stdin.readline().strip() for _ in range(n)]
+\end{minted}
+
+\textit{3. 批量输出优化}
+\begin{minted}{python}
+import sys
+
+# 方法1：收集结果后一次性输出
+results = []
+for i in range(n):
+    # 计算结果
+    result = process(i)
+    results.append(str(result))
+
+# 一次性输出所有结果
+print('\n'.join(results))
+
+# 方法2：使用sys.stdout.write（更快但需要手动添加换行）
+for i in range(n):
+    result = process(i)
+    sys.stdout.write(str(result) + '\n')
+
+# 方法3：缓冲区写入
+output_buffer = []
+for i in range(n):
+    result = process(i)
+    output_buffer.append(str(result))
+    
+    # 每1000行输出一次，避免内存问题
+    if len(output_buffer) >= 1000:
+        sys.stdout.write('\n'.join(output_buffer) + '\n')
+        output_buffer.clear()
+
+# 输出剩余部分
+if output_buffer:
+    sys.stdout.write('\n'.join(output_buffer) + '\n')
+\end{minted}
+
+\textit{4. 不同数据类型的快速读取}
+\begin{minted}{python}
+# 读取二维数组
+n, m = map(int, input().split())
+matrix = []
+for _ in range(n):
+    row = list(map(int, input().split()))
+    matrix.append(row)
+
+# 一行式读取二维数组
+matrix = [list(map(int, input().split())) for _ in range(n)]
+
+# 读取字符数组
+s = input().strip()
+char_array = list(s)  # 转换为字符列表
+
+# 读取多组测试数据
+while True:
+    try:
+        line = input().strip()
+        if not line:  # 空行结束
+            break
+        # 处理输入
+        process(line)
+    except EOFError:  # 文件结束
+        break
+
+# 读取不定数量的整数
+try:
+    while True:
+        numbers = list(map(int, input().split()))
+        if not numbers:
+            break
+        process(numbers)
+except EOFError:
+    pass
+
+# 读取直到特定值
+while True:
+    n = int(input())
+    if n == 0:  # 0作为结束标志
+        break
+    # 处理数据
+\end{minted}
+
+\textit{5. 格式化输出技巧}
+\begin{minted}{python}
+# 控制小数位数
+pi = 3.14159
+print(f"{pi:.2f}")        # 3.14
+print("{:.3f}".format(pi)) # 3.142
+
+# 科学计数法
+large_num = 1234567890
+print(f"{large_num:.2e}")  # 1.23e+09
+
+# 左右对齐和填充
+name = "Alice"
+print(f"{name:>10}")       # "     Alice" 右对齐
+print(f"{name:<10}")       # "Alice     " 左对齐  
+print(f"{name:^10}")       # "  Alice   " 居中
+print(f"{name:*^10}")      # "**Alice***" 用*填充居中
+
+# 进制转换输出
+num = 255
+print(f"{num:b}")          # 11111111 二进制
+print(f"{num:o}")          # 377 八进制
+print(f"{num:x}")          # ff 十六进制
+print(f"{num:X}")          # FF 大写十六进制
+
+# 数字千位分隔符
+big_num = 1234567
+print(f"{big_num:,}")      # 1,234,567
+\end{minted}
+
+\textit{6. 性能对比和选择建议}
+\begin{minted}{python}
+# 速度对比（从快到慢）：
+# 1. sys.stdin.read() + split()           最快，适合超大数据
+# 2. sys.stdin.readline()                 次快，通用推荐
+# 3. input()                             慢，小数据可用
+# 4. sys.stdin.readlines()               慢，内存消耗大
+
+# 输出速度对比（从快到慢）：
+# 1. sys.stdout.write()                   最快
+# 2. print() with 收集后批量输出           次快
+# 3. print() 逐行输出                     慢
+
+# 推荐的通用模板
+import sys
+input = sys.stdin.readline
+
+def main():
+    # 读取数据
+    n = int(input())
+    
+    # 处理和输出
+    results = []
+    for i in range(n):
+        # 计算逻辑
+        result = solve(i)
+        results.append(str(result))
+    
+    # 批量输出
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+\end{minted}
+
+\textbf{常用内置函数：}
+\begin{minted}{python}
+# 数学函数
+import math
+math.gcd(a, b)  # 最大公约数
+math.lcm(a, b)  # 最小公倍数（Python 3.9+）
+math.isqrt(n)   # 整数开方
+math.factorial(n)  # 阶乘
+
+# 排序和查找
+arr.sort()  # 原地排序
+sorted(arr, reverse=True)  # 返回新排序列表
+bisect.bisect_left(arr, x)  # 二分查找
+
+# 字符串操作
+s.count(sub)    # 统计子串出现次数
+s.replace(old, new)  # 替换
+''.join(arr)    # 连接字符串列表
+\end{minted}
+
+\textbf{数据结构使用：}
+\begin{minted}{python}
+from collections import deque, Counter, defaultdict
+from heapq import heappush, heappop
+
+# 双端队列
+q = deque()
+q.appendleft(x)
+q.popleft()
+
+# 优先队列（最小堆）
+heap = []
+heappush(heap, x)
+min_val = heappop(heap)
+
+# 计数器
+cnt = Counter(arr)
+
+# 默认字典
+graph = defaultdict(list)
+\end{minted}
+
+\subsubsection{注意事项}
+\begin{itemize}
+\item \textbf{时间复杂度：} Python 比 C++ 慢 10-100 倍，选择题目需谨慎
+\item \textbf{递归限制：} 默认递归深度限制 1000，需要时使用 \texttt{sys.setrecursionlimit()}
+\item \textbf{浮点精度：} 使用 \texttt{decimal} 模块处理高精度小数
+\item \textbf{大数运算：} Python 原生支持任意精度整数
+\item \textbf{列表复制：} 注意浅拷贝和深拷贝的区别
+\end{itemize}
+
+\textbf{递归深度设置：}
+\begin{minted}{python}
+import sys
+sys.setrecursionlimit(10**6)
+\end{minted}
+
+\textbf{高精度小数：}
+\begin{minted}{python}
+from decimal import Decimal, getcontext
+getcontext().prec = 50  # 设置精度
+result = Decimal('1') / Decimal('3')
+\end{minted}
+
+\subsubsection{适用场景}
+\begin{itemize}
+\item 大数运算、高精度计算
+\item 字符串处理密集的问题
+\item 图论中需要复杂数据结构的问题
+\item 动态规划（状态较少时）
+\item 贪心算法
+\item 简单的数学问题
+\end{itemize}
+
+\subsubsection{不适用场景}
+\begin{itemize}
+\item 对时间要求极严格的题目
+\item 需要大量循环的数值计算
+\item 复杂的计算几何
+\item 高频率的数组操作
+\end{itemize}
+
+\subsubsection{常用标准库详解}
+
+\textbf{itertools模块：}
+\begin{minted}{python}
+import itertools
+
+# 排列组合
+list(itertools.permutations([1,2,3], 2))     # 排列 A(3,2)
+list(itertools.combinations([1,2,3], 2))     # 组合 C(3,2)
+list(itertools.combinations_with_replacement([1,2], 3))  # 有重复组合
+
+# 笛卡尔积
+list(itertools.product([1,2], [3,4]))       # [(1,3),(1,4),(2,3),(2,4)]
+
+# 累积运算
+list(itertools.accumulate([1,2,3,4]))       # [1,3,6,10] 前缀和
+list(itertools.accumulate([1,2,3,4], max))  # [1,2,3,4] 前缀最大值
+
+# 分组工具
+for k, g in itertools.groupby([1,1,2,2,2,3]):
+    print(k, list(g))  # 按连续相同元素分组
+
+# 无限迭代器
+itertools.count(10, 2)    # 10, 12, 14, 16, ...
+itertools.cycle([1,2,3])  # 1, 2, 3, 1, 2, 3, ...
+itertools.repeat(5, 3)    # 5, 5, 5
+\end{minted}
+
+\textbf{bisect模块（二分查找）：}
+\begin{minted}{python}
+import bisect
+
+arr = [1, 3, 5, 7, 9]
+# 查找插入位置
+pos = bisect.bisect_left(arr, 6)    # 3，第一个>=6的位置
+pos = bisect.bisect_right(arr, 5)   # 3，第一个>5的位置
+
+# 插入元素并保持有序
+bisect.insort(arr, 6)  # arr变为[1,3,5,6,7,9]
+
+# 应用：查找范围内元素个数
+def count_range(arr, left, right):
+    return bisect.bisect_right(arr, right) - bisect.bisect_left(arr, left)
+\end{minted}
+
+\textbf{functools模块：}
+\begin{minted}{python}
+import functools
+
+# 缓存装饰器（记忆化）
+@functools.lru_cache(maxsize=None)
+def fibonacci(n):
+    if n <= 1: return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# reduce函数
+from functools import reduce
+result = reduce(lambda x, y: x + y, [1,2,3,4])  # 10
+
+# 偏函数应用
+multiply = lambda x, y: x * y
+double = functools.partial(multiply, 2)
+print(double(5))  # 10
+\end{minted}
+
+\textbf{字符串高级操作：}
+\begin{minted}{python}
+import string
+
+# 字符常量
+string.ascii_lowercase    # 'abcdefghijklmnopqrstuvwxyz'
+string.ascii_uppercase    # 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+string.digits            # '0123456789'
+
+# 字符串方法
+s = "hello world"
+s.startswith("he")       # True
+s.endswith("ld")         # True
+s.find("wo")            # 6，找不到返回-1
+s.rfind("l")            # 9，从右开始找
+s.split()               # ['hello', 'world']
+s.isdigit()             # False，是否全为数字
+s.isalpha()             # False，是否全为字母
+s.zfill(10)             # '00000hello'，左补零
+\end{minted}
+
+\textbf{位运算技巧：}
+\begin{minted}{python}
+# 常用位运算
+n & (n-1)        # 清除最低位的1
+n & -n           # 获取最低位的1（lowbit）
+bin(n).count('1') # 统计1的个数
+n.bit_length()    # 二进制长度
+
+# 快速幂
+def pow_mod(base, exp, mod):
+    result = 1
+    while exp > 0:
+        if exp & 1:
+            result = (result * base) % mod
+        base = (base * base) % mod
+        exp >>= 1
+    return result
+\end{minted}
+
+\textbf{图论常用模板：}
+\begin{minted}{python}
+from collections import deque, defaultdict
+
+# BFS模板
+def bfs(graph, start):
+    visited = set([start])
+    queue = deque([start])
+    
+    while queue:
+        node = queue.popleft()
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+# DFS模板
+def dfs(graph, node, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+# Dijkstra最短路径
+import heapq
+def dijkstra(graph, start):
+    dist = defaultdict(lambda: float('inf'))
+    dist[start] = 0
+    pq = [(0, start)]
+    
+    while pq:
+        d, u = heapq.heappop(pq)
+        if d > dist[u]:
+            continue
+        for v, w in graph[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                heapq.heappush(pq, (dist[v], v))
+    return dist
+\end{minted}
+
+\textbf{动态规划常用技巧：}
+\begin{minted}{python}
+# 一维DP
+dp = [0] * (n + 1)
+for i in range(1, n + 1):
+    dp[i] = max(dp[i-1], dp[i-2] + arr[i])
+
+# 二维DP（滚动数组优化）
+prev = [0] * (m + 1)
+curr = [0] * (m + 1)
+for i in range(1, n + 1):
+    for j in range(1, m + 1):
+        curr[j] = prev[j] + grid[i][j]
+    prev, curr = curr, prev
+
+# 记忆化搜索
+from functools import lru_cache
+@lru_cache(maxsize=None)
+def dp(i, j):
+    if i == 0 or j == 0:
+        return 1
+    return dp(i-1, j) + dp(i, j-1)
+\end{minted}
+
+\textbf{数学算法：}
+\begin{minted}{python}
+# 最大公约数和最小公倍数
+import math
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+# 素数筛法
+def sieve(n):
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
+    
+    for i in range(2, int(n**0.5) + 1):
+        if is_prime[i]:
+            for j in range(i*i, n + 1, i):
+                is_prime[j] = False
+    
+    return [i for i in range(2, n + 1) if is_prime[i]]
+
+# 快速矩阵幂
+def matrix_mult(A, B, mod):
+    n = len(A)
+    C = [[0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % mod
+    return C
+
+def matrix_power(mat, exp, mod):
+    n = len(mat)
+    result = [[1 if i == j else 0 for j in range(n)] for i in range(n)]
+    base = [row[:] for row in mat]
+    
+    while exp > 0:
+        if exp & 1:
+            result = matrix_mult(result, base, mod)
+        base = matrix_mult(base, base, mod)
+        exp >>= 1
+    return result
+\end{minted}
+
+\textbf{常见错误和避免方法：}
+\begin{itemize}
+\item \textbf{整数除法：} Python3中 \texttt{/} 返回浮点数，使用 \texttt{//} 进行整数除法
+\item \textbf{列表初始化：} \texttt{[[0]*m for \_ in range(n)]} 而不是 \texttt{[[0]*m]*n}
+\item \textbf{浮点比较：} 使用 \texttt{abs(a-b) < eps} 而不是 \texttt{a == b}
+\item \textbf{字符串拼接：} 大量拼接时使用 \texttt{join()} 而不是 \texttt{+=}
+\item \textbf{深拷贝：} 使用 \texttt{copy.deepcopy()} 或列表推导式
+\end{itemize}
+
+\textbf{性能优化建议：}
+\begin{itemize}
+\item 尽量使用内置函数和标准库
+\item 避免频繁的字符串操作
+\item 使用生成器表达式节省内存
+\item 合理使用 \texttt{@lru\_cache} 装饰器
+\item 关键循环可以考虑用 C++ 重写
+\end{itemize}
+
+\end{document}
