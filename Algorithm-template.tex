@@ -26,35 +26,35 @@
 \setlength\columnseprule{0.16pt} % 分割线
 \setlength{\headheight}{13pt} % 修复页眉高度警告
 
-% 缩小模板间距（不影响代码块）
-\setlength{\parskip}{0pt}  % 段落间距
+% 优化模板间距（保持可读性）
+\setlength{\parskip}{1pt}  % 段落间距 - 保持最小间距
 \setlength{\headsep}{8pt}  % 页眉与正文间距
 \setlength{\footskip}{12pt} % 页脚间距
 
-% 缩小标题间距
+% 优化标题间距 - 保持基本可读性
 \usepackage{titlesec}
-\titlespacing*{\section}{0pt}{0pt plus 0pt minus 0pt}{0pt plus 0pt minus 0pt}
-\titlespacing*{\subsection}{0pt}{0pt plus 0pt minus 0pt}{0pt plus 0pt minus 0pt}
-\titlespacing*{\subsubsection}{0pt}{0pt plus 0pt minus 0pt}{0pt plus 0pt minus 0pt}
+\titlespacing*{\section}{0pt}{2pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
+\titlespacing*{\subsection}{0pt}{2pt plus 1pt minus 1pt}{1pt plus 1pt minus 1pt}
+\titlespacing*{\subsubsection}{0pt}{1pt plus 1pt minus 1pt}{1pt plus 1pt minus 1pt}
 
-% 缩小复杂度注释和代码块之间的间距
-\setlength{\topsep}{0pt}   % 环境前后间距
-\setlength{\partopsep}{0pt} % 段落前环境间距
+% 优化代码块间距
+\setlength{\topsep}{1pt}   % 环境前后间距 - 最小但非零
+\setlength{\partopsep}{1pt} % 段落前环境间距
 
-% 设置minted环境的紧凑间距
-\BeforeBeginEnvironment{minted}{\vspace{-6pt}}
-\AfterEndEnvironment{minted}{\vspace{-6pt}}
+% 设置minted环境的合理间距
+\BeforeBeginEnvironment{minted}{\vspace{-2pt}}
+\AfterEndEnvironment{minted}{\vspace{-2pt}}
 
-% 进一步缩小代码块间距
-\setlength{\fboxsep}{1pt}  % 代码框内边距
-\setlength{\abovecaptionskip}{1pt}  % 标题上方间距
-\setlength{\belowcaptionskip}{1pt}  % 标题下方间距
+% 优化代码块间距
+\setlength{\fboxsep}{2pt}  % 代码框内边距
+\setlength{\abovecaptionskip}{2pt}  % 标题上方间距
+\setlength{\belowcaptionskip}{2pt}  % 标题下方间距
 %===============================环境参数===============================%
 \hypersetup{
     colorlinks=true,
     linkcolor=black
 }
-\linespread{1.04}  % 稍微减小行距
+\linespread{1.08}  % 优化行距避免重叠
 %=============================页眉、页脚设置==============================%
 \pagestyle{fancy}
 \lhead{Callmeplayxcpc}
@@ -88,7 +88,7 @@
     linenos=true,
     numbersep=6pt,
     frame=single,
-    framesep=1pt,
+    framesep=2pt,
     tabsize=4,
     breaklines=true,
     breakanywhere=false,
@@ -105,7 +105,7 @@
     texcomments=false,
     mathescape=false,
     rulecolor=\color{black!30},
-    baselinestretch=0.75
+    baselinestretch=0.85
 }
 
 % 为C++设置专门的高亮配置
@@ -146,7 +146,7 @@
     showspaces=false,
     obeytabs=true,
     autogobble=true,
-    baselinestretch=0.75
+    baselinestretch=0.85
 }
 %===============================代码块===============================%
 
@@ -175,7 +175,7 @@
 % 时间复杂度：预处理$O(n\log n)$，查询$O(1)$
 % 空间复杂度：$O(n\log n)$
 \begin{minted}{cpp}
-int st[N][M], w[N], n; // 使用 \texttt{ST} 表时一定要记得调用 build
+int st[N][M], w[N], n; // 使用ST表时一定要记得调用build
 void build()
 {
     for (int i = 0; i <= __lg(n); i++)
@@ -426,7 +426,7 @@ struct Heap
 \begin{minted}{cpp}
 void solve()
 {
-    map<string, int > mp;
+    map<string, int> mp;
     for (int i = 1; i <= n; i++)
     {
         string s;
@@ -525,7 +525,7 @@ while (T--)
 例子：给出一些$[l, r]$之间的异或和或者询问区间$[l, r]$异或和（强制在线）
 
 \begin{minted}{cpp}
-map<int, int > p, d;
+map<int, int> p, d;
 int find(int x)
 {
     if (p.find(x) == p.end()) return p[x] = x;
@@ -781,7 +781,7 @@ void solve()
         v.push_back({l - 1, i, r, -1}), v.push_back({l - 1, i, l - 1, 1});
     }
     sort(v.begin(), v.end());
-    for (auto[x, ty, y, val]:v)
+    for (auto [x, ty, y, val]:v)
         if (!ty) addp(x, y, val);
         else ans[ty] += val * query(x, y);
 }
@@ -948,7 +948,7 @@ void solve()
         int t, l, r;
         if (t == 1) root = modify(root, 1, n, l, r, 0);
         else root = modify(root, 1, n, l, r, 1);
-        cout << tr[root].sum<<"\n";
+        cout << tr[root].sum << "\n";
     }
 }
 \end{minted}
@@ -1080,7 +1080,7 @@ int query(int p, int l, int r, int x)
 int main()
 { // 如果对一个版本线段树修改多次 先让root[i] = root[i - 1], 再把下面的root[i - 1]换成root[i - 1]
     for (int i = 1; i <= n; i++) root[i] = insert(root[i - 1], 0, (int)2e5, w[i], i);
-    while (m--) cout << query(root[r], 0, (int)2e5, l)<<"\n";
+    while (m--) cout << query(root[r], 0, (int)2e5, l) << "\n";
 }
 \end{minted}
 \subsubsection{区间修改主席树}
@@ -1158,12 +1158,12 @@ void solve()
         else if (opt=='Q')
         {
             int l, r;
-            cout << query(root[t], 1, n, l, r, 0)<<"\n";
+            cout << query(root[t], 1, n, l, r, 0) << "\n";
         }
         else if (opt=='H')
         {
             int l, r, k;
-            cout << query(root[record[k]], 1, n, l, r, 0)<<"\n";
+            cout << query(root[record[k]], 1, n, l, r, 0) << "\n";
         }
         else
         {
@@ -1412,7 +1412,7 @@ int main()
         root[y] = merge(root[y], temp, 1, n);
     }
     for (int i = 1; i <= 100; i++) query(root[i], 1, n, i);
-    for (int i = 1; i <= n; i++) cout << w[i]<<" ";
+    for (int i = 1; i <= n; i++) cout << w[i] << " ";
 }
 \end{minted}
 \subsubsection{线段树分治}
@@ -1478,7 +1478,7 @@ int cal(int x) { return x * (x + 1) / 2; }
 void solve(int u, int l, int r)
 {
     int insz = stk.size();
-    for (auto[x, y]:tr[u].v)
+    for (auto [x, y]:tr[u].v)
     {
         int px = find(x), py = find(y);
         if (px == py) continue;
@@ -1517,7 +1517,7 @@ void solve()
         modify(1, c2 + 1, n, a, b);
     }
     solve(1, 1, n);
-    for (int i = 1; i <= n; i++) cout << n * (n + 1) / 2 - ans[i]<<"\n";
+    for (int i = 1; i <= n; i++) cout << n * (n + 1) / 2 - ans[i] << "\n";
 }
 \end{minted}
 
@@ -1566,7 +1566,7 @@ void solve()
     for (int i = 0; i < v.size(); i++)
     {
         if (i) ans += (v[i][0] - v[i - 1][0]) * tr[1].len;
-        auto[x, y1, y2, sign] = v[i];
+        auto [x, y1, y2, sign] = v[i];
         y1 = find(y1), y2 = find(y2);
         modify(1, y1, y2 - 1, sign);
     }
@@ -1626,7 +1626,7 @@ void solve()
     int ans = 0;
     for (int i = 1; i <= n; i++)
     {
-        for (auto[x, y, v]:buc[i]) modify(1, x, y, v);
+        for (auto [x, y, v]:buc[i]) modify(1, x, y, v);
         ans += tr[1].len;
     }
 }
@@ -1881,19 +1881,19 @@ void solve()
     }
     int maxx = -2E9, minx = 2E9;
     lct1.build(1, lsh.size()), lct2.build(1, lsh.size());
-    for (auto[x, y, a, b]:v)
+    for (auto [x, y, a, b]:v)
     {
         lct1.add(x, y), lct2.add(x, y);
         maxx = max(maxx, x), minx = min(minx, x);
-        if (!b) cout << max(minx * a, maxx * a)<<"\n";
+        if (!b) cout << max(minx * a, maxx * a) << "\n";
         else
         {
             double XX = 1.0L * a / b;
             int id;
             if (b >0) id = lct1.query(find(XX)).second;
             else id = lct2.query(find(XX)).second;
-            auto[X, Y, A, B] = v[id - 1];
-            cout << a * X + b * Y<<"\n";
+            auto [X, Y, A, B] = v[id - 1];
+            cout << a * X + b * Y << "\n";
         }
     }
 }
@@ -1926,15 +1926,15 @@ void pushup(int u)
 
 吉司机线段树的过程如下:
 
-假设我们要对于区间$[l, r]$中的数对$x$取min,我们首先将$[l, r]$拆分成线段树上若干个区间
+假设我们要对于区间$[l, r]$中的数对$x$取$\min$,我们首先将$[l, r]$拆分成线段树上若干个区间
 $[l_i, r_i]$对于每个$[l_i, r_i]$:
 
 如果它的最大值$\leqslant x$那么显然此次操作没有任何效果,直接 return 即可。
 
-如果$x$小于最大值 $maxv$,但大于（注意,这里必须是严格大于,否则的话也会出问题）严格次大值
+如果$x$小于最大值 $\max v$,但大于（注意,这里必须是严格大于,否则的话也会出问题）严格次大值
 $se$,那么显然有且只有$c$个最大值会变为
 $x$,我们可以简单维护一个标记 $tag$ 表示这段区间内最大值会增加 $tag$
-,然后令 $tag$←$tag+(x-maxv)$即可,由于更新完之后最大值依然严格大于次大值,因此最大值个数不会发生变化。
+,然后令 $tag$←$tag+(x-\max v)$即可,由于更新完之后最大值依然严格大于次大值,因此最大值个数不会发生变化。
 
 如果 $x$ 小于等于严格次大值 $se$,这个就没有什么优美的方法了,直接暴力递归左右子区间即可。
 
@@ -2042,10 +2042,10 @@ void solve()
     int ans = 0;
     for (int i = p; i >= 1; i--)
     {
-        for (auto[b, c]:v[i]) modify(1, 1, b, 0), modify(1, b + 1, q, r - c);
+        for (auto [b, c]:v[i]) modify(1, 1, b, 0), modify(1, b + 1, q, r - c);
         ans += tr[1].sum;
     }
-    cout << ans<<'\n';
+    cout << ans << '\n';
 }
 \end{minted}
 
@@ -2771,7 +2771,7 @@ void solve()
         if (x - 1) Q[x - 1].push_back({-i, l, r});
     }
     build(1, 1, n);
-    set<int > S;
+    set<int> S;
     S.insert(0);
     Matrix<3, 3> tra;
     tra(0, 0) = 1, tra(0, 1) = 0, tra(0, 2) = 0;
@@ -3262,10 +3262,10 @@ a[mid]\times{(i-mid+1)}^k+\sum\limits_{i=mid+1}^{r}a[i]\times{(i-l+1)}^k\\ \quad
 
 前两部分是好处理的，考虑如何计算第三部分，可以利用二项式定理展开
 
-$\sum\limits_{i=mid+1}^ra[i]\times{(i-l+1)}^k=\sum\limits_{i=mid+1}^ra[i]\times
+$\sum\limits_{i=mid+1}^{r}a[i]\times{(i-l+1)}^k=\sum\limits_{i=mid+1}^{r}a[i]\times
 \sum\limits_{j=0}^k\binom{k}{j}{(i-mid)}^j{(mid-l+1)}^{k-j}
-\\ \quad =\sum\limits_{j=0}^k\sum\limits_{i=mid+1}^r{(i-mid)}^ja[i]\binom{k}{j}{(mid-l+1)}^{k-j}
-=\sum\limits_{j=0}^kans_{r, j}\binom{k}{j}{(mid-l+1)}^{k-j}$
+\\ \quad =\sum\limits_{j=0}^k\sum\limits_{i=mid+1}^{r}{(i-mid)}^{j}a[i]\binom{k}{j}{(mid-l+1)}^{k-j}
+=\sum\limits_{j=0}^k\text{ans}_{r, j}\binom{k}{j}{(mid-l+1)}^{k-j}$
 
 \begin{minted}{cpp}
 struct FHQ_Treap
@@ -3362,14 +3362,14 @@ void solve()
 }
 \end{minted}
 
-\subsection{Link-Cut Tree(LCT)}
+\subsection{Link-Cut Tree (LCT)}
 \textbf{关键操作：}
 \begin{itemize}
-\item \texttt{split(x, y)}: 提取x到y路径，y成为路径根，路径信息在tr[y]中
-\item \texttt{link(x, y)}: 连边（自动判断是否已连通）
-\item \texttt{cut(x, y)}: 断边
-\item \texttt{connected(x, y)}: 判断连通性
-\item \texttt{path\_sum(x, y)}: 查询路径和
+\item \texttt{split (x, y)}: 提取x到y路径，y成为路径根，路径信息在tr[y]中
+\item \texttt{link (x, y)}: 连边（自动判断是否已连通）
+\item \texttt{cut (x, y)}: 断边
+\item \texttt{connected (x, y)}: 判断连通性
+\item \texttt{path\_sum (x, y)}: 查询路径和
 \end{itemize}
 
 \textbf{处理边权：}每条边$(u, v)$变成点$w$，连$(u, w)$和$(w, v)$，边权存在$w$上。
@@ -3489,7 +3489,7 @@ void solve()
         {
             lct.split(a, b);
             auto tim = lct.tr[b].minv;
-            auto[c, d] = E[tim];
+            auto [c, d] = E[tim];
             lct.cut(c, tim + n), lct.cut(d, tim + n);
             root[i] = insert(root[i], 1, m, tim, -1);
         }
@@ -3527,17 +3527,17 @@ void solve()
     }
     sort(edge.begin(), edge.end());
     int ans = INF;
-    multiset<int > s;
+    multiset<int> s;
     for (int i = 0; i < edge.size(); i++)
     {
         lct.tr[i + 1 + n].minv = lct.tr[i + 1 + n].v = i;
-        auto[c, a, b] = edge[i];
+        auto [c, a, b] = edge[i];
         if (lct.findr(a) == lct.findr(b))
         {
             lct.split(a, b);
             int id = lct.tr[b].minv;
             if (id > edge.size()) continue;
-            auto[C, A, B] = edge[id];
+            auto [C, A, B] = edge[id];
             lct.cut(A, id + 1 + n), lct.cut(B, id + 1 + n);
             s.extract(C);
         }
@@ -3545,7 +3545,7 @@ void solve()
         s.insert(c);
         if (lct.ee == 2 * n - 2) ans = min(ans, c-*s.begin());
     }
-    cout << ans<<"\n";
+    cout << ans << "\n";
 }
 \end{minted}
 
@@ -3880,7 +3880,7 @@ struct LCT
 \end{minted}
 
 \subsection{分块}
-\subsubsection{支持区间加法 区间内小于某个数的元素个数(区间重构)}
+\subsubsection{支持区间加法 区间内小于某个数的元素个数 (区间重构)}
 todo:利用归并可以做到更优的复杂度
 \begin{minted}{cpp}
 int n, len, w[N], id[N], add[M];
@@ -4645,13 +4645,13 @@ void solve()
     cdq1(1, n);
     int ans = -INF;
     for (int i = 1; i <= n; i++) ans = max(ans, dp[i]);
-    cout << ans<<"\n";
+    cout << ans << "\n";
 }
 \end{minted}
 \subsubsection{高维偏序}
 bitset 解决高维偏序  n个向量的m维偏序
 \begin{minted}{cpp}
-bitset<N > bs[N], temp;
+bitset<N> bs[N], temp;
 int id[N], w[M][N], n, m, cur;
 bool cmp(int a, int b) { return w[cur][a] < w[cur][b]; }
 int main()
@@ -4841,14 +4841,14 @@ int main()
 \subsection{猫树分治}
 猫树可以支持不修改的高速查询区间信息。
 
-先考虑普通猫树,普通猫树是线段树的拓展。线段树将询问区间拆成$log_n$个区间,然后再进行合并。
+先考虑普通猫树,普通猫树是线段树的拓展。线段树将询问区间拆成$\log n$个区间,然后再进行合并。
 猫树通过增加预处理的时间和空间,将询问区间拆成两个区间,加快了合并效率。
 
 在查询$[l, r]$这段区间的信息时,将线段树上代表$[l, l]$和$[r, r]$的区间的节点的$LCA$求出来,设这个节点$p$所代表的区间是$[L, R]$。
 可以知道$[l, r]$区间一定跨越了$[L, R]$的中点$mid$,且$l\in[L, mid], r\in[mid+1, r]$。在建树的时候预处理出$[L, mid]$的后缀信息和$[mid+1, R]$的前缀信息,查询的时候拼凑起来即可。
 
 现在瓶颈在于快速求得$\text{LCA}$，不需要用$\texttt{ST}$表的$O(n\log n)-O(1)$的技巧，可以利用堆式建树，将这个序列补成$2$的整次幂，然后建线段树。
-此时,线段树上的两个节点的$LCA$编号,就是两个节点二进制编号的$LCP$。且有结论$lcp(x, y)=x >> log(x\oplus y)$,即可快速查询$LCA$。
+此时,线段树上的两个节点的$LCA$编号,就是两个节点二进制编号的$LCP$。且有结论$lcp(x, y)=x >> \log(x\oplus y)$,即可快速查询$LCA$。
 
 若猫树的空间开销过大，难以承受，且问题可以离线，可以采用猫树分治，即将询问分配到猫树上的每个节点，查询该节点上的询问时才需要将猫树这个节点建出来，整个过程和整体二分较为类似。
 \begin{minted}{cpp}
@@ -4883,7 +4883,7 @@ void solve(int l, int r, int ql, int qr)
     int cnt1 = 0, cnt2 = 0;
     for (int i = ql; i <= qr; i++)
     {
-        auto[id, l, r, t] = q[i];
+        auto [id, l, r, t] = q[i];
         if (r <= mid) tl[++cnt1] = q[i];
         else if (l > mid) tr[++cnt2] = q[i];
         else
@@ -5021,7 +5021,7 @@ int query(int a, int b)//前面利用树剖求lca
 }
 \end{minted}
 
-\textbf{例子：}归程(NOI2018)
+\textbf{例子：}归程 (NOI2018)
 \begin{minted}{cpp}
 int h[N], ne[M], w[M], e[M], idx;
 int T, n, m, q, k, s, dist[N], p[N], v[N], fa[N][20];
@@ -5092,7 +5092,7 @@ void scutsky()
 例:IOI2018狼人
 
 给一个n个点, m条边的无向图,再给定Q个询问,每次询问,给定起点s和t,再给定两个限制L, R,要求在1状态下不能经过编号$\leqslant L$的点,
-在2状态下不能经过编号$\ge R$的点 ,起始状态是1,可以在中途变为2,问s能否到
+在2状态下不能经过编号$\ge R$的点,起始状态是1,可以在中途变为2,问s能否到
 
 建出两个重构树,对s和t分别在两个重构树上倍增,二维数点两个子树是否有交集
 
@@ -5170,7 +5170,7 @@ void solve()
     }
     for (int i = 1; i <= n; i++) q.push_back({R.dfn[i], 0, L.dfn[i]});
     sort(q.begin(), q.end());
-    for (auto[x, ty, sign, y, id]:q)
+    for (auto [x, ty, sign, y, id]:q)
     {
         if (!ty) add(sign, 1);
         else ans[id] += sign * query(y);
@@ -5202,7 +5202,7 @@ void solve()
         for (int i = 1; i <= m; i++)
         {
             if (used[i]) continue;
-            auto[a, b, v] = op[i];
+            auto [a, b, v] = op[i];
             int pa = find(a), pb = find(b);
             if (pa == pb) continue;
             if (!choose[pa] || op[choose[pa]][2] > v) choose[pa] = i;
@@ -5221,8 +5221,8 @@ void solve()
             }
         }
     }
-    if (cnt == n - 1) cout << ans<<"\n";
-    else cout<<"orz\n";
+    if (cnt == n - 1) cout << ans << "\n";
+    else cout << "orz\n";
 }
 \end{minted}
 \subsection{重链剖分}
@@ -5577,7 +5577,7 @@ int main()
 
 \textbf{时间复杂度：}$O(n\log n)$，每个节点最多被计算$\log n$次（重链层数）。
 
-经典例题 :求树上以$i$为根的子树中 颜色出现次数最多的编号和
+经典例题:求树上以$i$为根的子树中 颜色出现次数最多的编号和
 
 考虑对每棵子树暴力去做，时间复杂度是$O(n ^ 2)$
 
@@ -5647,7 +5647,7 @@ dfs(1, 0), dfs(1, 0, 1);
 
 \textbf{核心思想：}只保留关键点和它们的LCA构成的必要结构，大大减少DP的状态数。
 
-\textbf{构建步骤：}1)按DFS序排序关键点 2)加入相邻关键点的LCA 3)去重并按DFS序连边。
+\textbf{构建步骤：}1) 按DFS序排序关键点 2) 加入相邻关键点的LCA 3) 去重并按DFS序连边。
 
 \textbf{时间复杂度：}建树$O(k\log k)$，DP $O(k)$，其中$k$是关键点数。
 
@@ -5676,7 +5676,7 @@ void clear(int u)//清空虚树
 \end{minted}
 
 
-例题:消耗战(边有边权,给出一些关键点,要求断开1和这些关键点,求最小代价)
+例题:消耗战 (边有边权,给出一些关键点,要求断开1和这些关键点,求最小代价)
 
 \begin{minted}{cpp}
 int h[N >>1], ne[N << 1], e[N << 1], w[N << 1], idx;
@@ -5694,7 +5694,7 @@ void dfs(int u)
 }
 int solve(vector<int>&v v)
 {
-    for (int t:v) st[t] = 1;
+    for (int t : v) st[t] = 1;
     sort(v.begin(), v.end(), [&](int x, int y) {return dfn[x] < dfn[y]; });
     top = 0;
     vector<int> clr;
@@ -5712,7 +5712,7 @@ int solve(vector<int>&v v)
     while (top) add(stk[top - 1], stk[top], val[stk[top]]), top--;
     dfs(1);
     int ans = f[1];
-    for (int t:clr) st[t] = 0, h[t] = -1, f[t] = 0;
+    for (int t : clr) st[t] = 0, h[t] = -1, f[t] = 0;
     idx = 0;
     return ans;
 }
@@ -5751,13 +5751,13 @@ array<int, 3> dist[N]; //round id route
 void dfs_(int u, int fa)
 {
     dist[u] = {INF, INF, INF};
-    for (auto[j, w]:g[u]) if (j != fa) dfs_(j, u);
+    for (auto [j, w]:g[u]) if (j != fa) dfs_(j, u);
 }
 bool chu[N], st[N];
 void clear(int u, int fa)
 {
     chu[u] = false;
-    for (auto[j, w]:g[u]) if (j != fa) clear(j, u);
+    for (auto [j, w]:g[u]) if (j != fa) clear(j, u);
     g[u].clear();
 }
 int s[N], id[N];
@@ -5766,17 +5766,17 @@ void addp(int u, int fa)
 {
     st[u] = false;
     heap.push({dist[u][0], dist[u][1], dist[u][2], u});
-    for (auto[j, w]:g[u]) if (j != fa) addp(j, u);
+    for (auto [j, w]:g[u]) if (j != fa) addp(j, u);
 }
 void dij()
 {
     while (heap.size())
     {
-        auto[round, ID, route, u] = heap.top();
+        auto [round, ID, route, u] = heap.top();
         heap.pop();
         if (st[u] || round > N) continue;
         st[u] = true;
-        for (auto[j, w]:g[u])
+        for (auto [j, w]:g[u])
         {
             if (chu[j]) continue;
             array<int, 3> nd {};
@@ -5815,10 +5815,10 @@ void solve()
             Q.push_back(x), v.push_back(x);
         }
         build(v), dfs_(1, 0);
-        for (int x:op) chu[x] = true, dist[x] = {1, id[x], 0};
+        for (int x : op) chu[x] = true, dist[x] = {1, id[x], 0};
         addp(1, 0), dij();
-        for (int x:Q) cout << dist[x][1]<<" ";
-        cout<<"\n";
+        for (int x : Q) cout << dist[x][1] << " ";
+        cout << "\n";
         clear(1, 0);
     }
 }
@@ -5900,7 +5900,7 @@ void solve()
 {
     for (int i = 0; i < n - 1; i++) add(a, b), add(b, a);
     dfs1(1, 0), dfs2(1, 0);
-    set<ULL > S;
+    set<ULL> S;
     for (int i = 1; i <= n; i++) S.insert(v[i] + f[i]);
     for (int i = 0; i < n; i++) add(a, b), add(b, a), d[a]++, d[b]++;
     dfs1(1, 0), dfs2(1, 0);
@@ -5910,7 +5910,7 @@ void solve()
             int p = e[h[i]];
             if (S.find(f[p] + v[p] - shift(1)) != S.end())
             {
-                cout << i<<"\n";
+                cout << i << "\n";
                 return ;
             }
         }
@@ -5923,7 +5923,7 @@ void solve()
 
 \begin{minted}{cpp}
 ULL f[N], v[N];
-map<ULL, int > mp;
+map<ULL, int> mp;
 int cnt, ans, maxcnt;
 void dfs1(int u, int fa)
 {
@@ -5979,7 +5979,7 @@ void dfs2(int u, int fa)
 \subsection{拓扑排序}
 一般来说 做dp的时候 再开一个$pre$数组记录前驱进行dp
 
-若要求字典序最小/大的拓扑序,则将队列换成 小根堆/大根堆的优先队列 ,通过归纳法可知每一步都取到了最优解
+若要求字典序最小/大的拓扑序,则将队列换成 小根堆/大根堆的优先队列,通过归纳法可知每一步都取到了最优解
 
 若要求1尽量靠前, 1尽量靠前的情况下2尽量靠前  2尽量靠前的情况下3尽量靠前\ldots{}
 
@@ -6060,13 +6060,13 @@ void solve()
     cin >> root;
     dijkstra();
     int v = 0;
-    for (int t:ans) v += w[t];
+    for (int t : ans) v += w[t];
     cout << v <<"\n";
-    for (int t:ans) cout << t / 2 + 1 <<" ";
+    for (int t : ans) cout << t / 2 + 1 << " ";
 }
 \end{minted}
 
-例题:每次修改一条边的权值,求1-n的最短路(询问之间独立)
+例题:每次修改一条边的权值,求1-n的最短路 (询问之间独立)
 
 \begin{minted}{cpp}
 int h[N], ne[N << 1], e[N << 1], w[N << 1], idx;
@@ -6083,11 +6083,11 @@ void dijkstra(int dist[], int s, int ty)
     for (int i = 1; i <= n; i++) dist[i] = INF;
     memset(st, false, sizeof st);
     dist[s] = 0;
-    priority_queue < PII, vector<PII>, greater<PII >> heap;
+    priority_queue<PII, vector<PII>, greater<PII>> heap;
     heap.push({0, s});
     while (heap.size())
     {
-        auto[d, t] = heap.top();
+        auto [d, t] = heap.top();
         heap.pop();
         if (st[t]) continue;
         st[t] = true;
@@ -6134,14 +6134,14 @@ void solve()
     for (int i = 1; i <= m; i++)
         if (!edgeid[i])
         {
-            auto[a, b, c] = edge[i];
+            auto [a, b, c] = edge[i];
             modify(1, L[a] + 1, R[b] - 1, c + dist[0][a] + dist[1][b]);
             modify(1, L[b] + 1, R[a] - 1, c + dist[1][a] + dist[0][b]);
         }
     while (q--)
     {
         int id, v;
-        auto[a, b, c] = edge[id];
+        auto [a, b, c] = edge[id];
         if (edgeid[id])
         {
             if (v < c) cout << min(dist[0][a] + dist[1][b], dist[1][a] + dist[0][b]) + v<<"\n";
@@ -6185,7 +6185,7 @@ void spfa()
 {
     memset(dist, 0x3f, sizeof dist);
     dist[1] = 0;
-    queue<int > q;
+    queue<int> q;
     q.push(1);
     while (q.size())
     {
@@ -6212,7 +6212,7 @@ int n, h[N], w[N], e[N], ne[N], idx, dist[N], cnt[N];
 bool st[N];
 bool spfa()
 {
-    queue<int > q;
+    queue<int> q;
     for (int i = 1; i <= n; i++) q.push(i);
     memset(st, true, sizeof st);
     while (q.size())
@@ -6237,7 +6237,7 @@ bool spfa()
 \end{minted}
 \subsubsection{Floyd}
 
-Floyd求最小环(输出最小环的长度)
+Floyd求最小环 (输出最小环的长度)
 
 \begin{minted}{cpp}
 int g[N][N], d[N][N], n, m, res = INF; //g为原图的边 d为最短路数组
@@ -6332,7 +6332,7 @@ void solve()
             P(i, j) = g[i][j];
             for (int k = 1; k <= m; k++)
             {
-                auto[a, b, w] = edge[k];
+                auto [a, b, w] = edge[k];
                 P(i, j) = min(P(i, j), g[i][a] - w + g[b][j]);
             }
         }
@@ -6374,11 +6374,11 @@ void dijkstra()
 {
     memset(dist, 0x3f, sizeof dist);
     dist[0] = 0;
-    priority_queue < PII, vector<PII>, greater<PII >> heap;
+    priority_queue<PII, vector<PII>, greater<PII>> heap;
     heap.push({0, 0});
     while (heap.size())
     {
-        auto[d, t] = heap.top();
+        auto [d, t] = heap.top();
         heap.pop();
         if (st[t]) continue;
         st[t] = true;
@@ -6715,7 +6715,7 @@ void tarjan(int u)
     }
 }
 int w[N];
-multiset<int > S[N];
+multiset<int> S[N];
 void solve()
 {
     memset(h, -1, sizeof h);
@@ -6764,7 +6764,7 @@ void solve()
         {
             int p = lca(a, b), res = query_path(a, b);
             if (p > n && fa[p]) res = min(res, w[fa[p]]);
-            cout << res<<"\n";
+            cout << res << "\n";
         }
     }
 }
@@ -6930,13 +6930,13 @@ void solve()
     for (int i = 1; i <= n; i++)
         if (id[i] == id[i + n])//在同一个scc里说明能互相推导, 矛盾
         {
-            cout<<"IMPOSSIBLE\n";
+            cout << "IMPOSSIBLE\n";
             return ;
         }
-    cout<<"POSSIBLE\n";
+    cout << "POSSIBLE\n";
     for (int i = 1; i <= n; i++)//用tarjan, id小说明拓扑序大, 取拓扑序大的
-        if (id[i] < id[i + n]) cout<<"0 ";
-        else cout<<"1 ";
+        if (id[i] < id[i + n]) cout << "0 ";
+        else cout << "1 ";
 }
 \end{minted}
 
@@ -7008,10 +7008,10 @@ void solve()
     for (int i = 1; i <= n; i++)
         if (id[i] == id[i + n])
         {
-            cout<<"NIE\n";
+            cout << "NIE\n";
             return ;
         }
-    cout<<"TAK\n";
+    cout << "TAK\n";
 }
 \end{minted}
 
@@ -7102,10 +7102,10 @@ void solve()
     for (int i = 1; i <= n; i++)
         if (id[i] == id[i + n])
         {
-            cout<<"No\n";
+            cout << "No\n";
             return ;
         }
-    cout<<"Yes\n";
+    cout << "Yes\n";
 }
 \end{minted}
 
@@ -7120,14 +7120,14 @@ int id[N], stk[N], top;
 bool ins[N];
 vector<array<int, 4>> op;
 int n, m;
-map<int, int > color[N];
+map<int, int> color[N];
 vector<int> group[N];
 inline bool check(int mid)
 {
     memset(h, -1, sizeof h);
     memset(dfn, 0, sizeof dfn);
     idx = ts = top = scc_cnt = 0;
-    map<PII, int > edge;
+    map<PII, int> edge;
     for (int i = 1; i <= n; i++) color[i].clear();
     int cnt = 0;
     for (int i = 1; i <= m; i++)
@@ -7144,7 +7144,7 @@ inline bool check(int mid)
     for (int i = 1; i <= n; i++)
     {
         vector<int> all;
-        for (auto[x, y]:color[i])
+        for (auto [x, y]:color[i])
         {
             vector<int> part;
             for (auto t:group[edge[{i, x}]])
@@ -7215,7 +7215,7 @@ void solve()
     if (!check(val[m])) cout<<"No\n";
     else
     {
-        cout<<"Yes\n";
+        cout << "Yes\n";
         int l = 0, r = m;
         while (l < r)
         {
@@ -7227,8 +7227,8 @@ void solve()
         vector<int> ans;
         for (int i = 1; i <= m; i++)
             if (id[i] > id[i + m]) ans.push_back(i);
-        cout << l<<" "<<ans.size()<<"\n";
-        for (int t:ans) cout << t<<" ";
+        cout << l << " " << ans.size() << "\n";
+        for (int t : ans) cout << t << " ";
     }
 }
 \end{minted}
@@ -7405,13 +7405,13 @@ void solve()
         }
         reverse(ans.begin(), ans.end()); //注意找到的路径反过才是正确的欧拉环路
         vector<int> ans1, ans2;
-        for (int x:ans)
+        for (int x : ans)
             if (x <= n) ans1.push_back(x);
             else ans2.push_back(x - n);
-        for (int x:ans1) cout << x<<" ";
-        cout<<"\n";
-        for (int x:ans2) cout << x<<" ";
-        cout<<"\n";
+        for (int x : ans1) cout << x << " ";
+        cout << "\n";
+        for (int x : ans2) cout << x << " ";
+        cout << "\n";
         for (int i = 1; i <= tot; i++) h[i] = -1, din[i] = dout[i] = 0;
         for (int i = 0; i <= idx; i++) used[i] = false;
         return ;
@@ -7573,7 +7573,7 @@ void solve()
         op.push_back({a, b});
         din[a]++, din[b]++;
     }
-    for (auto[a, b]:op)
+    for (auto [a, b]:op)
     {
         if (din[a] > din[b]) swap(a, b);
         else if (din[a] == din[b] && a > b) swap(a, b);
@@ -7587,7 +7587,7 @@ void solve()
             for (auto w:e[v])
                 if (st[w] == u) ans++;
     }
-    cout << ans<<"\n";
+    cout << ans << "\n";
 }
 \end{minted}
 \subsection{优化建图}
@@ -7647,7 +7647,7 @@ struct SgtG
         heap.push({0, s});
         while (heap.size())
         {
-            auto[d, t] = heap.top();
+            auto [d, t] = heap.top();
             heap.pop();
             if (st[t]) continue;
             st[t] = true;
@@ -7788,7 +7788,7 @@ bool check(int mid)
     memset(dfn + 1, 0, n << 5), memset(dfn + 1 + B, 0, n << 5);
     for (int i = 1; i <= m; i++)
     {
-        auto[a, b] = e[i];
+        auto [a, b] = e[i];
         graph.add(graph.leaf[a], graph.leaf[b + n]);
         graph.add(graph.leaf[b], graph.leaf[a + n]);
     }
@@ -8025,7 +8025,7 @@ void solve()
     else
     {
         cout<<"WIN\n";
-        for (auto[a, b]:ans) cout << a<<" "<<b<<"\n";
+        for (auto [a, b]:ans) cout << a << " " << b << "\n";
     }
 }
 \end{minted}
@@ -8049,7 +8049,7 @@ bool bfs()
 {
     memset(d, -1, sizeof d);
     d[S] = 0, cur[S] = h[S];
-    queue<int > q;
+    queue<int> q;
     q.push(S);
     while (q.size())
     {
@@ -8150,7 +8150,7 @@ bool bfs()
 {
     memset(d, -1, sizeof d);
     d[S] = 0, cur[S] = h[S];
-    queue<int > q;
+    queue<int> q;
     q.push(S);
     while (q.size())
     {
@@ -8288,7 +8288,7 @@ void add(int a, int b, int c, int d)
 bool spfa()
 {
     memset(d, 0x3f, sizeof d);
-    queue<int > q;
+    queue<int> q;
     q.push(S);
     d[S] = 0, incf[S] = INF, incf[T] = 0;
     while (q.size())
@@ -8342,7 +8342,7 @@ void add(int a, int b, int c, double d)
 bool spfa()
 {
     for (int i = 0; i < N; i++) d[i] = INF;
-    queue<int > q;
+    queue<int> q;
     q.push(S);
     d[S] = 0, incf[S] = INF, incf[T] = 0;
     while (q.size())
@@ -8431,7 +8431,7 @@ int main()
     for (int i = 1; i <= n; i++) bfs(i);
     int ans = 0;
     for (int i = 1; i <= n; i++) ans += A[i] + B[i];
-    cout << ans<<"\n";
+    cout << ans << "\n";
     for (int i = 1; i <= n; i++) cout << mch[i]<<" ";
 }
 \end{minted}
@@ -8497,7 +8497,7 @@ void solve()
         ans = max(ans, res);
         if (u % 1000 == 0 && clock() >= 1.9 * CLOCKS_PER_SEC) break; //卡时
     }
-    cout << ans<<"\n";
+    cout << ans << "\n";
 }
 \end{minted}
 \subsubsection{网络流的有关模型}
@@ -8772,13 +8772,13 @@ void solve()
 然后是第三问,这只要默认该点被选中,也就是删除这个点和与其有偏序关系的所有点后,再求一次最长反链,如果最长反链的大小只减小了 $1$,那么这个点就能在最长反链中,否则不能。
 
 \begin{minted}{cpp}
-bitset<N > bs[N];
+bitset<N> bs[N];
 int cal(vector<array<int, 2>>& e)
 {
     memset(h, -1, sizeof h); idx = 0;
     S = 0, T = N - 1;
     for (int i = 1; i <= n; i++) add(S, i, 1), add(i + n, T, 1);
-    for (auto[a, b]:e) add(a, b + n, 1);
+    for (auto [a, b]:e) add(a, b + n, 1);
     return dinic();
 }
 bool st[N], del[N];
@@ -8879,7 +8879,7 @@ bool st[N];
 bool check(int a, int b)
 {
     memset(st, false, sizeof st);
-    queue<int > q;
+    queue<int> q;
     q.push(a), st[a] = true;
     while (q.size())
     {
@@ -8924,7 +8924,7 @@ void solve()
     int maxflow = dinic();
     vector<int> ans;
     sort(edge.begin(), edge.end());
-    for (auto[_, u, v, id]:edge)
+    for (auto [_, u, v, id]:edge)
     {
         if (check(u, v)) continue; //检查有没有u-> v的增广路
         ans.push_back(u);
@@ -9050,7 +9050,7 @@ void solve()
             for (int j = 0; j < 26; j++) jump[i][j] = jump[fail][j];
             cout << ne[i]<<" ";
         }
-        cout<<"\n";
+        cout << "\n";
         fail = pre_fail, jump[n][s[n + 1]-'a'] = pre_jumpn; //注意还原
         for (int i = 1; i <= str.size(); i++) s.pop_back();
     }
@@ -9362,7 +9362,7 @@ void solve()
         g[p].push_back(i);
     }
     dfs(1);
-    cout << ans<<"\n";
+    cout << ans << "\n";
 }
 \end{minted}
 \subsubsection{可持久化Trie}
@@ -9432,7 +9432,7 @@ struct ACAM
     }
     void build()
     {
-        queue<int > q;
+        queue<int> q;
         for (int i = 0; i < 26; i++) if (trie[0][i]) q.push(trie[0][i]);
         while (q.size())
         {
@@ -9564,7 +9564,7 @@ int merge(int p, int q)
 }
 void build(int p)
 {
-    queue<int > q;
+    queue<int> q;
     for (int i = 0, v; i < M; i++)
         if (v = trie[p][i])
         {
@@ -9873,7 +9873,7 @@ for (int i = 1; i <= n; i++) extend(s[i]-'a'); //要转化一下
 struct SAM
 {
     int len, fa;
-    map<int, int > ch;
+    map<int, int> ch;
 }sam[N];
 int tot = 1, last = 1;
 int s[N];
@@ -10024,7 +10024,7 @@ void insert(string s)
 }
 void build()
 {
-    queue<int > q;
+    queue<int> q;
     q.push(pos[1] = 1);
     while (q.size())
     {
@@ -10466,7 +10466,7 @@ void solve()
         t = fa[t][0];
         if (pam.len[t] == tar) ans = max(ans, pam.len[i]);
     }
-    cout << ans<<'\n';
+    cout << ans << '\n';
 }
 
 \subsection{可撤销回文自动机}
@@ -10596,7 +10596,7 @@ void solve()
 2 l r y:求字符串 y 在 s 的子串$s [l , r]$中作为子串出现的次数。
 
 \begin{minted}{cpp}
-bitset<N > c[26], ans;
+bitset<N> c[26], ans;
 char s[N];
 void solve()
 {
@@ -10638,7 +10638,7 @@ void solve()
 给你一个字符串 s,有 n个询问,第 i 个询问包含一个整数 k 和一个字符串 m。要求找到一个字符串 t ,使得 t 是 s 的子串并且 m 至少在 t 中出现了 k 次。你只需要求出 t 的最短长度。
 
 \begin{minted}{cpp}
-bitset<N > c[26], ans;
+bitset<N> c[26], ans;
 char s[N];
 int p[N];
 void solve()
@@ -10729,7 +10729,7 @@ void solve()
             if (i < k) sum[k][i] = b[i];
             else sum[k][i] = sum[k][i - k] + b[i];
         ans += 1ll * a[i] * query(i, i);
-        cout << ans<<"\n";
+        cout << ans << "\n";
     }
 }
 \end{minted}
@@ -10843,7 +10843,7 @@ for (int i = 1; i <= n; i++)
     for (int j = 1; j <= s; s -= j, j<<=1) item.push_back({v * j, w * j});
     if (s) item.push_back({v * s, w * s});
 }
-for (auto[v, w]:item)
+for (auto [v, w]:item)
     for (int i = m; i >= v; i--)
         f[i] = max(f[i], f[i - v] + w);
 \end{minted}
@@ -11234,11 +11234,11 @@ $\max$运算对加法的分配律:$\max(a, b+c)=\max(a, b)+\max(a, c)$不成立
 
 定义$g_{u, 0}$和$g_{u, 1}$的意义与上面类似 但只考虑轻儿子的贡献 不考虑重儿子的贡献
 
-$g_{u, 0}=\sum\limits_{j\in lightson_u}max(f_{j, 0}, f_{j, 1})$,$g_{u, 1}={\sum\limits_{j\in lightson_u}f_{j, 0}}+val_u$
+$g_{u, 0}=\sum\limits_{j\in lightson_u}\max(f_{j, 0}, f_{j, 1})$,$g_{u, 1}={\sum\limits_{j\in lightson_u}f_{j, 0}}+val_u$
 
-$f_{u, 0}=g_{u, 0}+max(f_{son, 0}, f_{son, 1})=max(f_{son, 0}+g_{u, 0}, f_{son, 1}+g_{u, 0})$
+$f_{u, 0}=g_{u, 0}+\max(f_{son, 0}, f_{son, 1})=\max(f_{son, 0}+g_{u, 0}, f_{son, 1}+g_{u, 0})$
 
-$f_{u, 1}=g_{u, 1}+f_{son, 0}=max(f_{son, 0}+g_{u, 1}, f_{son, 1}+(-INF))$
+$f_{u, 1}=g_{u, 1}+f_{son, 0}=\max(f_{son, 0}+g_{u, 1}, f_{son, 1}+(-INF))$
 
 考虑矩阵转移，我们希望通过矩阵乘法实现状态转移：
 
@@ -11523,7 +11523,7 @@ void dp()
 
 考虑$f_{j, i}$为以$i$结尾,分成$j$个子段的最小代价。
 
-显然有dp方程$f_{j, i}=min\{f_{j-1, k}+cal(k+1, i)\}$
+显然有dp方程$f_{j, i}=\min\{f_{j-1, k}+cal(k+1, i)\}$
 
 显然对于每一层的$i$来说,决策点单调不降,考虑到$cal$的贡献比较难算,但是在分治的时候,指针移动是比较单调的,移动次数不会很多,可以利用类似莫队指针移动的方式快速计算贡献。
 
@@ -11646,7 +11646,7 @@ struct Pollard_Rho
     int PR(int n)
     {
         static mt19937_64 sj(chrono::steady_clock::now().time_since_epoch().count());
-        uniform_int_distribution<int > u0(1, n - 1);
+        uniform_int_distribution<int> u0(1, n - 1);
         int c = u0(sj);
         auto f = [&](int x) {return ((i128)x * x + c) % n; };
         int x = 0, y = 0, s = 1;
@@ -11767,10 +11767,10 @@ else
 \end{minted}
 \subsection{中国剩余定理}
 
-给定 $n$ 组非负整数 $a_i, b_i$ ,求解关于 $x$ 的方程组的最小非负整数解。
+给定 $n$ 组非负整数 $a_i, b_i$,求解关于 $x$ 的方程组的最小非负整数解。
 \[\begin{cases}x\equiv b_1\pmod{a_1}\\x\equiv b_2\pmod{a_2}\\\dots\\x\equiv b_n\pmod{a_n}\end{cases}\]
 
-其中$a_1, a_2, a_3...a_n$两两互质
+其中$a_1, a_2, a_3\ldots a_n$两两互质
 
 \begin{minted}{cpp}
 int exgcd(int a, int b, int & x, int & y)
@@ -11917,7 +11917,7 @@ int gauss()//高斯消元
 \subsubsection{bitset优化解异或方程组}
 
 \begin{minted}{cpp}
-std::bitset<1010 > matrix[2010]; // matrix[1~n]：增广矩阵，0 位置为常数
+std::bitset<1010> matrix[2010]; // matrix[1~n]：增广矩阵，0 位置为常数
 
 std::vector<bool> GaussElimination(
     int n, int m) // n 为未知数个数，m 为方程个数，返回方程组的解
@@ -12132,7 +12132,7 @@ void solve()
     for (int i = 1; i <= n; i++)
     {
         insert(w[i], i);
-        for (auto[l, id]:Q[i]) ans[id] = query(l);
+        for (auto [l, id]:Q[i]) ans[id] = query(l);
     }
     for (int i = 0; i < q; i++) cout << ans[i]<<"\n";
 }
@@ -12144,7 +12144,7 @@ void solve()
 
 \begin{minted}{cpp}
 const int N = 5005, M = 64;
-bitset<N > base[M], temp[M];
+bitset<N> base[M], temp[M];
 int sz;
 void insert(bitset<N>& x)
 {
@@ -12160,9 +12160,9 @@ void insert(bitset<N>& x)
         x ^= base[i];
     }
 }
-bitset<N > query_max()
+bitset<N> query_max()
 {
-    bitset<N > res;
+    bitset<N> res;
     for (int i = M - 1; i >= 0; i--)
         res = max(res, res ^ base[i]);
     return res;
@@ -12410,7 +12410,7 @@ void solve()
         }
         ans += l + 1;
     }
-    cout << ans<<"\n";
+    cout << ans << "\n";
 }
 \end{minted}
 \subsection{区间合并}
@@ -12690,7 +12690,7 @@ void solve()
 }
 \end{minted}
 
-\texttt{yes.cpp}(用来对check结果作判断)
+\texttt{yes.cpp} (用来对check结果作判断)
 \begin{minted}{cpp}
 void solve() { cout<<"yes\n"; }
 \end{minted}
@@ -12710,7 +12710,7 @@ void solve()
 
 \begin{minted}{cpp}
 mt19937 myrand(chrono::steady_clock::now().time_since_epoch().count());
-int rd(int l, int r) { return uniform_int_distribution<int >(l, r)(myrand); }
+int rd(int l, int r) { return uniform_int_distribution<int>(l, r)(myrand); }
 int main()
 {
     int n = rd(1, 10);
@@ -12722,7 +12722,7 @@ int main()
 
 \begin{minted}{cpp}
 mt19937 myrand(chrono::steady_clock::now().time_since_epoch().count());
-int rd(int l, int r) { return uniform_int_distribution<int >(l, r)(myrand); }
+int rd(int l, int r) { return uniform_int_distribution<int>(l, r)(myrand); }
 int main()
 {
     int n = rd(1, 10);
@@ -12743,7 +12743,7 @@ int main()
 \begin{minted}{cpp}
 array<int, 2> e[N];
 mt19937 myrand(chrono::steady_clock::now().time_since_epoch().count());
-int rd(int l, int r) { return uniform_int_distribution<int >(l, r)(myrand); }
+int rd(int l, int r) { return uniform_int_distribution<int>(l, r)(myrand); }
 int main()
 {
     int n = rd(3, 6), m = rd(0, (n - 1) * n / 2);
@@ -12770,7 +12770,7 @@ int main()
 \begin{minted}{cpp}
 array<int, 2> e[N];
 mt19937 myrand(chrono::steady_clock::now().time_since_epoch().count());
-int rd(int l, int r) { return uniform_int_distribution<int >(l, r)(myrand); }
+int rd(int l, int r) { return uniform_int_distribution<int>(l, r)(myrand); }
 int main()
 {
     int n = rd(3, 6), m = rd(n, (n - 1) * n / 2);
@@ -12805,28 +12805,28 @@ bool ed;
 cout << fixed << setprecision(3) << (&ed-&st) / 1048576.0 <<" MB\n";
 \end{minted}
 \subsection{pbds}
-好用的哈希表(define int long long要插在中间)
+好用的哈希表 (define int long long要插在中间)
 \begin{minted}{cpp}
-#include<ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
 using namespace __gnu_pbds;
 const int RANDOM = std::chrono::high_resolution_clock::now().time_since_epoch().count();
 struct chash {
     int operator()(int x) const { return x ^ RANDOM; }
 };
 #define int long long
-typedef gp_hash_table < int, int, chash > hash_t;
+typedef gp_hash_table<int, int, chash> hash_t;
 \end{minted}
 
-封装好的平衡树(貌似每次都要插入一个pair 如果第二维不需要 随便插个大于0的数应该就行)
+封装好的平衡树 (貌似每次都要插入一个pair 如果第二维不需要 随便插个大于0的数应该就行)
 
 \begin{minted}{cpp}
-#include<ext/pb_ds/assoc_container.hpp>
-#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <bits/stdc++.h>
 #define pb __gnu_pbds
 #define pii pair<int, int>
 using namespace std;
-pb::tree < pii, pb::null_type, less<pii>,
-pb::rb_tree_tag, pb::tree_order_statistics_node_update > tr;
+pb::tree<pii, pb::null_type, less<pii>,
+pb::rb_tree_tag, pb::tree_order_statistics_node_update> tr;
 int main()
 {
     int n, opt, x;
