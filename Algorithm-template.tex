@@ -172,8 +172,8 @@
 \section{数据结构}
 \subsection{ST表}
 \subsubsection{一维ST表}
-% 时间复杂度：预处理$O(n\log n)$，查询$O(1)$
-% 空间复杂度：$O(n\log n)$
+% 时间复杂度：预处理$O(n \log n)$，查询$O(1)$
+% 空间复杂度：$O(n \log n)$
 \begin{minted}{cpp}
 int st[N][M], w[N], n; // 使用ST表时一定要记得调用build
 void build()
@@ -850,9 +850,9 @@ struct Node
 } tr[N << 2];
 void build(int u, int l, int r)
 {
-    if (l == r) {
-        tr[u] = {l, r, w[r], 0};
-    } else {
+    if (l == r) tr[u] = {l, r, w[r], 0};
+    else 
+    {
         tr[u] = {l, r, 0, 0};
         int mid = (l + r) >> 1;
         build(u << 1, l, mid);
@@ -863,7 +863,8 @@ void build(int u, int l, int r)
 void modify(int u, int l, int r, int val)
 {
     tr[u].sum += (min(tr[u].r, r) - max(tr[u].l, l) + 1) * val;
-    if (l <= tr[u].l && r >= tr[u].r) {
+    if (l <= tr[u].l && r >= tr[u].r) 
+    {
         tr[u].tag += val;
         return;
     }
@@ -873,9 +874,7 @@ void modify(int u, int l, int r, int val)
 }
 int query(int u, int l, int r, int s)
 {
-    if (l <= tr[u].l && r >= tr[u].r) {
-        return tr[u].sum + (tr[u].r - tr[u].l + 1) * s;
-    }
+    if (l <= tr[u].l && r >= tr[u].r) return tr[u].sum + (tr[u].r - tr[u].l + 1) * s;
     int mid = (tr[u].l + tr[u].r) >> 1, res = 0;
     if (l <= mid) res += query(u << 1, l, r, s + tr[u].tag);
     if (r > mid) res += query(u << 1 | 1, l, r, s + tr[u].tag);
@@ -884,8 +883,8 @@ int query(int u, int l, int r, int s)
 \end{minted}
 \subsubsection{动态开点线段树}
 % 时间复杂度：修改$O(\log n)$，查询$O(\log n)$
-% 空间复杂度：$O(m\log n)$，$m$为操作次数
-注意：动态开点线段树的空间复杂度为$O(m\log n)$，其中$m$为操作次数。通常需要预留$4 \times m \times \log n$的空间，防止\texttt{MLE}。
+% 空间复杂度：$O(m \log n)$，$m$为操作次数
+注意：动态开点线段树的空间复杂度为$O(m \log n)$，其中$m$为操作次数。通常需要预留$4 \times m \times \log n$的空间，防止\texttt{MLE}。
 
 例子：默认一开始所有值都是$1$。$t=1$：$[l, r]$都变为$0$；$t=2$：$[l, r]$都变为$1$，求总体的$\text{sum}$。
 
@@ -1007,7 +1006,7 @@ int query(int p, int l, int r, int ql, int qr, int s)
 
 \textbf{关键：}相邻版本只有$O(\log n)$个节点不同，通过复用节点节省空间。
 
-\textbf{空间：}$O(n\log n)$个节点，开$N \times 20$一般够用。
+\textbf{空间：}$O(n \log n)$个节点，开$N \times 20$一般够用。
 \begin{minted}{cpp}
 struct Node
 {
@@ -1323,7 +1322,7 @@ int main()
 int split(int & p, int l, int r, int ql, int qr) // 对于p 分裂出ql和qr的区间
 {
     int q = ++idx; // 要新开节点
-    if (ql<= l && qr >= r)
+    if (ql <= l && qr >= r)
     {
         tr[q] = tr[p];
         p = 0; // p要用引用 因为这里分裂出来之后要清空
@@ -1364,7 +1363,7 @@ int modify(int p, int l, int r, int x)
 int split(int & p, int l, int r, int ql, int qr)
 {
     int q = ++idx;
-    if (ql<= l && qr >= r)
+    if (ql <= l && qr >= r)
     {
         tr[q] = tr[p], p = 0;
         return q;
@@ -1931,18 +1930,18 @@ $[l_i, r_i]$对于每个$[l_i, r_i]$:
 
 如果它的最大值$\leqslant x$那么显然此次操作没有任何效果,直接 return 即可。
 
-如果$x$小于最大值 $\max v$,但大于（注意,这里必须是严格大于,否则的话也会出问题）严格次大值
+如果$x$小于最大值 $\max\{v\}$,但大于（注意,这里必须是严格大于,否则的话也会出问题）严格次大值
 $se$,那么显然有且只有$c$个最大值会变为
 $x$,我们可以简单维护一个标记 $tag$ 表示这段区间内最大值会增加 $tag$
-,然后令 $tag$←$tag+(x-\max v)$即可,由于更新完之后最大值依然严格大于次大值,因此最大值个数不会发生变化。
+,然后令 $tag$←$tag+(x-\max\{v\})$即可,由于更新完之后最大值依然严格大于次大值,因此最大值个数不会发生变化。
 
 如果 $x$ 小于等于严格次大值 $se$,这个就没有什么优美的方法了,直接暴力递归左右子区间即可。
 
-吉司机线段树复杂度是$O(n\log n)$的，证明如下：
+吉司机线段树复杂度是$O(n \log n)$的，证明如下：
 
 我们记一个节点的容为这段区间内不同数的个数,那么显然在不断取min的过程中容只可能越来越小。
 而如果对于某个区间如果我们对其进行暴力递归,那么原来是最大值和次大值的位置上的数必然会变为同一个值,区间的容建一,
-而所有区间的长度之和是 $n\log n$级别的,因此所有区间容之和也是 $n\log n$级别的,暴力递归的次数也是 $n\log n$
+而所有区间的长度之和是 $n \log n$级别的,因此所有区间容之和也是 $n \log n$级别的,暴力递归的次数也是 $n \log n$
 
 
 例题:
@@ -2053,7 +2052,7 @@ void solve()
 
 额外加一个懒标记 stag,表示除了最大值之外的其他数都要增加 stag,
 区间加v时令对应区间的tag和stag都加v,区间取min时只会影响 tag,不会影响
-stag的值。下推标记就和普通吉司机树一样正常推即可。复杂度$O(n\log^2 n)$
+stag的值。下推标记就和普通吉司机树一样正常推即可。复杂度$O(n \log^2 n)$
 
 \begin{minted}{cpp}
 struct node
@@ -2226,7 +2225,7 @@ ctag传给他们即可。
 
 1 l r k:对于所有的 $i\in[l, r]$,将 $A_i$ 加上 $k$ ($k$ 可以为负数)。
 
-2 l r v:对于所有的 $i\in[l, r]$,将 $A_i$ 变成 $\min(A_i, v)$。
+2 l r v:对于所有的 $i\in[l, r]$,将 $A_i$ 变成 $\min\{A_i, v\}$。
 
 3 l r:求 $\sum_{i=l}^{r}A_i$。
 
@@ -2234,7 +2233,7 @@ ctag传给他们即可。
 
 5 l r:对于所有的 $i\in[l, r]$,求 $B_i$ 的最大值。
 
-在每一次操作后,我们都进行一次更新,让 $B_i\gets\max(B_i, A_i)$。
+在每一次操作后,我们都进行一次更新,让 $B_i\gets\max\{B_i, A_i\}$。
 
 \begin{minted}{cpp}
 struct Node
@@ -5080,14 +5079,14 @@ void scutsky()
 上面解决的问题都是边权,如果是点权,有两种解决方法:
 
 1.为原图每条边巧妙赋值,将点权转化为边权。若限制经过的点权最大值,因为走一条边$u\rightarrow v$需满足$w_u, w_v$都不超过限制,
-所以$w(u, v)=\max(w_u, w_v)$。类似地,若限制最小值则$w(u, v)=\min(w_u, w_v)$。
+所以$w(u, v)=\max\{w_u, w_v\}$。类似地,若限制最小值则$w(u, v)=\min\{w_u, w_v\}$。
 
 2(\textbf{点权多叉重构树}).实际上我们几乎用不到重构树是二叉树这一性质,因此存在更高妙的做法。不妨设题目限制点权最大值。
-将节点按权值从小到大排序,按序遍历每个点$i$及其所有出边 $i\rightarrow u$。若$u$已经遍历过,则$w_i\ge w_u$,$\max(w_i, w_u)$取到$w_i$,
+将节点按权值从小到大排序,按序遍历每个点$i$及其所有出边 $i\rightarrow u$。若$u$已经遍历过,则$w_i\ge w_u$,$\max\{w_i, w_u\}$取到$w_i$,
 此时若 $i, u$不连通则从 $i$向$u$的代表元连边。
 
 上述做法与一般 kruskal 重构树几乎等价:普通重构树中点权相同的虚点,仅有深度最小的有用:按权值从小到大枚举节点相当于对所有边排序,
-因为边权即 $\max(w_i, w_u)$。这样做不用新建虚点,有效减小了常数。
+因为边权即 $\max\{w_i, w_u\}$。这样做不用新建虚点,有效减小了常数。
 
 例:IOI2018狼人
 
@@ -5653,7 +5652,7 @@ dfs(1, 0), dfs(1, 0, 1);
 
 虚树一般都是在树上做dp,然后给你多次询问,每次询问都会给你不多的关键点,故每次询问都建出虚树,减小复杂度
 
-建出的点有关键点,关键点之间的LCA,根节点(一般为1)
+建出的点有关键点，关键点之间的LCA，根节点 (一般为1)
 
 如果关键点有重复,要记得去重
 
@@ -5692,7 +5691,7 @@ void dfs(int u)
         else f[u] += min(f[j], (LL)w[i]);
     }
 }
-int solve(vector<int>&v v)
+int solve(vector<int>& v)
 {
     for (int t : v) st[t] = 1;
     sort(v.begin(), v.end(), [&](int x, int y) {return dfn[x] < dfn[y]; });
@@ -5704,7 +5703,7 @@ int solve(vector<int>&v v)
     {
         int p = lca(stk[top], v[i]);
         clr.push_back(p), clr.push_back(v[i]);
-        while (top >1 && depth[stk[top - 1]] >= depth[p])
+        while (top > 1 && depth[stk[top - 1]] >= depth[p])
             add(stk[top - 1], stk[top], val[stk[top]]), top--;
         if (p != stk[top]) add(p, stk[top], val[stk[top]]), stk[top] = p;
         stk[++top] = v[i];
@@ -6279,7 +6278,7 @@ Floyd倍增
 $M\times M$ 就是任意点到任意点最多修改两次道路费用的最短路。
 求出$M ^ k$即可。该运算满足结合律，可以用快速幂优化。时间复杂度为$O(n ^ 3+n ^ 2m+n ^ 3\log k)$。
 
-注意矩阵乘法的时候不需要的点初始化为幺元,否则出现(1, 0)*(0, 4)->(1, 4)的非法转移
+注意矩阵乘法的时候不需要的点初始化为幺元，否则出现 (1, 0)*(0, 4)->(1, 4) 的非法转移
 
 \begin{minted}{cpp}
 template<int row, int col>
@@ -6524,7 +6523,7 @@ DAG上的性质:
 
 1.问在DAG上最少选择多少个点能够使得从这些点出发可以到达所有点,那么答案就是入度为0的点的个数。
 
-2.假设DAG上出度为0的结点有a个,入度为0的结点有b个,那么再加$\max(a, b)$条边可以使得该有向图强连通。
+2.假设DAG上出度为0的结点有a个,入度为0的结点有b个,那么再加$\max\{a, b\}$条边可以使得该有向图强连通。
 
 强连通分量编号的逆序是一个拓扑序,可以直接倒序枚举做拓扑操作
 
@@ -7421,7 +7420,7 @@ void solve()
 \end{minted}
 
 现在有一个长度为 $n$ 的数组 $a$ 和一个长度为 $n−1$ 的排列 $p$。分别构造四个数列 $b$,$c$,$b'$,$c'$,其定义如下:
-$b_i=\min(a_i, a_{i+1})$,$c_i=\max(a_i, a_{i+1})$,$b_i'=b_{p_i}$,$c_i'=c_{p_i}$
+$b_i=\min\{a_i, a_{i+1}\}$,$c_i=\max\{a_i, a_{i+1}\}$,$b_i'=b_{p_i}$,$c_i'=c_{p_i}$
 
 如果没有任何一个可能的序列,那么输出 $-1$。
 
@@ -9525,7 +9524,7 @@ AC自动机上DP
 
 ACAM的状态转移为dp刻画了转移方向,考虑在ACAM的节点上dp,
 
-有状态转移方程$f_{i, tr_{j, u}}=\max\{f_{i-1, j}+cnt_{tr_{j, u}}\}(u\in \sum)$
+有状态转移方程$f_{i, tr_{j, u}}=\max\{f_{i-1, j}+cnt_{tr_{j, u}}\}(u\in \Sigma)$
 \subsubsection{二进制分组AC自动机(动态)}
 
 维护一个字符串集合,支持三种操作:
@@ -10468,6 +10467,7 @@ void solve()
     }
     cout << ans << '\n';
 }
+\end{minted}
 
 \subsection{可撤销回文自动机}
 
@@ -10476,10 +10476,10 @@ void solve()
 \textbf{核心优化}：使用$mem[u][c]$数组预计算从节点$u$开始匹配字符$c$时应该跳转的位置，避免重复的$fail$跳转，使得每次操作摊还时间复杂度为$O(1)$。
 
 设$mem[u][c] = v$表示从节点$u$开始，当匹配字符$c$失败时，应该跳转到的节点$v$，满足：
-$$mem[u][c] = \begin{cases}
-u & \text{如果} s[|s| - len[u] - 1] = c
+\[mem[u][c] = \begin{cases}
+u & \text{如果} s[|s| - len[u] - 1] = c \\
 mem[fail[u]][c] & \text{否则}
-\end{cases}$$
+\end{cases}\]
 
 \textbf{例题}：牛客14055F
 - 给定模板字符串$S$，生成长度为$n$的字符串$T$
@@ -10987,8 +10987,8 @@ for (int i = 1; i < (1 << n); i++)
 f_{i, j}=\left\{
         \begin{array}{lr}
         f_{i-1, j}
-        f_{i-1, k}+1(k\in[max(0, l_i-j), r_i-j])
-        f_{i-1, k}+2(k\in[max(0, j-len, j)])
+        f_{i-1, k}+1(k\in[\max(0, l_i-j), r_i-j])
+        f_{i-1, k}+2(k\in[\max(0, j-len, j)])
         \end{array}
 \right.
 \end{equation}
@@ -11226,9 +11226,9 @@ $\max$运算对加法的分配律:$\max(a, b+c)=\max(a, b)+\max(a, c)$不成立
 
 验证：$A \otimes E = E \otimes A = A$
 
-\textbf{示例：}设$A = \begin{pmatrix}1 1&2 2\\3 3&4 4\end{pmatrix}$，$B = \begin{pmatrix}0 0&1 1\\2 2&0 0\end{pmatrix}$
+\textbf{示例：}设$A = \begin{pmatrix}1&2\\3&4\end{pmatrix}$，$B = \begin{pmatrix}0&1\\2&0\end{pmatrix}$
 
-则$A \otimes B = \begin{pmatrix}\max(1+0, 2+2) & \max(1+1, 2+0) \\ \max(3+0, 4+2) & \max(3+1, 4+0)\end{pmatrix} = \begin{pmatrix}4 4&2 2\\6 6&4 4\end{pmatrix}$
+则$A \otimes B = \begin{pmatrix}\max(1+0, 2+2) & \max(1+1, 2+0) \\ \max(3+0, 4+2) & \max(3+1, 4+0)\end{pmatrix} = \begin{pmatrix}4&2\\6&4\end{pmatrix}$
 
 定义$f_{u, 0}$和$f_{u, 1}$分别为以$u$为根的子树中 不选/选 当前点的最大权独立集
 
@@ -11242,9 +11242,9 @@ $f_{u, 1}=g_{u, 1}+f_{son, 0}=\max(f_{son, 0}+g_{u, 1}, f_{son, 1}+(-INF))$
 
 考虑矩阵转移，我们希望通过矩阵乘法实现状态转移：
 
-设向量$V_{son} = \begin{pmatrix}f_{son, 0} \\ f_{son, 1}\end{pmatrix}$，转移矩阵$M_u = \begin{pmatrix}a a&b b\\c c&d d\end{pmatrix}$
+设向量$V_{son} = \begin{pmatrix}f_{son, 0} \\ f_{son, 1}\end{pmatrix}$，转移矩阵$M_u = \begin{pmatrix}a&b\\c&d\end{pmatrix}$
 
-则转移过程为：$V_u = M_u \times V_{son} = \begin{pmatrix}a a&b b\\c c&d d\end{pmatrix} \times \begin{pmatrix}f_{son, 0} \\ f_{son, 1}\end{pmatrix}$
+则转移过程为：$V_u = M_u \times V_{son} = \begin{pmatrix}a&b\\c&d\end{pmatrix} \times \begin{pmatrix}f_{son, 0} \\ f_{son, 1}\end{pmatrix}$
 
 在广义矩阵乘法下：
 \[V_u = \begin{pmatrix}\max(a+f_{son, 0}, b+f_{son, 1}) \\ \max(c+f_{son, 0}, d+f_{son, 1})\end{pmatrix} = \begin{pmatrix}f_{u, 0} \\ f_{u, 1}\end{pmatrix}\]
@@ -12184,55 +12184,55 @@ $f_{n+m}=f_{m-1}\times f_n+f_m\times f_{n+1}$
 F_0
 \end{pmatrix}
 \begin{bmatrix}
-1 \ \  1
-1 \ \  0
+1 & 1 \\
+1 & 0
 \end{bmatrix}
 ^n=
 \begin{pmatrix}
-F_{n+1}
+F_{n+1} \\
 F_n
 \end{pmatrix}\\[5mm]
 \therefore
 \begin{bmatrix}
-1 \ \  1
-1 \ \  0
+1 & 1 \\
+1 & 0
 \end{bmatrix}
 ^n=
 \begin{pmatrix}
-F_{n+1} \ \  F_n
-F_n \ \   F_{n-1}
+F_{n+1} & F_n \\
+F_n & F_{n-1}
 \end{pmatrix}\\[5mm]
 \because
 \begin{bmatrix}
-1 \ \  1
-1 \ \ 0
+1 & 1 \\
+1 & 0
 \end{bmatrix}
 ^{n+m}=
 \begin{bmatrix}
-1 \ \  1
-1 \ \  0
+1 & 1 \\
+1 & 0
 \end{bmatrix}^n
 \begin{bmatrix}
-1 \ \  1
-1 \ \  0
+1 & 1 \\
+1 & 0
 \end{bmatrix}
 ^m\\[5mm]
 \therefore
 \begin{pmatrix}
-F_{n+m+1} \ \   F_{n+m}
-F_{n+m} \ \ F_{n+m-1}
+F_{n+m+1} & F_{n+m} \\
+F_{n+m} & F_{n+m-1}
 \end{pmatrix}=
 \begin{pmatrix}
-F_{n+1} \ \ F_{n}
-F_{n} \ \  F_{n-1}
+F_{n+1} & F_{n} \\
+F_{n} & F_{n-1}
 \end{pmatrix}
 \begin{pmatrix}
-F_{m+1} \ \  F_{m}
-F_{m} \ \  F_{m-1}
+F_{m+1} & F_{m} \\
+F_{m} & F_{m-1}
 \end{pmatrix}\\=
 \begin{pmatrix}
-F_{n+1}F_{m+1}+F_nF_m \ \ \ \ \ \ \ \   F_{n+1}F_m+F_{n}F_{m-1}
-F_{n}F_{m+1}+F_{n-1}F_{m} \ \ \ \ \ \ \ \  F_nF_m+F_{n-1}F_{m-1}
+F_{n+1}F_{m+1}+F_nF_m & F_{n+1}F_m+F_{n}F_{m-1} \\
+F_{n}F_{m+1}+F_{n-1}F_{m} & F_nF_m+F_{n-1}F_{m-1}
 \end{pmatrix}\\[3mm]
 \therefore F_{n+m}=F_{n+1}F_{m}+F_{n}F_{m-1}
 \end{array}
