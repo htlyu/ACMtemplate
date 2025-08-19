@@ -28,13 +28,13 @@ The main template is organized into the following sections:
 
 ### Compile LaTeX
 ```bash
-xelatex -shell-escape Algorithm-template.tex
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" xelatex -shell-escape Algorithm-template.tex
 ```
 
 ### Full compilation with table of contents
 ```bash
-xelatex -shell-escape Algorithm-template.tex
-xelatex -shell-escape Algorithm-template.tex
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" xelatex -shell-escape Algorithm-template.tex
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" xelatex -shell-escape Algorithm-template.tex
 ```
 
 ### Clean generated files
